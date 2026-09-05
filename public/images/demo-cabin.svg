@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-label="Vertix demo elevator cabin visual">
+  <defs>
+    <linearGradient id="panel" x1="0" x2="1">
+      <stop offset="0" stop-color="#e8eadf"/>
+      <stop offset=".5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a9bca8"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="700" fill="#102019"/>
+  <rect x="160" y="70" width="580" height="560" rx="18" fill="#0f2d25" stroke="#c6a15b" stroke-width="6"/>
+  <rect x="210" y="120" width="215" height="460" fill="url(#panel)"/>
+  <rect x="475" y="120" width="215" height="460" fill="url(#panel)"/>
+  <path d="M450 120v460" stroke="#c6a15b" stroke-width="8"/>
+  <rect x="725" y="215" width="38" height="160" rx="12" fill="#c6a15b"/>
+  <circle cx="744" cy="255" r="9" fill="#063f31"/>
+  <circle cx="744" cy="305" r="9" fill="#063f31"/>
+  <text x="60" y="650" fill="#c6a15b" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900">REPLACEABLE DEMO MEDIA</text>
+</svg>

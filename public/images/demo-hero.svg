@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Vertix premium elevator shaft demo visual">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#101613"/>
+      <stop offset="0.52" stop-color="#063f31"/>
+      <stop offset="1" stop-color="#0b231d"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f1d28a"/>
+      <stop offset="1" stop-color="#a8792f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g opacity=".32" stroke="#c6a15b" stroke-width="1">
+    <path d="M190 0v1000M370 0v1000M550 0v1000M730 0v1000M910 0v1000M1090 0v1000M1270 0v1000M1450 0v1000"/>
+    <path d="M0 140h1600M0 300h1600M0 460h1600M0 620h1600M0 780h1600"/>
+  </g>
+  <g transform="translate(960 150)">
+    <rect x="0" y="0" width="330" height="700" rx="14" fill="#101613" opacity=".8" stroke="#c6a15b" stroke-width="3"/>
+    <rect x="42" y="60" width="246" height="580" rx="10" fill="#143d33" stroke="#a9bca8" opacity=".92"/>
+    <path d="M165 60v580" stroke="#c6a15b" stroke-width="4"/>
+    <path d="M82 620h166" stroke="#c6a15b" stroke-width="3"/>
+    <path d="M165 24l-48 48h96z" fill="url(#gold)"/>
+  </g>
+  <g transform="translate(170 230)">
+    <text fill="#c6a15b" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">VERTIX TECHNO ELEVATOR</text>
+    <text y="96" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="900">ENGINEERING</text>
+    <text y="190" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="900">THE WAY UP.</text>
+    <rect y="240" width="440" height="4" fill="url(#gold)"/>
+  </g>
+</svg>
