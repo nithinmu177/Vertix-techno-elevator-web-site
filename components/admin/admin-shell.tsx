@@ -1,41 +1,122 @@
+"use client";
+
 import Link from "next/link";
-import { BarChart3, Boxes, Briefcase, FileQuestion, FolderKanban, ImageIcon, Inbox, MessageSquare, Newspaper, Settings, Users } from "lucide-react";
-import { Brand } from "@/components/site/brand";
+import { usePathname } from "next/navigation";
+import {
+  Activity, ArrowUpRight, BarChart3, Boxes, Briefcase,
+  FileQuestion, FolderKanban, ImageIcon, Inbox, MessageSquare,
+  Newspaper, Settings, Users, Star, ChevronRight
+} from "lucide-react";
 
 const nav = [
-  ["Dashboard", "/admin", BarChart3],
-  ["Products", "/admin/products", Boxes],
-  ["Projects", "/admin/projects", FolderKanban],
-  ["Services", "/admin/services", Briefcase],
-  ["Media Library", "/admin/media", ImageIcon],
-  ["Quote Requests", "/admin/quotes", Inbox],
-  ["Messages", "/admin/messages", MessageSquare],
-  ["Customers", "/admin/customers", Users],
-  ["Blog", "/admin/blog", Newspaper],
-  ["FAQ", "/admin/faq", FileQuestion],
-  ["Testimonials", "/admin/testimonials", Users],
-  ["Settings", "/admin/settings", Settings]
+  { label: "Dashboard", href: "/admin", Icon: BarChart3 },
+  { label: "Products", href: "/admin/products", Icon: Boxes },
+  { label: "Projects", href: "/admin/projects", Icon: FolderKanban },
+  { label: "Services", href: "/admin/services", Icon: Briefcase },
+  { label: "Media Library", href: "/admin/media", Icon: ImageIcon },
+  { label: "Quote Requests", href: "/admin/quotes", Icon: Inbox },
+  { label: "Messages", href: "/admin/messages", Icon: MessageSquare },
+  { label: "Customers", href: "/admin/customers", Icon: Users },
+  { label: "Blog", href: "/admin/blog", Icon: Newspaper },
+  { label: "FAQ", href: "/admin/faq", Icon: FileQuestion },
+  { label: "Testimonials", href: "/admin/testimonials", Icon: Star },
+  { label: "Settings", href: "/admin/settings", Icon: Settings },
 ];
+
+function NavItem({ label, href, Icon }: { label: string; href: string; Icon: any }) {
+  const pathname = usePathname();
+  const isActive = pathname === href || (href !== "/admin" && pathname.startsWith(href));
+  return (
+    <Link
+      href={href}
+      className={`group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+        isActive
+          ? "bg-gradient-to-r from-[#d4af37]/15 to-transparent border border-[#d4af37]/20 text-[#f5e2a3] shadow-[0_0_20px_rgba(212,175,55,0.06)]"
+          : "text-slate-400 hover:bg-white/[0.04] hover:text-[#f5e2a3] border border-transparent"
+      }`}
+    >
+      <Icon className={`size-4 transition ${isActive ? "text-[#d4af37]" : "text-slate-500 group-hover:text-[#d4af37]"}`} />
+      <span className="flex-1">{label}</span>
+      {isActive && <ChevronRight className="size-3 text-[#d4af37]/60" />}
+    </Link>
+  );
+}
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#eef1e8] text-[#121815] lg:grid lg:grid-cols-[280px_1fr]">
-      <aside className="border-r border-[#063f31]/10 bg-[#101613] p-5 text-white">
-        <Brand light />
-        <nav className="mt-8 grid gap-1">
-          {nav.map(([label, href, Icon]) => (
-            <Link className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-bold text-white/75 hover:bg-white/10 hover:text-white" href={href as string} key={href as string}>
-              <Icon className="size-4" /> {label as string}
-            </Link>
-          ))}
-        </nav>
+    <div className="min-h-screen bg-[#06090e] text-slate-100 lg:grid lg:grid-cols-[280px_1fr]">
+      {/* Sidebar */}
+      <aside className="relative flex flex-col border-r border-white/[0.06] bg-[#080c14]">
+        {/* Sidebar glow */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-[#d4af37]/8 blur-[60px]" />
+        </div>
+
+        <div className="relative flex-1 p-5">
+          {/* Brand */}
+          <Link href="/" className="group flex items-center gap-3 pb-5 border-b border-white/[0.06]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d4af37]/30 bg-[#d4af37]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)] transition group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+              <span className="text-base font-black text-[#d4af37]">V</span>
+            </div>
+            <div>
+              <p className="text-sm font-black tracking-tight text-white">Vertix Techno</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Operations Portal</p>
+            </div>
+          </Link>
+
+          {/* Status pill */}
+          <div className="mt-5 flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3.5 py-3">
+            <div className="relative flex h-2 w-2 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00e5ff] opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00e5ff]" />
+            </div>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#00e5ff]">Live System Connected</p>
+              <p className="text-[10px] text-slate-500">Real-time operations active</p>
+            </div>
+          </div>
+
+          {/* Nav */}
+          <nav className="mt-6 grid gap-0.5">
+            {nav.map((item) => (
+              <NavItem key={item.href} {...item} />
+            ))}
+          </nav>
+        </div>
+
+        {/* Back link */}
+        <div className="relative border-t border-white/[0.06] p-5">
+          <Link
+            href="/"
+            className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-xs font-bold text-slate-400 hover:border-[#d4af37]/30 hover:text-[#d4af37] transition"
+          >
+            <span>↗ Back to Live Site</span>
+            <ArrowUpRight className="size-3.5" />
+          </Link>
+        </div>
       </aside>
-      <div>
-        <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-[#063f31]/10 bg-white/85 px-5 backdrop-blur">
-          <strong>Vertix Admin</strong>
-          <Link className="rounded-lg bg-[#063f31] px-4 py-2 text-sm font-bold text-white" href="/">View Site</Link>
+
+      {/* Main */}
+      <div className="flex min-w-0 flex-col">
+        {/* Topbar */}
+        <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-white/[0.06] bg-[#080c14]/90 px-6 backdrop-blur-xl">
+          <div className="flex items-center gap-3">
+            <Activity className="size-4 text-[#00e5ff]" />
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">Command Console</p>
+              <strong className="text-sm font-black text-white">Vertix Operations Admin</strong>
+            </div>
+          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#f5e2a3] to-[#c59e33] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#06090e] shadow-lg shadow-[#d4af37]/20 hover:brightness-110 transition"
+          >
+            Live Site <ArrowUpRight className="size-3.5" />
+          </Link>
         </header>
-        <main className="p-5">{children}</main>
+
+        {/* Page content */}
+        <main className="flex-1 p-6">{children}</main>
       </div>
     </div>
   );

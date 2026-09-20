@@ -1,7 +1,99 @@
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { SectionHeading } from "@/components/site/section-heading";
+import { CtaLink } from "@/components/ui/button";
+import { Cpu, Zap, Activity, ShieldCheck, Gauge, Layers } from "lucide-react";
+
+export const metadata = {
+  title: "Elevator Technology & Drives | Vertix",
+  description: "Explore the advanced propulsion and control technologies powering Vertix elevators: PMSM gearless motors, 32-bit VVVF drives, and IoT telemetry."
+};
+
+const techModules = [
+  {
+    title: "Permanent Magnet Synchronous Motor (PMSM)",
+    icon: Zap,
+    desc: "Gearless synchronous motor technology delivering up to 40% energy conservation compared to legacy geared drives, operating with zero oil lubrication and near-zero heat loss."
+  },
+  {
+    title: "32-Bit Closed-Loop VVVF Vector Controller",
+    icon: Cpu,
+    desc: "Calculates acceleration and deceleration curves in real-time with micro-second responsiveness, guaranteeing 1mm floor levelling accuracy and jerk-free starts and stops."
+  },
+  {
+    title: "Regenerative Power Harvesting",
+    icon: Gauge,
+    desc: "Captures potential gravitational energy during counterweight-assisted descents and converts it into clean AC electricity fed back into the building's internal power network."
+  },
+  {
+    title: "Automatic Rescue Device (ARD)",
+    icon: ShieldCheck,
+    desc: "High-capacity industrial battery backup automatically powers the drive during mains power failure, gently moving the car to the nearest landing and opening the doors safely."
+  },
+  {
+    title: "IoT Remote Diagnostics & Telemetry",
+    icon: Activity,
+    desc: "Continuous monitoring of vibration sensors, door cycle counts, and thermal patterns sends real-time predictive service telemetry to our central monitoring center."
+  },
+  {
+    title: "Smart Destination Dispatch AI",
+    icon: Layers,
+    desc: "Algorithms analyze passenger destination requests before boarding, batching passengers efficiently to eliminate intermediate stops and reduce wait times by up to 40%."
+  }
+];
 
 export default function TechnologyPage() {
-  return <><Navbar /><main className="architectural-grid"><section className="container py-16"><SectionHeading eyebrow="Technology" title="Smart controls, modern drives and precision engineering." text="Upload elevator design images and control videos in the Media Library and assign them to technology content." /><div className="grid gap-4 md:grid-cols-3">{["Smart Controls","Energy Efficiency","Modern Drive Systems","Precision Engineering","Remote Monitoring","Predictive Maintenance"].map((item) => <div className="rounded-lg border border-[#063f31]/10 bg-white/90 p-6" key={item}><h2 className="font-black">{item}</h2><div className="mt-5 h-32 rounded-lg bg-[#063f31] opacity-90" /></div>)}</div></section></main><Footer /></>;
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-[#06090e] py-16 text-slate-100">
+        <div className="container">
+          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
+            <div className="max-w-3xl">
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#00e5ff] mb-3 block">
+                Next-Generation Vertical Propulsion
+              </span>
+              <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
+                Advanced Elevator Technology
+              </h1>
+              <p className="mt-4 text-base leading-relaxed text-slate-300">
+                Vertix systems combine German-engineered magnetics, Japanese VVVF power electronics, and proprietary micro-leveling software to set new industry benchmarks for ride comfort, whisper acoustics, and energy conservation.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {techModules.map((mod) => {
+              const Icon = mod.icon;
+              return (
+                <div
+                  key={mod.title}
+                  className="rounded-3xl border border-white/[0.08] bg-[#0c121e]/80 p-8 shadow-xl backdrop-blur-xl transition hover:border-[#00e5ff]/40 hover:-translate-y-1"
+                >
+                  <div className="flex size-12 items-center justify-center rounded-2xl border border-[#00e5ff]/30 bg-[#00e5ff]/10 text-[#00e5ff] mb-6">
+                    <Icon className="size-6" />
+                  </div>
+                  <h2 className="text-xl font-black text-white">{mod.title}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{mod.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-20 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+            <div>
+              <h3 className="text-2xl font-black text-white">Review Engineering Blueprints</h3>
+              <p className="mt-1 text-sm text-slate-300">
+                Request power supply schematics, drive kW ratings, and shaft load charts.
+              </p>
+            </div>
+            <CtaLink href="/quote" variant="primary">
+              REQUEST TECHNICAL SPEC SHEETS
+            </CtaLink>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }

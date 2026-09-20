@@ -42,13 +42,13 @@ export const projectSchema = z.object({
   slug: z.string().min(2),
   location: z.string().min(2),
   categoryId: z.string().optional().nullable(),
-  description: z.string().min(10),
+  description: z.string().min(2),
   challenge: z.string().optional().default(""),
   solution: z.string().optional().default(""),
-  elevatorType: z.string().min(2),
+  elevatorType: z.string().min(1).default("Passenger Elevator"),
   timeline: z.string().optional().default(""),
   results: z.string().optional().default(""),
-  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]).default("DRAFT")
+  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]).default("PUBLISHED")
 });
 
 export const serviceSchema = z.object({

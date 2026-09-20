@@ -20,34 +20,44 @@ async function main() {
 
   const hero = await prisma.media.upsert({
     where: { id: "demo-hero-media" },
-    update: {},
+    update: {
+      originalName: "vertix-elevator-entrance.jpg",
+      url: "/images/brochure-extracts/extract-02.jpg",
+      title: "Vertix elevator entrance",
+      altText: "Modern elevator entrance with marble wall finish and indoor plants"
+    },
     create: {
       id: "demo-hero-media",
-      filename: "demo-hero",
-      originalName: "demo-hero-unsplash.jpg",
-      url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=82",
+      filename: "vertix-elevator-entrance",
+      originalName: "vertix-elevator-entrance.jpg",
+      url: "/images/brochure-extracts/extract-02.jpg",
       type: MediaType.IMAGE,
       category: MediaCategory.HERO,
       mimeType: "image/jpeg",
       size: 0,
-      title: "Demo hero image",
-      altText: "Replaceable demo architectural elevator-style hero image"
+      title: "Vertix elevator entrance",
+      altText: "Modern elevator entrance with marble wall finish and indoor plants"
     }
   });
   const cabin = await prisma.media.upsert({
     where: { id: "demo-cabin-media" },
-    update: {},
+    update: {
+      originalName: "vertix-wood-cabin.jpg",
+      url: "/images/brochure-extracts/extract-15.jpg",
+      title: "Vertix wood finish cabin",
+      altText: "Wood finish elevator cabin with stainless steel wall panels"
+    },
     create: {
       id: "demo-cabin-media",
-      filename: "demo-cabin",
-      originalName: "demo-cabin-unsplash.jpg",
-      url: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82",
+      filename: "vertix-wood-cabin",
+      originalName: "vertix-wood-cabin.jpg",
+      url: "/images/brochure-extracts/extract-15.jpg",
       type: MediaType.IMAGE,
       category: MediaCategory.PRODUCT,
       mimeType: "image/jpeg",
       size: 0,
-      title: "Demo product image",
-      altText: "Replaceable demo elevator interior image"
+      title: "Vertix wood finish cabin",
+      altText: "Wood finish elevator cabin with stainless steel wall panels"
     }
   });
 

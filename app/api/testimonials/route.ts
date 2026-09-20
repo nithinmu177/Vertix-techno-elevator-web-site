@@ -19,3 +19,12 @@ export async function PATCH(request: Request) {
   const { id, ...data } = body;
   return NextResponse.json(await prisma.testimonial.update({ where: { id }, data }));
 }
+
+export async function DELETE(request: Request) {
+  const session = await auth();
+  if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const id = new URL(request.url).searchParams.get("id");
+  if (!id) return NextResponse.json({ error: "Missing testimonial id." }, { status: 400 });
+  await prisma.testimonial.delete({ where: { id } });
+  return NextResponse.json({ ok: true });
+}
