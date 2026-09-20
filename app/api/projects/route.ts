@@ -6,8 +6,10 @@ import { projectSchema } from "@/lib/validations/schemas";
 import { createLocalProject, deleteLocalProject, ensureLocalProjects, updateLocalProject } from "@/lib/local-store";
 
 export async function GET() {
+  const session = await auth();
+  const isAdmin = session?.user.role === "ADMIN";
   if (!process.env.DATABASE_URL) return NextResponse.json(await ensureLocalProjects(demoProjects));
-  return NextResponse.json(await prisma.project.findMany({ include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
+  return NextResponse.json(await prisma.project.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
 export async function POST(request: Request) {

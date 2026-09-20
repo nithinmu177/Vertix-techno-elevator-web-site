@@ -7,7 +7,8 @@ import { ShieldCheck, Award, Clock, FileText } from "lucide-react";
 
 export const metadata = {
   title: "Request Formal Elevator Quote & Pricing | Vertix",
-  description: "Receive instant customized elevator cost estimates and submit formal architectural specifications to the Vertix engineering team."
+  description: "Receive instant customized elevator cost estimates and submit formal architectural specifications to the Vertix engineering team.",
+  alternates: { canonical: "/quote" }
 };
 
 export default function QuotePage() {

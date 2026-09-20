@@ -6,6 +6,12 @@ import { CtaLink } from "@/components/ui/button";
 import { firstMedia, getProject } from "@/lib/data";
 import { MapPin, Clock, ArrowLeft, CheckCircle2, Award } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const project = await getProject((await params).slug);
+  return project ? { title: project.name, description: project.description, alternates: { canonical: `/projects/${project.slug}` } } : { title: "Elevator Project" };
+}
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

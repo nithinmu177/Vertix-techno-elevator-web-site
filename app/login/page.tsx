@@ -2,6 +2,11 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { LoginForm } from "@/components/forms/auth-forms";
 
+export const metadata = {
+  title: "Sign In",
+  robots: { index: false, follow: false }
+};
+
 export default function LoginPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#06090e] flex items-center justify-center px-4 py-16">
@@ -56,13 +61,6 @@ export default function LoginPage() {
             <LoginForm />
           </Suspense>
 
-          {/* Admin hint */}
-          <div className="mt-6 rounded-xl border border-[#00e5ff]/10 bg-[#00e5ff]/5 px-4 py-3">
-            <p className="text-center text-xs text-slate-500">
-              <span className="font-semibold text-[#00e5ff]">Admin:</span>{" "}
-              admin@vertix.local · VertixAdmin@123
-            </p>
-          </div>
         </div>
 
         {/* Footer links */}

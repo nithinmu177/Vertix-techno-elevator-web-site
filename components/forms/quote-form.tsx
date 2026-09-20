@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ShieldCheck, Sparkles, Building, MapPin, Phone, Mail, User } from "lucide-react";
+import { apiUrl } from "@/lib/api-url";
 
 const fields = [
   { name: "name", label: "Full Name *", type: "text", placeholder: "e.g. Vikram Singhania", icon: User, required: true },
@@ -30,7 +31,7 @@ export function QuoteForm() {
     const body = Object.fromEntries(new FormData(form));
 
     try {
-      const response = await fetch("/api/quotes", {
+      const response = await fetch(apiUrl("/api/quotes"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

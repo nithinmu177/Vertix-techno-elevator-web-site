@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Calculator, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { apiUrl } from "@/lib/api-url";
 
 export function QuoteCalculator() {
   const [floors, setFloors] = useState(4);
@@ -34,7 +35,7 @@ export function QuoteCalculator() {
     setError("");
 
     try {
-      const res = await fetch("/api/quotes", {
+      const res = await fetch(apiUrl("/api/quotes"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

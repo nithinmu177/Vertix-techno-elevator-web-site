@@ -3,7 +3,9 @@ import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/db/prisma";
 
 export async function GET() {
-  return NextResponse.json(await prisma.blogPost.findMany({ include: { category: true, coverMedia: true }, orderBy: { updatedAt: "desc" } }));
+  const session = await auth();
+  const isAdmin = session?.user.role === "ADMIN";
+  return NextResponse.json(await prisma.blogPost.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, coverMedia: true }, orderBy: { updatedAt: "desc" } }));
 }
 
 export async function POST(request: Request) {

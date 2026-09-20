@@ -6,7 +6,8 @@ import { PhoneCall, Mail, MapPin, Clock, ShieldCheck, AlertCircle } from "lucide
 
 export const metadata = {
   title: "Contact Engineering & 24/7 Hotline | Vertix",
-  description: "Get in touch with Vertix Techno Elevators for new project consultations, 24/7 emergency dispatch, and technical customer service."
+  description: "Get in touch with Vertix Techno Elevators for new project consultations, 24/7 emergency dispatch, and technical customer service.",
+  alternates: { canonical: "/contact" }
 };
 
 export default function ContactPage() {

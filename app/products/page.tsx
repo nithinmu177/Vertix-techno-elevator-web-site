@@ -8,7 +8,8 @@ import { Award, Layers, ShieldCheck, Sparkles } from "lucide-react";
 
 export const metadata = {
   title: "Elevator Products & Models",
-  description: "Explore the Vertix lineup of precision passenger, home villa, panoramic, hospital, and freight elevators."
+  description: "Explore the Vertix lineup of precision passenger, home villa, panoramic, hospital, and freight elevators.",
+  alternates: { canonical: "/products" }
 };
 
 export default async function ProductsPage() {

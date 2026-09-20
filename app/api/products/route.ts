@@ -6,8 +6,10 @@ import { createLocalResource, deleteLocalResource, ensureLocalResource, updateLo
 import { productSchema } from "@/lib/validations/schemas";
 
 export async function GET() {
+  const session = await auth();
+  const isAdmin = session?.user.role === "ADMIN";
   if (!process.env.DATABASE_URL) return NextResponse.json(await ensureLocalResource("products", demoProducts));
-  return NextResponse.json(await prisma.product.findMany({ include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
+  return NextResponse.json(await prisma.product.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
 export async function POST(request: Request) {

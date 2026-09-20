@@ -7,7 +7,8 @@ import { ShieldCheck, CheckCircle2, Clock, Wrench, RefreshCw, AlertTriangle, Pho
 
 export const metadata = {
   title: "Engineering Services & 24/7 AMC Support",
-  description: "Comprehensive elevator lifecycle services: custom installation, preventive maintenance, modernization, and rapid emergency breakdown rescue."
+  description: "Comprehensive elevator lifecycle services: custom installation, preventive maintenance, modernization, and rapid emergency breakdown rescue.",
+  alternates: { canonical: "/services" }
 };
 
 export default async function ServicesPage() {

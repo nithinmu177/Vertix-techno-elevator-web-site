@@ -7,7 +7,8 @@ import { HelpCircle, PhoneCall } from "lucide-react";
 
 export const metadata = {
   title: "Frequently Asked Questions | Vertix Elevators",
-  description: "Comprehensive answers regarding elevator installation requirements, pit depths, ARD emergency systems, AMC coverage, and costs."
+  description: "Comprehensive answers regarding elevator installation requirements, pit depths, ARD emergency systems, AMC coverage, and costs.",
+  alternates: { canonical: "/faq" }
 };
 
 export default async function FaqPage() {

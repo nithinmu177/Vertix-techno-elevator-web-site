@@ -6,6 +6,7 @@ import { Edit3, Loader2, Plus, RotateCcw, Save, Trash2, CheckCircle2, AlertCircl
 import { Button } from "@/components/ui/button";
 import { slugify } from "@/lib/utils";
 import { MediaPicker } from "@/components/media/media-picker";
+import { apiUrl } from "@/lib/api-url";
 
 type Resource = "products" | "projects" | "services" | "blog" | "faq" | "testimonials";
 
@@ -77,7 +78,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
 
   async function load() {
     setBusy(true);
-    const response = await fetch(`/api/${resource}`);
+    const response = await fetch(apiUrl(`/api/${resource}`));
     setItems(response.ok ? await response.json() : []);
     setBusy(false);
   }
@@ -168,7 +169,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
     const method = editing?.id ? "PATCH" : "POST";
     if (editing?.id) payload.id = editing.id;
 
-    const response = await fetch(`/api/${resource}`, {
+    const response = await fetch(apiUrl(`/api/${resource}`), {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -189,7 +190,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
   async function remove(id: string) {
     if (!confirm("Delete this item permanently?")) return;
     setBusy(true);
-    await fetch(`/api/${resource}?id=${id}`, { method: "DELETE" });
+    await fetch(apiUrl(`/api/${resource}?id=${id}`), { method: "DELETE" });
     await load();
     setBusy(false);
   }

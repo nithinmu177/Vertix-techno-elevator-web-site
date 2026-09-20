@@ -13,6 +13,12 @@ import { VideoShowcaseModal } from "@/components/site/video-showcase-modal";
 import { getFaqs, getPosts, getProducts, getProjects, getServices, getSettings, getTestimonials } from "@/lib/data";
 import { ArrowDownRight, ArrowUpRight, Check, Gauge, ShieldCheck, Sparkles, Wrench, Cpu, Zap, Activity, Award } from "lucide-react";
 
+export const metadata = {
+  title: "Elevator Engineering, Installation & AMC",
+  description: "Vertix Techno Elevator designs, installs and maintains safe, energy-efficient elevator systems for homes, commercial buildings and healthcare facilities.",
+  alternates: { canonical: "/" }
+};
+
 export default async function HomePage() {
   const [settings, products, projects, services, faqs, posts, testimonials] = await Promise.all([
     getSettings(),

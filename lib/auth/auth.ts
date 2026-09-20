@@ -5,10 +5,15 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/db/prisma";
 
 const hasDatabase = Boolean(process.env.DATABASE_URL);
+const authSecret = process.env.AUTH_SECRET;
+
+if (process.env.NODE_ENV === "production" && !authSecret) {
+  throw new Error("AUTH_SECRET must be configured in production.");
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...(hasDatabase ? { adapter: PrismaAdapter(prisma) } : {}),
-  secret: process.env.AUTH_SECRET || "vertix-local-development-secret-change-before-production",
+  secret: authSecret || "local-development-only-secret",
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login"
@@ -24,12 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const password = String(credentials?.password ?? "");
         if (!email || !password) return null;
 
-        if (!hasDatabase) {
-          if (email === "admin@vertix.local" && password === "VertixAdmin@123") {
-            return { id: "local-admin", email, name: "Vertix Admin", role: "ADMIN" };
-          }
-          return null;
-        }
+        if (!hasDatabase) return null;
 
         const user = await prisma.user.findUnique({ where: { email }, include: { role: true } });
         if (!user?.passwordHash) return null;

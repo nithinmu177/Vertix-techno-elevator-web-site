@@ -6,6 +6,12 @@ import { CtaLink } from "@/components/ui/button";
 import { firstMedia, getProduct } from "@/lib/data";
 import { Check, Gauge, Layers, ShieldCheck, Zap, ArrowLeft, Download, PhoneCall } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const product = await getProduct((await params).slug);
+  return product ? { title: product.name, description: product.shortDescription, alternates: { canonical: `/products/${product.slug}` } } : { title: "Elevator Product" };
+}
 
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

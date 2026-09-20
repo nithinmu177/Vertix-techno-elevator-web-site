@@ -38,6 +38,10 @@ copy .env.example .env
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/vertix_techno_elevator?schema=public"
 AUTH_SECRET="replace-with-a-secure-random-secret"
 NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+NEXT_PUBLIC_API_URL="http://localhost:3000"
+ADMIN_EMAIL="admin@vertix.local"
+ADMIN_PASSWORD="set-a-strong-password-before-seeding"
 STORAGE_PROVIDER="local"
 ```
 
@@ -56,13 +60,7 @@ npm run dev
 
 ## Admin Access
 
-After seeding:
-
-- URL: `/admin`
-- Email: `admin@vertix.local`
-- Password: `VertixAdmin@123`
-
-Change this password before production.
+The seed command creates the administrator using `ADMIN_EMAIL` and `ADMIN_PASSWORD` from the environment. Never commit those values.
 
 ## Media Workflow
 
@@ -88,8 +86,37 @@ The build was tested without a local `DATABASE_URL`, so public pages used demo f
 
 ## Production Notes
 
-- Provide a real PostgreSQL database.
-- Set a strong `AUTH_SECRET`.
+### Architecture
+
+This project is a single Next.js deployment containing the public frontend and server-side API routes. Browser requests use `NEXT_PUBLIC_API_URL`; set it to the same HTTPS origin for the least disruptive deployment. Prisma connects to PostgreSQL only on the server. No database credentials are exposed to browser code.
+
+### Required production configuration
+
+- Deploy the Next.js app to a host with HTTPS and set `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_API_URL`, and `NEXTAUTH_URL` to `https://www.mydomain.com`.
+- Set a long random `AUTH_SECRET`, `AUTH_TRUST_HOST=true`, `DATABASE_URL` with TLS enabled, and administrator credentials only in the host secret manager.
+- Run `npx prisma migrate deploy`, then `npm run db:seed` with `ADMIN_EMAIL` and `ADMIN_PASSWORD` supplied securely.
+- Use managed object storage for uploads in production. The current local upload adapter writes to the instance filesystem, which is not durable on serverless hosts.
+- Keep the database on a private network or provider allowlist and do not expose its port publicly.
+- The API is same-origin by default, so no wildcard CORS policy is needed. If the frontend and API are split later, configure an explicit allowlist at the API host and use secure cross-site cookie settings.
+
+### Deployment checklist
+
+1. Provision PostgreSQL and restrict network access to the backend host.
+2. Configure the environment variables above in the hosting provider; do not upload `.env` files.
+3. Deploy with `npm ci` and `npm run build`.
+4. Run `npx prisma migrate deploy` and seed the administrator with a unique password.
+5. Point `www` and the apex domain to the frontend host. Use `api` only if a separate API deployment is introduced later.
+6. Confirm HTTPS redirects, `/robots.txt`, `/sitemap.xml`, public forms, login, logout, `/profile`, and `/admin` after deployment.
+7. Add the canonical site URL and sitemap URL to Google Search Console.
+
+### Security checks
+
+- `.env` and `.env*.local` are ignored and no secret is referenced by `NEXT_PUBLIC_*` variables.
+- Admin pages and mutating API routes verify the server-side `ADMIN` role.
+- Public collection APIs return published records only; API and private routes send `noindex` headers.
+- Production headers disable framework disclosure, MIME sniffing, framing by other origins, and downgrade referrers.
+- Test that ordinary users cannot access admin pages or admin API methods, and that database credentials do not appear in `.next/static` browser bundles.
+
 - Replace demo content with approved company copy.
 - Replace demo testimonials with real approved testimonials.
 - Add verified certificates only after company confirmation.

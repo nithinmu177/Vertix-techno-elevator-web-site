@@ -4,7 +4,9 @@ import { prisma } from "@/lib/db/prisma";
 import { serviceSchema } from "@/lib/validations/schemas";
 
 export async function GET() {
-  return NextResponse.json(await prisma.service.findMany({ include: { media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
+  const session = await auth();
+  const isAdmin = session?.user.role === "ADMIN";
+  return NextResponse.json(await prisma.service.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
 export async function POST(request: Request) {

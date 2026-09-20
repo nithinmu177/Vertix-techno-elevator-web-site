@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { apiUrl } from "@/lib/api-url";
 
 export function LoginForm() {
   const router = useRouter();
@@ -78,7 +79,7 @@ export function RegisterForm() {
     setLoading(true);
     setStatus("");
     const body = Object.fromEntries(new FormData(e.currentTarget));
-    const response = await fetch("/api/auth/register", {
+    const response = await fetch(apiUrl("/api/auth/register"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

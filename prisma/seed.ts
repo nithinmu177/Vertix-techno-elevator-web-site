@@ -2,18 +2,23 @@ import { PrismaClient, MediaCategory, MediaType, PublishStatus } from "@prisma/c
 import bcrypt from "bcryptjs";
 import { slugify } from "../lib/utils";
 
+const adminEmail = process.env.ADMIN_EMAIL || "admin@vertix.local";
+const adminPassword = process.env.ADMIN_PASSWORD || "";
+
+if (!adminPassword) throw new Error("ADMIN_PASSWORD must be set before running the seed.");
+
 const prisma = new PrismaClient();
 
 async function main() {
   const adminRole = await prisma.role.upsert({ where: { name: "ADMIN" }, update: {}, create: { name: "ADMIN" } });
   await prisma.role.upsert({ where: { name: "CUSTOMER" }, update: {}, create: { name: "CUSTOMER" } });
   await prisma.user.upsert({
-    where: { email: "admin@vertix.local" },
+    where: { email: adminEmail },
     update: {},
     create: {
       name: "Vertix Admin",
-      email: "admin@vertix.local",
-      passwordHash: await bcrypt.hash("VertixAdmin@123", 12),
+      email: adminEmail,
+      passwordHash: await bcrypt.hash(adminPassword, 12),
       roleId: adminRole.id
     }
   });
