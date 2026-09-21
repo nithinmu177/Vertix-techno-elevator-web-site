@@ -78,7 +78,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
 
   async function load() {
     setBusy(true);
-    const response = await fetch(apiUrl(`/api/${resource}`));
+    const response = await fetch(apiUrl(`/api/${resource}`), { credentials: "include" });
     setItems(response.ok ? await response.json() : []);
     setBusy(false);
   }
@@ -171,6 +171,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
 
     const response = await fetch(apiUrl(`/api/${resource}`), {
       method,
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
@@ -190,7 +191,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
   async function remove(id: string) {
     if (!confirm("Delete this item permanently?")) return;
     setBusy(true);
-    await fetch(apiUrl(`/api/${resource}?id=${id}`), { method: "DELETE" });
+    await fetch(apiUrl(`/api/${resource}?id=${id}`), { method: "DELETE", credentials: "include" });
     await load();
     setBusy(false);
   }

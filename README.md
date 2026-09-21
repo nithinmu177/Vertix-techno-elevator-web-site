@@ -88,7 +88,17 @@ The build was tested without a local `DATABASE_URL`, so public pages used demo f
 
 ### Architecture
 
-This project is a single Next.js deployment containing the public frontend and server-side API routes. Browser requests use `NEXT_PUBLIC_API_URL`; set it to the same HTTPS origin for the least disruptive deployment. Prisma connects to PostgreSQL only on the server. No database credentials are exposed to browser code.
+The repository now includes a copy-ready `backend/` service. Copy that folder into a separate private GitHub repository when you are ready to deploy the API independently. It contains the API routes, Auth.js, Prisma schema/client setup, database seed script, media storage, validation, CORS middleware, and its own deployment configuration.
+
+For a split deployment, deploy `backend/` as the API host and set this frontend variable:
+
+```env
+NEXT_PUBLIC_API_URL="https://YOUR-BACKEND-DOMAIN"
+```
+
+Set `FRONTEND_URL` or `CORS_ALLOWED_ORIGINS` on the backend to the exact frontend origin. The frontend Auth.js route proxies `/api/auth/*` to the backend when `NEXT_PUBLIC_API_URL` is set, so login and admin API requests continue to use the same browser session. For local development, leave `NEXT_PUBLIC_API_URL` unset and the original same-origin routes remain active.
+
+Prisma connects to PostgreSQL only on the backend server. No database credentials are exposed to browser code.
 
 ### Required production configuration
 

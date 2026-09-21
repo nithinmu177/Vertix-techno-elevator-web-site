@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiUrl } from "@/lib/api-url";
 import { Mail, Phone, User, MessageSquare, Clock } from "lucide-react";
 
 const statusColors: Record<string, string> = {
@@ -16,15 +17,16 @@ export default function MessagesPage() {
 
   async function load() {
     setLoading(true);
-    const r = await fetch("/api/contact");
+    const r = await fetch(apiUrl("/api/contact"), { credentials: "include" });
     setItems(r.ok ? await r.json() : []);
     setLoading(false);
   }
   useEffect(() => { load(); }, []);
 
   async function setStatus(id: string, status: string) {
-    await fetch("/api/contact", {
+    await fetch(apiUrl("/api/contact"), {
       method: "PATCH",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });

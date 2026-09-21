@@ -30,20 +30,18 @@ API_RATE_LIMIT_PER_MINUTE=120
 
 This keeps database credentials on the server only. It does not put secrets in browser code.
 
-## Exact split architecture requested
+## Exact split architecture
 
-To get a public frontend repository plus private backend repository, do this as a second step:
+The `backend/` directory is a standalone API service. Copy it into a separate private GitHub repository and deploy that repository independently. Keep the current repository as the frontend until you intentionally extract the public pages into a separate frontend repository.
 
-1. Keep this repository private and deploy it to Render as the backend/API.
-2. Create a new public frontend repository after extracting the public pages and client components.
-3. Configure the public frontend build with only public variables:
+For the current repository as the frontend, configure only this public variable:
 
 ```env
 NEXT_PUBLIC_SITE_URL="https://YOUR-GITHUB-USER.github.io/YOUR-FRONTEND-REPO"
 NEXT_PUBLIC_API_URL="https://vertix-techno-elevator-api.onrender.com"
 ```
 
-4. Configure the private backend with exact CORS origins:
+Configure the private backend with exact CORS origins:
 
 ```env
 FRONTEND_URL="https://YOUR-GITHUB-USER.github.io/YOUR-FRONTEND-REPO"
@@ -51,7 +49,7 @@ CORS_ALLOWED_ORIGINS=""
 NEXTAUTH_URL="https://vertix-techno-elevator-api.onrender.com"
 ```
 
-Do not copy `.env`, Prisma credentials, Auth secrets, admin credentials, or private config into the public frontend repository.
+Do not copy `.env`, Prisma credentials, Auth secrets, admin credentials, or private config into the frontend repository. When `NEXT_PUBLIC_API_URL` is set, the frontend proxies Auth.js requests and sends admin API requests to the backend with credentials.
 
 ## Files already configured
 
@@ -63,6 +61,7 @@ Do not copy `.env`, Prisma credentials, Auth secrets, admin credentials, or priv
 - `app/layout.tsx`: sets SEO metadata, canonical base, Open Graph, Twitter card and crawler defaults.
 - `next.config.ts`: removes the powered-by header and adds security headers.
 - `package.json`: includes Render-compatible `build` and `start` scripts.
+- `backend/`: copy-ready standalone API/Auth.js service with its own `package.json`, Prisma schema, `.env.example`, health check and deployment README.
 
 ## Database
 

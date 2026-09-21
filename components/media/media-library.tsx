@@ -13,7 +13,7 @@ export function MediaLibrary({ picker = false, onSelect }: { picker?: boolean; o
   const [status, setStatus] = useState<{ text: string; ok: boolean } | null>(null);
 
   async function load() {
-    const response = await fetch(apiUrl(`/api/media?q=${encodeURIComponent(q)}&type=${type}`));
+    const response = await fetch(apiUrl(`/api/media?q=${encodeURIComponent(q)}&type=${type}`), { credentials: "include" });
     setMedia(response.ok ? await response.json() : []);
   }
   useEffect(() => { load(); }, [type]);
@@ -29,14 +29,14 @@ export function MediaLibrary({ picker = false, onSelect }: { picker?: boolean; o
     Array.from(files).forEach((file) => body.append("files", file));
     body.append("category", "GENERAL");
     setStatus({ text: "Uploading…", ok: true });
-    const response = await fetch(apiUrl("/api/media"), { method: "POST", body });
+    const response = await fetch(apiUrl("/api/media"), { method: "POST", body, credentials: "include" });
     setStatus({ text: response.ok ? "Upload successful." : "Upload failed. Check file type, size and login.", ok: response.ok });
     await load();
   }
 
   async function remove(id: string) {
     if (!confirm("Delete this media file permanently?")) return;
-    await fetch(apiUrl(`/api/media?id=${id}`), { method: "DELETE" });
+    await fetch(apiUrl(`/api/media?id=${id}`), { method: "DELETE", credentials: "include" });
     await load();
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiUrl } from "@/lib/api-url";
 import { Loader2, Save, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -64,7 +65,7 @@ export default function SettingsPage() {
   useEffect(() => {
     async function loadSettings() {
       setBusy(true);
-      const response = await fetch("/api/settings");
+      const response = await fetch(apiUrl("/api/settings"), { credentials: "include" });
       const rows = response.ok ? await response.json() : [];
       setValues(flattenSettings(rows));
       setBusy(false);
@@ -87,8 +88,9 @@ export default function SettingsPage() {
       seo: { siteTitle: data.siteTitle, metaDescription: data.metaDescription },
       footer: { description: data.footerDescription, copyright: data.copyright },
     };
-    const response = await fetch("/api/settings", {
+    const response = await fetch(apiUrl("/api/settings"), {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });

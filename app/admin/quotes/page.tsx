@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiUrl } from "@/lib/api-url";
 import { Clock, Mail, Phone, User, Tag, MapPin, Layers, CheckCircle2 } from "lucide-react";
 
 const statuses = ["NEW", "CONTACTED", "IN_PROGRESS", "QUOTED", "WON", "CLOSED"];
@@ -20,7 +21,7 @@ export default function QuotesPage() {
 
   async function load() {
     setLoading(true);
-    const r = await fetch("/api/quotes");
+    const r = await fetch(apiUrl("/api/quotes"), { credentials: "include" });
     setItems(r.ok ? await r.json() : []);
     setLoading(false);
   }
@@ -28,8 +29,9 @@ export default function QuotesPage() {
   useEffect(() => { load(); }, []);
 
   async function setStatus(id: string, status: string) {
-    await fetch("/api/quotes", {
+    await fetch(apiUrl("/api/quotes"), {
       method: "PATCH",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
     });
