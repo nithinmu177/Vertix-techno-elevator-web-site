@@ -1,6 +1,7 @@
+import type { NextRequest } from "next/server";
 import { handlers } from "@/lib/auth/auth";
 
-async function proxyToBackend(request: Request, fallback: (request: Request) => Promise<Response>) {
+async function proxyToBackend(request: NextRequest, fallback: (request: NextRequest) => Promise<Response>) {
 	const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
 	if (!backendUrl) return fallback(request);
 
@@ -21,10 +22,10 @@ async function proxyToBackend(request: Request, fallback: (request: Request) => 
 	});
 }
 
-export function GET(request: Request) {
+export function GET(request: NextRequest) {
 	return proxyToBackend(request, handlers.GET);
 }
 
-export function POST(request: Request) {
+export function POST(request: NextRequest) {
 	return proxyToBackend(request, handlers.POST);
 }
