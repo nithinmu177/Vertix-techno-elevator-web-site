@@ -386,7 +386,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
                   </div>
                 ) : (
                   <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/[0.1] bg-black/20 text-xs text-slate-500">
-                    No cover selected. Click "Select Cover" above.
+                    No cover selected. Click &quot;Select Cover&quot; above.
                   </div>
                 )}
               </div>
@@ -419,7 +419,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
                   </div>
                 ) : (
                   <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/[0.1] bg-black/20 text-xs text-slate-500">
-                    No walkthrough video selected. Click "Select Video" above.
+                    No walkthrough video selected. Click &quot;Select Video&quot; above.
                   </div>
                 )}
               </div>
@@ -469,7 +469,7 @@ export function ResourceManager({ resource, title }: { resource: Resource; title
                 </div>
               ) : (
                 <div className="py-8 text-center rounded-lg border border-dashed border-white/[0.08] text-xs text-slate-500">
-                  No gallery items attached yet. Click "+ Add Photo/Video to Gallery" to attach installation footage.
+                  No gallery items attached yet. Click &quot;+ Add Photo/Video to Gallery&quot; to attach installation footage.
                 </div>
               )}
             </div>
