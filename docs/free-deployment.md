@@ -4,9 +4,9 @@ This repository is currently a full-stack Next.js 15 app with Prisma, Auth.js, A
 
 ## What can be deployed now without redesigning
 
-Use this repo as the private backend/full-stack repository on Render Free Web Service:
+Use the `backend/` repository as the private API service on Render Free Web Service:
 
-- Build command: `npm ci && npm run build`
+- Build command: `npm install && npm run build`
 - Start command: `npm run start`
 - Runtime: Node.js
 - Environment: production
@@ -34,11 +34,14 @@ This keeps database credentials on the server only. It does not put secrets in b
 
 The `backend/` directory is a standalone API service. Copy it into a separate private GitHub repository and deploy that repository independently. Keep the current repository as the frontend until you intentionally extract the public pages into a separate frontend repository.
 
-For the current repository as the frontend, configure only this public variable:
+For the current repository as the frontend, configure these variables:
 
 ```env
 NEXT_PUBLIC_SITE_URL="https://YOUR-GITHUB-USER.github.io/YOUR-FRONTEND-REPO"
 NEXT_PUBLIC_API_URL="https://vertix-techno-elevator-api.onrender.com"
+NEXTAUTH_URL="https://YOUR-FRONTEND-DOMAIN"
+AUTH_SECRET="use-the-same-value-as-the-backend"
+AUTH_TRUST_HOST="true"
 ```
 
 Configure the private backend with exact CORS origins:
@@ -47,6 +50,7 @@ Configure the private backend with exact CORS origins:
 FRONTEND_URL="https://YOUR-GITHUB-USER.github.io/YOUR-FRONTEND-REPO"
 CORS_ALLOWED_ORIGINS=""
 NEXTAUTH_URL="https://vertix-techno-elevator-api.onrender.com"
+AUTH_SECRET="use-the-same-value-as-the-frontend"
 ```
 
 Do not copy `.env`, Prisma credentials, Auth secrets, admin credentials, or private config into the frontend repository. When `NEXT_PUBLIC_API_URL` is set, the frontend proxies Auth.js requests and sends admin API requests to the backend with credentials.
