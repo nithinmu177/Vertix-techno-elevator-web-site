@@ -8,8 +8,8 @@ const hasDatabase = Boolean(process.env.DATABASE_URL);
 const authSecret = process.env.AUTH_SECRET || "vertix-luxury-secret-key-c8f498b31c9a72df9108b53e";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  ...(hasDatabase ? { adapter: PrismaAdapter(prisma) } : {}),
-  secret: authSecret || "local-development-only-secret",
+  trustHost: true,
+  secret: authSecret || "vertix-luxury-secret-key-c8f498b31c9a72df9108b53e",
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login"

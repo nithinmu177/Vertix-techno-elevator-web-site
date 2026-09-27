@@ -8,6 +8,8 @@ import { MapPin, Clock, ArrowLeft, CheckCircle2, Award } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+import { ProjectGalleryGrid } from "@/components/site/project-gallery-grid";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const project = await getProject((await params).slug);
   return project ? { title: project.name, description: project.description, alternates: { canonical: `/projects/${project.slug}` } } : { title: "Elevator Project" };
@@ -15,9 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export function generateStaticParams() {
   return [
-    { slug: "prestige-falcon-city" },
-    { slug: "brigade-gateway" },
-    { slug: "sobha-lifestyle-villas" }
+    { slug: "skyline-prestige-corporate-tower" },
+    { slug: "the-elysium-luxury-villa-estate" },
+    { slug: "apollo-multi-specialty-healthcare-wing" },
+    { slug: "zenith-business-bay-atrium" },
+    { slug: "ns-elevators-live-installations" }
   ];
 }
 
@@ -175,35 +179,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
         {/* Project Gallery */}
         {project.media && project.media.length > 1 && (
-          <section className="container pb-20">
-            <div className="mb-8">
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37]">Installation Assets</span>
-              <h2 className="text-2xl font-black text-white uppercase tracking-wider mt-1">
-                Project Gallery ({project.media.length} Items)
-              </h2>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {project.media.map((item: any, idx: number) => {
-                const m = item.media || item;
-                const isVid = m.type === "VIDEO" || m.url?.endsWith(".mp4") || m.url?.endsWith(".webm");
-                return (
-                  <div key={idx} className="group relative aspect-video overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c121e]">
-                    {isVid ? (
-                      <video src={m.url} controls preload="metadata" className="h-full w-full object-cover" />
-                    ) : (
-                      <Image
-                        src={m.url}
-                        alt={m.altText || m.title || `Project asset ${idx + 1}`}
-                        fill
-                        sizes="(min-width: 1024px) 33vw, 50vw"
-                        className="object-cover transition duration-500 group-hover:scale-105"
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+          <ProjectGalleryGrid media={project.media} projectName={project.name} />
         )}
       </main>
       <Footer />

@@ -20,6 +20,34 @@ function configuredOrigins() {
     .filter(Boolean);
 }
 
+function isOriginAllowed(origin: string, request: NextRequest): boolean {
+  if (!origin) return true;
+  const cleanOrigin = origin.trim().replace(/\/$/, "");
+
+  // 1. Same-origin match with request URL
+  if (cleanOrigin === request.nextUrl.origin.replace(/\/$/, "")) {
+    return true;
+  }
+
+  // 2. Match with Host header
+  const host = request.headers.get("host");
+  if (host && (cleanOrigin === `https://${host}` || cleanOrigin === `http://${host}`)) {
+    return true;
+  }
+
+  // 3. Render cloud domains
+  try {
+    const url = new URL(cleanOrigin);
+    if (url.hostname.endsWith(".onrender.com") || url.hostname === "localhost" || url.hostname === "127.0.0.1") {
+      return true;
+    }
+  } catch {}
+
+  // 4. Configured origins from environment
+  const allowed = configuredOrigins();
+  return allowed.some((allowedOrigin) => cleanOrigin === allowedOrigin);
+}
+
 function getClientKey(request: NextRequest) {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
 }
@@ -40,10 +68,7 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const origin = request.headers.get("origin") || "";
 
-  const allowedOrigins = configuredOrigins();
-  const isAllowedOrigin =
-    !origin ||
-    allowedOrigins.some((allowed) => origin.replace(/\/$/, "") === allowed);
+  const isAllowedOrigin = isOriginAllowed(origin, request);
 
   // Handle preflight OPTIONS requests for API routes
   if (request.method === "OPTIONS" && pathname.startsWith("/api/")) {
