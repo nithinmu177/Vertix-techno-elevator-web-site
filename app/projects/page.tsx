@@ -5,6 +5,9 @@ import { ProjectCard } from "@/components/site/cards";
 import { getProjects } from "@/lib/data";
 import { Sparkles, Building2, MapPin, CheckCircle2 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Featured Elevator Projects & Installations",
   description: "Explore completed Vertix elevator installations across high-rise commercial headquarters, luxury villas, and specialized healthcare campuses.",

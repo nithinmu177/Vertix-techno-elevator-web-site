@@ -9,6 +9,8 @@ export async function GET() {
   return NextResponse.json(await prisma.service.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(request: Request) {
   const session = await auth();
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -17,6 +19,7 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid service details." }, { status: 400 });
   const service = await prisma.service.create({ data: parsed.data });
   await syncServiceMedia(service.id, body.media ?? {});
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(service, { status: 201 });
 }
 
@@ -28,6 +31,7 @@ export async function PATCH(request: Request) {
   if (!parsed.success || !body.id) return NextResponse.json({ error: "Invalid service details." }, { status: 400 });
   const service = await prisma.service.update({ where: { id: body.id }, data: parsed.data });
   await syncServiceMedia(service.id, body.media ?? {});
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(service);
 }
 
@@ -37,6 +41,7 @@ export async function DELETE(request: Request) {
   const id = new URL(request.url).searchParams.get("id");
   if (!id) return NextResponse.json({ error: "Missing service id." }, { status: 400 });
   await prisma.service.delete({ where: { id } });
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json({ ok: true });
 }
 

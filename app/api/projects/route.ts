@@ -12,6 +12,8 @@ export async function GET() {
   return NextResponse.json(await prisma.project.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(request: Request) {
   const session = await auth();
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -23,10 +25,12 @@ export async function POST(request: Request) {
   }
   if (!process.env.DATABASE_URL) {
     const project = await createLocalProject({ ...parsed.data, categoryId: parsed.data.categoryId || null, specifications: body.specifications ?? {} }, body.media);
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json(project, { status: 201 });
   }
   const project = await prisma.project.create({ data: { ...parsed.data, categoryId: parsed.data.categoryId || null, specifications: body.specifications ?? {} } });
   if (body.media) await syncProjectMedia(project.id, body.media);
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(project, { status: 201 });
 }
 
@@ -43,10 +47,12 @@ export async function PATCH(request: Request) {
   if (!process.env.DATABASE_URL) {
     const project = await updateLocalProject(body.id, { ...parsed.data, categoryId: parsed.data.categoryId || null, specifications: body.specifications ?? {} }, body.media);
     if (!project) return NextResponse.json({ error: "Project not found." }, { status: 404 });
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json(project);
   }
   const project = await prisma.project.update({ where: { id: body.id }, data: { ...parsed.data, categoryId: parsed.data.categoryId || null, specifications: body.specifications ?? {} } });
   if (Object.prototype.hasOwnProperty.call(body, "media")) await syncProjectMedia(project.id, body.media ?? {});
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(project);
 }
 
@@ -57,9 +63,11 @@ export async function DELETE(request: Request) {
   if (!id) return NextResponse.json({ error: "Missing project id." }, { status: 400 });
   if (!process.env.DATABASE_URL) {
     await deleteLocalProject(id);
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json({ ok: true });
   }
   await prisma.project.delete({ where: { id } });
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json({ ok: true });
 }
 

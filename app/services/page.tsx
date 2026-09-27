@@ -5,6 +5,9 @@ import { getServices } from "@/lib/data";
 import { CtaLink } from "@/components/ui/button";
 import { ShieldCheck, CheckCircle2, Clock, Wrench, RefreshCw, AlertTriangle, PhoneCall } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Engineering Services & 24/7 AMC Support",
   description: "Comprehensive elevator lifecycle services: custom installation, preventive maintenance, modernization, and rapid emergency breakdown rescue.",

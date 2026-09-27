@@ -8,11 +8,15 @@ export async function GET() {
   return NextResponse.json(await prisma.blogPost.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, coverMedia: true }, orderBy: { updatedAt: "desc" } }));
 }
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(request: Request) {
   const session = await auth();
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = await request.json();
-  return NextResponse.json(await prisma.blogPost.create({ data: body }), { status: 201 });
+  const res = await prisma.blogPost.create({ data: body });
+  try { revalidatePath("/", "layout"); } catch {}
+  return NextResponse.json(res, { status: 201 });
 }
 
 export async function PATCH(request: Request) {
@@ -20,7 +24,9 @@ export async function PATCH(request: Request) {
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = await request.json();
   const { id, ...data } = body;
-  return NextResponse.json(await prisma.blogPost.update({ where: { id }, data }));
+  const res = await prisma.blogPost.update({ where: { id }, data });
+  try { revalidatePath("/", "layout"); } catch {}
+  return NextResponse.json(res);
 }
 
 export async function DELETE(request: Request) {
@@ -29,5 +35,6 @@ export async function DELETE(request: Request) {
   const id = new URL(request.url).searchParams.get("id");
   if (!id) return NextResponse.json({ error: "Missing post id." }, { status: 400 });
   await prisma.blogPost.delete({ where: { id } });
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json({ ok: true });
 }

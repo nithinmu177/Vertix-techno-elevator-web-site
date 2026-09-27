@@ -11,11 +11,17 @@ export async function GET() {
   return NextResponse.json(await prisma.siteSetting.findMany({ include: { media: true } }));
 }
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(request: Request) {
   const session = await auth();
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const body = await request.json();
-  if (!process.env.DATABASE_URL) return NextResponse.json(await saveLocalSettings(body));
+  if (!process.env.DATABASE_URL) {
+    const res = await saveLocalSettings(body);
+    try { revalidatePath("/", "layout"); } catch {}
+    return NextResponse.json(res);
+  }
   const updates = await Promise.all(
     Object.entries(body).map(([key, value]) =>
       prisma.siteSetting.upsert({
@@ -25,5 +31,6 @@ export async function POST(request: Request) {
       })
     )
   );
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(updates);
 }

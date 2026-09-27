@@ -6,6 +6,9 @@ import { getProducts } from "@/lib/data";
 import { CtaLink } from "@/components/ui/button";
 import { Award, Layers, ShieldCheck, Sparkles } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Elevator Products & Models",
   description: "Explore the Vertix lineup of precision passenger, home villa, panoramic, hospital, and freight elevators.",

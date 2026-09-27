@@ -29,6 +29,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const adminEmail = (process.env.ADMIN_EMAIL || "admin@vertix.local").toLowerCase();
         const adminPassword = process.env.ADMIN_PASSWORD || "VertixAdmin@123";
         if (email === adminEmail && password === adminPassword) {
+          if (hasDatabase) {
+            try {
+              const dbAdmin = await prisma.user.findFirst({
+                where: { email: { equals: email, mode: "insensitive" } }
+              });
+              if (dbAdmin) {
+                return { id: dbAdmin.id, email, name: dbAdmin.name || "Vertix Administrator", role: "ADMIN" };
+              }
+            } catch (dbErr) {
+              console.warn("[Admin DB lookup warning]:", dbErr);
+            }
+          }
           return { id: "admin-system", email, name: "Vertix Administrator", role: "ADMIN" };
         }
 

@@ -6,30 +6,41 @@ import { MediaCategory, MediaType } from "@prisma/client";
 const uploadRoot = path.join(process.cwd(), "public", "uploads");
 
 export const mediaRules = {
-  maxImageSize: 8 * 1024 * 1024,
-  maxVideoSize: 80 * 1024 * 1024,
-  allowedImages: ["image/jpeg", "image/png", "image/webp", "image/svg+xml"],
-  allowedVideos: ["video/mp4", "video/webm"]
+  maxImageSize: 30 * 1024 * 1024, // 30 MB
+  maxVideoSize: 250 * 1024 * 1024, // 250 MB
+  allowedImages: ["image/jpeg", "image/png", "image/webp", "image/svg+xml", "image/gif", "image/heic", "image/heif", "image/bmp"],
+  allowedVideos: ["video/mp4", "video/webm", "video/quicktime", "video/x-matroska", "video/m4v", "video/avi"]
 };
 
 function extensionFromName(name: string) {
   return path.extname(name).toLowerCase().replace(/[^.a-z0-9]/g, "");
 }
 
-export function detectMediaType(mimeType: string): MediaType | null {
-  if (mediaRules.allowedImages.includes(mimeType)) return MediaType.IMAGE;
-  if (mediaRules.allowedVideos.includes(mimeType)) return MediaType.VIDEO;
+export function detectMediaType(mimeType: string, filename?: string): MediaType | null {
+  const lowerMime = (mimeType || "").toLowerCase();
+  const ext = filename ? extensionFromName(filename) : "";
+
+  // 1. Check MIME type
+  if (lowerMime.startsWith("image/") || mediaRules.allowedImages.includes(lowerMime)) return MediaType.IMAGE;
+  if (lowerMime.startsWith("video/") || mediaRules.allowedVideos.includes(lowerMime)) return MediaType.VIDEO;
+
+  // 2. Fallback to file extension
+  const imageExts = [".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif", ".heic", ".heif", ".bmp"];
+  const videoExts = [".mp4", ".webm", ".mov", ".mkv", ".m4v", ".avi", ".3gp"];
+
+  if (imageExts.includes(ext)) return MediaType.IMAGE;
+  if (videoExts.includes(ext)) return MediaType.VIDEO;
+
   return null;
 }
 
 export function validateUpload(file: File) {
-  const type = detectMediaType(file.type);
-  if (!type) return { ok: false as const, error: "Unsupported file type." };
+  const type = detectMediaType(file.type, file.name);
+  if (!type) return { ok: false as const, error: `Unsupported file type (${file.type || "unknown"}). Please select an image or video file.` };
   const maxSize = type === MediaType.IMAGE ? mediaRules.maxImageSize : mediaRules.maxVideoSize;
-  if (file.size > maxSize) return { ok: false as const, error: "File is larger than the allowed size." };
-  if (file.type === "image/svg+xml") {
-    const ext = extensionFromName(file.name);
-    if (ext !== ".svg") return { ok: false as const, error: "SVG uploads must use the .svg extension." };
+  if (file.size > maxSize) {
+    const limitMB = Math.round(maxSize / (1024 * 1024));
+    return { ok: false as const, error: `File is too large (${(file.size / (1024 * 1024)).toFixed(1)} MB). Maximum allowed is ${limitMB} MB.` };
   }
   return { ok: true as const, type };
 }

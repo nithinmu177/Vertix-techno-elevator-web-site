@@ -2,55 +2,58 @@ import { v2 as cloudinary } from "cloudinary";
 import { MediaCategory, MediaType } from "@prisma/client";
 import { detectMediaType, validateUpload } from "./local";
 
-// Configure Cloudinary from environment variables
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true
-});
+import os from "os";
+import fs from "fs/promises";
+import path from "path";
+
+// Ensure Cloudinary is configured with valid active credentials
+function getCloudinary() {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "tt4rgc2n",
+    api_key: process.env.CLOUDINARY_API_KEY || "952851658953269",
+    api_secret: process.env.CLOUDINARY_API_SECRET || "4fCKFrUIUPPez9bVNQ45-p9KB-I",
+    secure: true
+  });
+  return cloudinary;
+}
 
 export async function saveCloudinaryMedia(file: File, category: MediaCategory = MediaCategory.GENERAL) {
   const validation = validateUpload(file);
   if (!validation.ok) throw new Error(validation.error);
 
+  const isVideo = validation.type === MediaType.VIDEO;
+  const resourceType = isVideo ? "video" : "image";
+  const cld = getCloudinary();
+
   const buffer = Buffer.from(await file.arrayBuffer());
-  const resourceType = validation.type === MediaType.VIDEO ? "video" : "image";
+  const sanitizedName = file.name.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 40);
+  const tempPath = path.join(os.tmpdir(), `upload-${Date.now()}-${sanitizedName}`);
 
-  return new Promise<{
-    filename: string;
-    originalName: string;
-    url: string;
-    type: MediaType;
-    category: MediaCategory;
-    mimeType: string;
-    size: number;
-  }>((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: "vertix-elevators",
-        resource_type: resourceType,
-        public_id: `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 40)}`
-      },
-      (error, result) => {
-        if (error || !result) {
-          return reject(error || new Error("Cloudinary upload failed with empty result."));
-        }
+  try {
+    await fs.writeFile(tempPath, buffer);
 
-        resolve({
-          filename: result.public_id,
-          originalName: file.name,
-          url: result.secure_url,
-          type: validation.type,
-          category,
-          mimeType: file.type,
-          size: result.bytes || file.size
-        });
-      }
-    );
+    const result = await cld.uploader.upload(tempPath, {
+      folder: "vertix-elevators",
+      resource_type: resourceType,
+      public_id: `${Date.now()}-${sanitizedName}`,
+      chunk_size: isVideo ? 6000000 : undefined
+    });
 
-    uploadStream.end(buffer);
-  });
+    return {
+      filename: result.public_id,
+      originalName: file.name,
+      url: result.secure_url,
+      type: validation.type,
+      category,
+      mimeType: file.type || (isVideo ? "video/mp4" : "image/jpeg"),
+      size: result.bytes || file.size
+    };
+  } catch (err: any) {
+    console.error("[Cloudinary Upload Error]:", err);
+    throw new Error(err?.message || "Failed to upload file to Cloudinary.");
+  } finally {
+    await fs.unlink(tempPath).catch(() => undefined);
+  }
 }
 
 export async function deleteCloudinaryMedia(urlOrPublicId: string) {

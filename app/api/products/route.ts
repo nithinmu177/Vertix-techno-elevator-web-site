@@ -12,6 +12,8 @@ export async function GET() {
   return NextResponse.json(await prisma.product.findMany({ where: isAdmin ? undefined : { status: "PUBLISHED" }, include: { category: true, media: { include: { media: true } } }, orderBy: { updatedAt: "desc" } }));
 }
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(request: Request) {
   const session = await auth();
   if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -20,10 +22,12 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid product details." }, { status: 400 });
   if (!process.env.DATABASE_URL) {
     const product = await createLocalResource("products", { ...parsed.data, categoryId: parsed.data.categoryId || null, safetyFeatures: body.safetyFeatures ?? [], finishes: body.finishes ?? [], applications: body.applications ?? [], specifications: body.specifications ?? {} }, { mediaMap: body.media });
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json(product, { status: 201 });
   }
   const product = await prisma.product.create({ data: { ...parsed.data, categoryId: parsed.data.categoryId || null, safetyFeatures: body.safetyFeatures ?? [], finishes: body.finishes ?? [], applications: body.applications ?? [], specifications: body.specifications ?? {} } });
   if (body.media) await syncProductMedia(product.id, body.media);
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(product, { status: 201 });
 }
 
@@ -36,10 +40,12 @@ export async function PATCH(request: Request) {
   if (!process.env.DATABASE_URL) {
     const product = await updateLocalResource("products", body.id, { ...parsed.data, categoryId: parsed.data.categoryId || null, safetyFeatures: body.safetyFeatures ?? [], finishes: body.finishes ?? [], applications: body.applications ?? [], specifications: body.specifications ?? {} }, { mediaMap: Object.prototype.hasOwnProperty.call(body, "media") ? body.media ?? {} : undefined });
     if (!product) return NextResponse.json({ error: "Product not found." }, { status: 404 });
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json(product);
   }
   const product = await prisma.product.update({ where: { id: body.id }, data: { ...parsed.data, categoryId: parsed.data.categoryId || null, safetyFeatures: body.safetyFeatures ?? [], finishes: body.finishes ?? [], applications: body.applications ?? [], specifications: body.specifications ?? {} } });
   if (Object.prototype.hasOwnProperty.call(body, "media")) await syncProductMedia(product.id, body.media ?? {});
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json(product);
 }
 
@@ -50,9 +56,11 @@ export async function DELETE(request: Request) {
   if (!id) return NextResponse.json({ error: "Missing product id." }, { status: 400 });
   if (!process.env.DATABASE_URL) {
     await deleteLocalResource("products", id);
+    try { revalidatePath("/", "layout"); } catch {}
     return NextResponse.json({ ok: true });
   }
   await prisma.product.delete({ where: { id } });
+  try { revalidatePath("/", "layout"); } catch {}
   return NextResponse.json({ ok: true });
 }
 
