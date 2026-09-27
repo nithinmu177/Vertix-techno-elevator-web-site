@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Activity, ArrowUpRight, BarChart3, Boxes, Briefcase,
@@ -62,14 +63,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
         <div className="relative flex-1 p-5">
           {/* Brand */}
-          <Link href="/" className="group flex items-center gap-3 pb-5 border-b border-white/[0.06]">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d4af37]/30 bg-[#d4af37]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)] transition group-hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">
-              <span className="text-base font-black text-[#d4af37]">V</span>
-            </div>
-            <div>
-              <p className="text-sm font-black tracking-tight text-white">Vertix Techno</p>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">Operations Portal</p>
-            </div>
+          <Link href="/" className="group flex items-center pb-5 border-b border-white/[0.06]">
+            <Image
+              src="/images/vertix-logo.png"
+              alt="Vertix Techno Elevator"
+              width={200}
+              height={50}
+              priority
+              className="h-10 w-auto object-contain transition group-hover:scale-105 filter drop-shadow-[0_2px_10px_rgba(212,175,55,0.2)]"
+            />
           </Link>
 
           {/* Status pill */}

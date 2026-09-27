@@ -5,7 +5,7 @@ import { deleteCloudinaryMedia, saveCloudinaryMedia } from "./cloudinary";
 
 const getStorageProvider = () => {
   const provider = process.env.STORAGE_PROVIDER?.toLowerCase();
-  if (provider === "cloudinary" || process.env.CLOUDINARY_CLOUD_NAME) return "cloudinary";
+  if (provider === "cloudinary" || process.env.CLOUDINARY_CLOUD_NAME || process.env.NODE_ENV === "production") return "cloudinary";
   if (provider === "github") return "github";
   return "local";
 };

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import { LoginForm } from "@/components/forms/auth-forms";
 
@@ -31,14 +32,16 @@ export default function LoginPage() {
 
       <div className="relative z-10 w-full max-w-md">
         {/* Brand mark */}
-        <div className="mb-8 text-center">
-          <Link href="/" className="inline-flex flex-col items-center gap-2 group">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#d4af37]/30 bg-[#d4af37]/10 shadow-[0_0_40px_rgba(212,175,55,0.15)] transition-all duration-300 group-hover:shadow-[0_0_60px_rgba(212,175,55,0.3)]">
-              <span className="text-2xl font-black tracking-tight text-[#d4af37]">V</span>
-            </div>
-            <span className="text-sm font-bold uppercase tracking-[0.3em] text-slate-400">
-              Vertix Techno
-            </span>
+        <div className="mb-8 text-center flex justify-center">
+          <Link href="/" className="inline-flex items-center gap-2 group">
+            <Image
+              src="/images/vertix-logo.png"
+              alt="Vertix Techno Elevator"
+              width={260}
+              height={70}
+              priority
+              className="h-14 w-auto object-contain transition duration-300 group-hover:scale-105 filter drop-shadow-[0_4px_20px_rgba(212,175,55,0.3)]"
+            />
           </Link>
         </div>
 
