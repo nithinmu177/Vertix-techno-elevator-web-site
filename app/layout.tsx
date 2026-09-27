@@ -3,7 +3,7 @@ import "./globals.css";
 
 // SITE_URL: use NEXT_PUBLIC_SITE_URL env var on Render so this is easy to update
 // when a real domain is purchased — just change the env var, no code change needed.
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://vertix-techno-elevator.onrender.com").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://vertix-techno-elevator-web-site.onrender.com").replace(/\/$/, "");
 const LOGO_URL = `${SITE_URL}/images/vertix-logo.png`;
 
 export const metadata: Metadata = {
@@ -56,6 +56,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL
+  },
+  verification: {
+    google: [
+      "LnpYlkCqKekbLkZnGtB6RP-DjS1nomwZ3tmE-3VymGs",
+      "5Rnnf-zWZhClBerebpCEnY_-TerNGUbkis-5zeESdag"
+    ]
   }
 };
 
