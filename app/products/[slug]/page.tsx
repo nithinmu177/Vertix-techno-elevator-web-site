@@ -13,6 +13,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return product ? { title: product.name, description: product.shortDescription, alternates: { canonical: `/products/${product.slug}` } } : { title: "Elevator Product" };
 }
 
+export function generateStaticParams() {
+  return [
+    { slug: "passenger-lift" },
+    { slug: "home-lift" },
+    { slug: "hospital-lift" },
+    { slug: "hydraulic-lift" },
+    { slug: "goods-lift" },
+    { slug: "mrl-lift" }
+  ];
+}
+
 export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getProduct(slug);

@@ -9,6 +9,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return post ? { title: post.title, description: post.excerpt, alternates: { canonical: `/blog/${post.slug}` } } : { title: "Elevator Engineering Insight" };
 }
 
+export function generateStaticParams() {
+  return [
+    { slug: "importance-of-preventive-elevator-maintenance" },
+    { slug: "mrl-vs-traction-elevators" },
+    { slug: "elevator-safety-codes-is-14665" }
+  ];
+}
+
 export default async function BlogDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);

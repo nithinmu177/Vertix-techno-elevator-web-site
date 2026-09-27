@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return project ? { title: project.name, description: project.description, alternates: { canonical: `/projects/${project.slug}` } } : { title: "Elevator Project" };
 }
 
+export function generateStaticParams() {
+  return [
+    { slug: "prestige-falcon-city" },
+    { slug: "brigade-gateway" },
+    { slug: "sobha-lifestyle-villas" }
+  ];
+}
+
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await getProject(slug);
