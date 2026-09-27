@@ -33,3 +33,37 @@ export async function PATCH(request: Request) {
   }
   return NextResponse.json(await prisma.contactMessage.update({ where: { id: body.id }, data: { status: body.status } }));
 }
+
+export async function DELETE(request: Request) {
+  const session = await auth();
+  if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  const deleteAll = searchParams.get("all") === "true";
+
+  if (!id && !deleteAll) {
+    return NextResponse.json({ error: "Missing message id." }, { status: 400 });
+  }
+
+  if (!process.env.DATABASE_URL) {
+    if (deleteAll) {
+      // In local mode, clear all messages
+      const { deleteLocalMessage } = await import("@/lib/local-store");
+      const list = await listLocalMessages();
+      for (const m of list) await deleteLocalMessage(m.id);
+      return NextResponse.json({ ok: true, count: list.length });
+    }
+    const { deleteLocalMessage } = await import("@/lib/local-store");
+    await deleteLocalMessage(id!);
+    return NextResponse.json({ ok: true });
+  }
+
+  if (deleteAll) {
+    const res = await prisma.contactMessage.deleteMany({});
+    return NextResponse.json({ ok: true, count: res.count });
+  }
+
+  await prisma.contactMessage.delete({ where: { id: id! } });
+  return NextResponse.json({ ok: true });
+}

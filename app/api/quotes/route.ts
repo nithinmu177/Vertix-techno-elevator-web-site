@@ -34,3 +34,35 @@ export async function PATCH(request: Request) {
   const quote = await prisma.quoteRequest.update({ where: { id: body.id }, data: { status: body.status } });
   return NextResponse.json(quote);
 }
+
+export async function DELETE(request: Request) {
+  const session = await auth();
+  if (session?.user.role !== "ADMIN") return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  const deleteAll = searchParams.get("all") === "true";
+
+  if (!id && !deleteAll) {
+    return NextResponse.json({ error: "Missing quote request id." }, { status: 400 });
+  }
+
+  if (!process.env.DATABASE_URL) {
+    const { deleteLocalQuote, listLocalQuotes } = await import("@/lib/local-store");
+    if (deleteAll) {
+      const allQuotes = await listLocalQuotes();
+      for (const q of allQuotes) await deleteLocalQuote(q.id);
+      return NextResponse.json({ ok: true, count: allQuotes.length });
+    }
+    await deleteLocalQuote(id!);
+    return NextResponse.json({ ok: true });
+  }
+
+  if (deleteAll) {
+    const res = await prisma.quoteRequest.deleteMany({});
+    return NextResponse.json({ ok: true, count: res.count });
+  }
+
+  await prisma.quoteRequest.delete({ where: { id: id! } });
+  return NextResponse.json({ ok: true });
+}

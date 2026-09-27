@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { apiUrl } from "@/lib/api-url";
-import { Clock, Mail, Phone, User, Tag, MapPin, Layers, CheckCircle2 } from "lucide-react";
+import { Clock, Mail, Phone, User, Tag, MapPin, Layers, CheckCircle2, Trash2 } from "lucide-react";
 
 const statuses = ["NEW", "CONTACTED", "IN_PROGRESS", "QUOTED", "WON", "CLOSED"];
 
@@ -26,7 +26,9 @@ export default function QuotesPage() {
     setLoading(false);
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   async function setStatus(id: string, status: string) {
     await fetch(apiUrl("/api/quotes"), {
@@ -38,13 +40,53 @@ export default function QuotesPage() {
     load();
   }
 
+  async function removeQuote(id: string, name: string) {
+    if (!confirm(`Are you sure you want to delete quote request from "${name}"?`)) return;
+    const res = await fetch(apiUrl(`/api/quotes?id=${id}`), {
+      method: "DELETE",
+      credentials: "include"
+    });
+    if (res.ok) {
+      await load();
+    } else {
+      alert("Failed to delete quote request.");
+    }
+  }
+
+  async function removeAllQuotes() {
+    if (!items.length) return;
+    if (!confirm(`Are you sure you want to permanently delete ALL ${items.length} quote requests?`)) return;
+    const res = await fetch(apiUrl(`/api/quotes?all=true`), {
+      method: "DELETE",
+      credentials: "include"
+    });
+    if (res.ok) {
+      await load();
+    } else {
+      alert("Failed to delete quote requests.");
+    }
+  }
+
   return (
     <section className="grid gap-6">
       {/* Header */}
-      <div>
-        <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">CRM Pipeline</p>
-        <h1 className="mt-1 text-3xl font-black tracking-tight text-white">Quote Requests</h1>
-        <p className="mt-1 text-sm text-slate-500">{items.length} total requests in the pipeline</p>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">CRM Pipeline</p>
+          <h1 className="mt-1 text-3xl font-black tracking-tight text-white">Quote Requests</h1>
+          <p className="mt-1 text-sm text-slate-500">{items.length} total requests in the pipeline</p>
+        </div>
+
+        {items.length > 0 && (
+          <button
+            type="button"
+            onClick={removeAllQuotes}
+            className="inline-flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2 text-xs font-bold text-red-400 hover:bg-red-500/20 active:scale-95 transition"
+          >
+            <Trash2 className="size-4" />
+            <span>Delete All Quotes</span>
+          </button>
+        )}
       </div>
 
       {loading && (
@@ -59,7 +101,7 @@ export default function QuotesPage() {
         <table className="w-full min-w-[960px] text-left text-sm">
           <thead>
             <tr className="border-b border-white/[0.06]">
-              {["Customer", "Company", "Phone", "Email", "Project", "Location", "Elevator", "Date", "Status"].map((h) => (
+              {["Customer", "Company", "Phone", "Email", "Project", "Location", "Elevator", "Date", "Status", "Action"].map((h) => (
                 <th key={h} className="px-4 py-3.5 text-[10px] font-black uppercase tracking-wider text-slate-500">
                   {h}
                 </th>
@@ -90,11 +132,21 @@ export default function QuotesPage() {
                     ))}
                   </select>
                 </td>
+                <td className="px-4 py-3.5">
+                  <button
+                    type="button"
+                    onClick={() => removeQuote(q.id, q.name)}
+                    title="Delete quote request"
+                    className="rounded-lg border border-white/[0.08] p-1.5 text-slate-400 hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400 active:scale-95 transition"
+                  >
+                    <Trash2 className="size-4" />
+                  </button>
+                </td>
               </tr>
             ))}
             {!items.length && !loading && (
               <tr>
-                <td colSpan={9} className="px-4 py-16 text-center text-sm text-slate-600">
+                <td colSpan={10} className="px-4 py-16 text-center text-sm text-slate-600">
                   No quote requests yet. They will appear here when customers submit the quote form.
                 </td>
               </tr>

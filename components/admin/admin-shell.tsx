@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import {
   Activity, ArrowUpRight, BarChart3, Boxes, Briefcase,
   FileQuestion, FolderKanban, ImageIcon, Inbox, MessageSquare,
-  Newspaper, Settings, Users, Star, ChevronRight
+  Newspaper, Settings, Users, Star, ChevronRight, LogOut
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 const nav = [
   { label: "Dashboard", href: "/admin", Icon: BarChart3 },
@@ -84,15 +85,23 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           </nav>
         </div>
 
-        {/* Back link */}
-        <div className="relative border-t border-white/[0.06] p-5">
+        {/* Back link & Logout */}
+        <div className="relative border-t border-white/[0.06] p-4 space-y-2">
           <Link
             href="/"
-            className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-xs font-bold text-slate-400 hover:border-[#d4af37]/30 hover:text-[#d4af37] transition"
+            className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3.5 py-2.5 text-xs font-bold text-slate-400 hover:border-[#d4af37]/30 hover:text-[#d4af37] transition"
           >
             <span>↗ Back to Live Site</span>
             <ArrowUpRight className="size-3.5" />
           </Link>
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="w-full flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 px-3.5 py-2.5 text-xs font-bold text-red-400 hover:bg-red-500/15 hover:border-red-500/40 active:scale-95 transition"
+          >
+            <span>Sign Out Admin</span>
+            <LogOut className="size-3.5" />
+          </button>
         </div>
       </aside>
 
@@ -107,12 +116,22 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               <strong className="text-sm font-black text-white">Vertix Operations Admin</strong>
             </div>
           </div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#f5e2a3] to-[#c59e33] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#06090e] shadow-lg shadow-[#d4af37]/20 hover:brightness-110 transition"
-          >
-            Live Site <ArrowUpRight className="size-3.5" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#f5e2a3] to-[#c59e33] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#06090e] shadow-lg shadow-[#d4af37]/20 hover:brightness-110 transition"
+            >
+              Live Site <ArrowUpRight className="size-3.5" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-red-400 hover:bg-red-500/20 active:scale-95 transition"
+            >
+              <LogOut className="size-3.5" />
+              <span>Logout</span>
+            </button>
+          </div>
         </header>
 
         {/* Page content */}

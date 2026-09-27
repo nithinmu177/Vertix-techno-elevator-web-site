@@ -50,10 +50,10 @@ export default function LoginPage() {
               </span>
             </div>
             <h1 className="mt-3 text-3xl font-black tracking-tight text-white">
-              Welcome Back
+              Admin Sign In
             </h1>
-            <p className="mt-1.5 text-sm text-slate-500">
-              Sign in to access your Vertix dashboard
+            <p className="mt-1.5 text-sm text-slate-400">
+              Enter your admin credentials to access the Operations Console
             </p>
           </div>
 
@@ -63,20 +63,13 @@ export default function LoginPage() {
 
         </div>
 
-        {/* Footer links */}
-        <div className="mt-6 flex items-center justify-center gap-6 text-sm">
-          <Link
-            href="/register"
-            className="font-semibold text-slate-500 transition-colors hover:text-[#d4af37]"
-          >
-            Create Account
-          </Link>
-          <span className="text-slate-700">·</span>
+        {/* Footer link */}
+        <div className="mt-6 flex items-center justify-center text-sm">
           <Link
             href="/"
             className="font-semibold text-slate-500 transition-colors hover:text-[#d4af37]"
           >
-            Back to Home
+            ← Back to Home
           </Link>
         </div>
       </div>

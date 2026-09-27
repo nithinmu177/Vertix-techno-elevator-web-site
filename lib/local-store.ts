@@ -450,3 +450,25 @@ export async function updateLocalQuoteStatus(id: string, status: string) {
   await writeStore(store);
   return quote;
 }
+
+export async function deleteLocalMessage(id: string) {
+  const store = normalizeStore(await readStore());
+  const before = store.messages.length;
+  store.messages = store.messages.filter((m) => m.id !== id);
+  if (store.messages.length !== before) {
+    await writeStore(store);
+    return true;
+  }
+  return false;
+}
+
+export async function deleteLocalQuote(id: string) {
+  const store = normalizeStore(await readStore());
+  const before = store.quotes.length;
+  store.quotes = store.quotes.filter((q) => q.id !== id);
+  if (store.quotes.length !== before) {
+    await writeStore(store);
+    return true;
+  }
+  return false;
+}

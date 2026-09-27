@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { apiUrl } from "@/lib/api-url";
-import { Mail, Phone, User, MessageSquare, Clock } from "lucide-react";
+import { Mail, Phone, User, MessageSquare, Clock, Trash2 } from "lucide-react";
 
 const statusColors: Record<string, string> = {
   NEW: "border-[#00e5ff]/30 bg-[#00e5ff]/10 text-[#00e5ff]",
@@ -21,7 +21,10 @@ export default function MessagesPage() {
     setItems(r.ok ? await r.json() : []);
     setLoading(false);
   }
-  useEffect(() => { load(); }, []);
+
+  useEffect(() => {
+    load();
+  }, []);
 
   async function setStatus(id: string, status: string) {
     await fetch(apiUrl("/api/contact"), {
@@ -33,13 +36,53 @@ export default function MessagesPage() {
     load();
   }
 
+  async function removeMessage(id: string, name: string) {
+    if (!confirm(`Are you sure you want to delete message from "${name}"?`)) return;
+    const res = await fetch(apiUrl(`/api/contact?id=${id}`), {
+      method: "DELETE",
+      credentials: "include"
+    });
+    if (res.ok) {
+      await load();
+    } else {
+      alert("Failed to delete message. Please try again.");
+    }
+  }
+
+  async function removeAllMessages() {
+    if (!items.length) return;
+    if (!confirm(`Are you sure you want to permanently delete ALL ${items.length} messages from the inbox?`)) return;
+    const res = await fetch(apiUrl(`/api/contact?all=true`), {
+      method: "DELETE",
+      credentials: "include"
+    });
+    if (res.ok) {
+      await load();
+    } else {
+      alert("Failed to delete messages.");
+    }
+  }
+
   return (
     <section className="grid gap-6">
       {/* Header */}
-      <div>
-        <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">Inbox</p>
-        <h1 className="mt-1 text-3xl font-black tracking-tight text-white">Messages</h1>
-        <p className="mt-1 text-sm text-slate-500">{items.length} messages in inbox</p>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">Inbox</p>
+          <h1 className="mt-1 text-3xl font-black tracking-tight text-white">Messages</h1>
+          <p className="mt-1 text-sm text-slate-500">{items.length} messages in inbox</p>
+        </div>
+
+        {items.length > 0 && (
+          <button
+            type="button"
+            onClick={removeAllMessages}
+            className="inline-flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-2 text-xs font-bold text-red-400 hover:bg-red-500/20 active:scale-95 transition"
+          >
+            <Trash2 className="size-4" />
+            <span>Delete All Messages</span>
+          </button>
+        )}
       </div>
 
       {loading && (
@@ -76,19 +119,32 @@ export default function MessagesPage() {
                   </span>
                 </div>
               </div>
-              <select
-                value={m.status}
-                onChange={(e) => setStatus(m.id, e.target.value)}
-                className={`rounded-lg border px-3 py-1.5 text-xs font-bold uppercase tracking-wider outline-none cursor-pointer bg-transparent transition ${statusColors[m.status] || statusColors.NEW}`}
-              >
-                <option value="NEW" className="bg-[#0c121e] text-white">NEW</option>
-                <option value="READ" className="bg-[#0c121e] text-white">READ</option>
-                <option value="REPLIED" className="bg-[#0c121e] text-white">REPLIED</option>
-                <option value="ARCHIVED" className="bg-[#0c121e] text-white">ARCHIVED</option>
-              </select>
+
+              <div className="flex items-center gap-2.5">
+                <select
+                  value={m.status}
+                  onChange={(e) => setStatus(m.id, e.target.value)}
+                  className={`rounded-lg border px-3 py-1.5 text-xs font-bold uppercase tracking-wider outline-none cursor-pointer bg-transparent transition ${statusColors[m.status] || statusColors.NEW}`}
+                >
+                  <option value="NEW" className="bg-[#0c121e] text-white">NEW</option>
+                  <option value="READ" className="bg-[#0c121e] text-white">READ</option>
+                  <option value="REPLIED" className="bg-[#0c121e] text-white">REPLIED</option>
+                  <option value="ARCHIVED" className="bg-[#0c121e] text-white">ARCHIVED</option>
+                </select>
+
+                <button
+                  type="button"
+                  onClick={() => removeMessage(m.id, m.name || m.subject)}
+                  title="Delete message"
+                  className="rounded-lg border border-white/[0.08] p-2 text-slate-400 hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400 active:scale-95 transition"
+                >
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
             </div>
+
             <div className="mt-4 rounded-xl border border-white/[0.04] bg-[#080c14] p-4">
-              <p className="text-sm leading-relaxed text-slate-400">{m.message}</p>
+              <p className="text-sm leading-relaxed text-slate-300 whitespace-pre-wrap">{m.message}</p>
             </div>
           </article>
         ))}
@@ -96,7 +152,7 @@ export default function MessagesPage() {
         {!items.length && !loading && (
           <div className="rounded-2xl border border-dashed border-white/[0.06] bg-[#0c121e]/50 p-16 text-center">
             <MessageSquare className="mx-auto mb-3 size-10 text-slate-700" />
-            <p className="text-sm font-bold text-slate-600">No messages yet. Customer inquiries will appear here.</p>
+            <p className="text-sm font-bold text-slate-600">No messages in inbox.</p>
           </div>
         )}
       </div>
