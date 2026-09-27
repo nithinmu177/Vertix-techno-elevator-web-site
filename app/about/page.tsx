@@ -5,8 +5,13 @@ import { CtaLink } from "@/components/ui/button";
 import { Award, CheckCircle2, Cpu, Eye, ShieldCheck, Target, Users, Zap } from "lucide-react";
 
 export const metadata = {
-  title: "About Company | VERTIX TECHNO ELEVATOR",
-  description: "VERTIX TECHNO ELEVATOR provides innovative, safe, and reliable solutions for vertical transportation in India across residential, commercial, industrial, and institutional buildings."
+  title: "About Us | Our Mission, Vision & Core Values",
+  description: "Learn about Vertix Techno Elevator — our mission to deliver safe, reliable, and innovative vertical transportation solutions across Bengaluru and Karnataka.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Vertix Techno Elevator | Our Story & Values",
+    description: "Vertix Techno Elevator is committed to safety, quality, and innovation in elevator engineering across residential, commercial, and industrial segments."
+  }
 };
 
 export default function AboutPage() {

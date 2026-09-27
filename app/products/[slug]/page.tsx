@@ -7,6 +7,7 @@ import { firstMedia, getProduct } from "@/lib/data";
 import { Check, Gauge, Layers, ShieldCheck, Zap, ArrowLeft, Download, PhoneCall } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ProjectGalleryGrid } from "@/components/site/project-gallery-grid";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const product = await getProduct((await params).slug);
@@ -150,9 +151,17 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
               </div>
             </div>
           )}
+
+          {/* Product Photo Gallery */}
+          {product.media && product.media.length > 1 && (
+            <div className="mt-14">
+              <ProjectGalleryGrid media={product.media} projectName={product.name} />
+            </div>
+          )}
         </div>
       </main>
       <Footer />
     </>
   );
 }
+

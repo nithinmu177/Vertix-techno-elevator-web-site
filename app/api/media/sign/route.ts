@@ -11,17 +11,18 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized. Please log in as Admin." }, { status: 401 });
     }
 
-    const cloudName = process.env.CLOUDINARY_CLOUD_NAME || "tt4rgc2n";
-    const apiKey = process.env.CLOUDINARY_API_KEY || "952851658953269";
-    const apiSecret = process.env.CLOUDINARY_API_SECRET || "4fCKFrUIUPPez9bVNQ45-p9KB-I";
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+    if (!cloudName || !apiKey || !apiSecret) {
+      console.error("[Media Sign] Cloudinary env vars not set.");
+      return NextResponse.json({ error: "Storage service is not configured." }, { status: 500 });
+    }
+
     const folder = "vertix-elevators";
 
-    cloudinary.config({
-      cloud_name: cloudName,
-      api_key: apiKey,
-      api_secret: apiSecret,
-      secure: true
-    });
+    cloudinary.config({ cloud_name: cloudName, api_key: apiKey, api_secret: apiSecret, secure: true });
 
     const timestamp = Math.round(Date.now() / 1000);
     const signature = cloudinary.utils.api_sign_request({ folder, timestamp }, apiSecret);

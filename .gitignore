@@ -10,6 +10,9 @@ backend/
 public/uploads/*
 !public/uploads/.gitkeep
 
+# Development scratch / one-off scripts — never commit these
+scratch/
+
 *.log
 tsconfig.tsbuildinfo
 npm-debug.log*

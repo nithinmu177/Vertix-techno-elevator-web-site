@@ -1,15 +1,58 @@
 import type { MetadataRoute } from "next";
 
+const CANONICAL_URL = "https://www.vertix-techno-elevator.com";
+
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "https://vertix-techno-elevator.onrender.com").replace(/\/$/, "");
   return {
     rules: [
       {
+        // Allow all legitimate crawlers to index public pages
         userAgent: "*",
-        allow: ["/", "/about", "/about/*", "/products", "/products/*", "/services", "/projects", "/projects/*", "/blog", "/blog/*", "/faq", "/contact", "/quote", "/terms", "/privacy", "/cookies"],
-        disallow: ["/admin", "/admin/*", "/profile", "/profile/*", "/login", "/register", "/forgot-password", "/reset-password", "/api/*"]
+        allow: [
+          "/",
+          "/about",
+          "/about/technology",
+          "/about/safety",
+          "/about/quality",
+          "/products",
+          "/products/",
+          "/services",
+          "/projects",
+          "/projects/",
+          "/blog",
+          "/blog/",
+          "/faq",
+          "/contact",
+          "/quote",
+          "/terms",
+          "/privacy",
+          "/cookies",
+          "/images/"
+        ],
+        disallow: [
+          "/admin",
+          "/admin/",
+          "/profile",
+          "/profile/",
+          "/login",
+          "/register",
+          "/forgot-password",
+          "/reset-password",
+          "/api/"
+        ]
+      },
+      {
+        // Block known bad bots that ignore robots.txt selectively
+        userAgent: "AhrefsBot",
+        disallow: ["/"]
+      },
+      {
+        userAgent: "SemrushBot",
+        disallow: ["/"]
       }
     ],
-    sitemap: `${baseUrl}/sitemap.xml`
+    sitemap: `${CANONICAL_URL}/sitemap.xml`,
+    host: CANONICAL_URL
   };
 }
+

@@ -6,14 +6,17 @@ import os from "os";
 import fs from "fs/promises";
 import path from "path";
 
-// Ensure Cloudinary is configured with valid active credentials
+// Ensure Cloudinary is configured with env-var credentials only — no hardcoded fallbacks
 function getCloudinary() {
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "tt4rgc2n",
-    api_key: process.env.CLOUDINARY_API_KEY || "952851658953269",
-    api_secret: process.env.CLOUDINARY_API_SECRET || "4fCKFrUIUPPez9bVNQ45-p9KB-I",
-    secure: true
-  });
+  const cloud_name = process.env.CLOUDINARY_CLOUD_NAME;
+  const api_key = process.env.CLOUDINARY_API_KEY;
+  const api_secret = process.env.CLOUDINARY_API_SECRET;
+  if (!cloud_name || !api_key || !api_secret) {
+    throw new Error(
+      "Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables."
+    );
+  }
+  cloudinary.config({ cloud_name, api_key, api_secret, secure: true });
   return cloudinary;
 }
 

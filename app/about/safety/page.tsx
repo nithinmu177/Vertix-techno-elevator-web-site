@@ -5,8 +5,13 @@ import { CtaLink } from "@/components/ui/button";
 import { ShieldCheck, AlertOctagon, CheckCircle2, Lock, Flame, Activity } from "lucide-react";
 
 export const metadata = {
-  title: "Safety Standards & Redundancies | Vertix Elevators",
-  description: "Learn about the multi-layer safety mechanisms engineered into every Vertix elevator: EN 81-20/50 compliance, ARD rescue, and overspeed governors."
+  title: "Elevator Safety Standards & Compliance | EN 81-20/50",
+  description: "Vertix Techno Elevator builds multi-layer safety mechanisms into every lift: EN 81-20/50 compliance, automatic rescue devices, overspeed governors, and fire-rated doors.",
+  alternates: { canonical: "/about/safety" },
+  openGraph: {
+    title: "Elevator Safety Standards | Vertix Techno Elevator",
+    description: "Industry-standard safety compliance in every Vertix elevator installation — ARD rescue, overspeed protection, and EN 81 certified systems."
+  }
 };
 
 const safetyProtocols = [

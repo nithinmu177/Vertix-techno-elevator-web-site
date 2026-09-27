@@ -5,8 +5,13 @@ import { CtaLink } from "@/components/ui/button";
 import { Cpu, Zap, Activity, ShieldCheck, Gauge, Layers } from "lucide-react";
 
 export const metadata = {
-  title: "Elevator Technology & Drives | Vertix",
-  description: "Explore the advanced propulsion and control technologies powering Vertix elevators: PMSM gearless motors, 32-bit VVVF drives, and IoT telemetry."
+  title: "Elevator Technology & Innovation | PMSM, VVVF Drives & IoT",
+  description: "Explore the advanced propulsion and control technologies powering Vertix elevators: PMSM gearless motors, 32-bit VVVF drives, and IoT remote telemetry.",
+  alternates: { canonical: "/about/technology" },
+  openGraph: {
+    title: "Elevator Technology & Drives | Vertix Techno Elevator",
+    description: "Advanced elevator technologies: synchronous gearless motors, VVVF frequency drives, energy regeneration, and smart IoT monitoring."
+  }
 };
 
 const techModules = [

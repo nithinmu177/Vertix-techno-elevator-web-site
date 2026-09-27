@@ -5,8 +5,13 @@ import { CtaLink } from "@/components/ui/button";
 import { Award, CheckCircle2, ShieldCheck, Layers, Gauge, Sliders } from "lucide-react";
 
 export const metadata = {
-  title: "Quality Assurance & Manufacturing Standards | Vertix",
-  description: "ISO 9001:2015 quality control, CNC laser fabrication, dynamic load testing, and metallurgical standards at Vertix Techno Elevators."
+  title: "Quality Assurance & Manufacturing Standards | ISO 9001",
+  description: "Vertix Techno Elevator follows ISO 9001:2015 quality control with CNC laser fabrication, dynamic load testing, and rigorous metallurgical standards at every stage.",
+  alternates: { canonical: "/about/quality" },
+  openGraph: {
+    title: "Quality Assurance & Standards | Vertix Techno Elevator",
+    description: "ISO 9001:2015 certified quality processes in elevator design, manufacturing, and installation — built for long-term reliability and safety."
+  }
 };
 
 const qualityStandards = [

@@ -17,9 +17,16 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Elevator Engineering, Installation & AMC",
-  description: "Vertix Techno Elevator designs, installs and maintains safe, energy-efficient elevator systems for homes, commercial buildings and healthcare facilities.",
-  alternates: { canonical: "/" }
+  title: "Elevator Engineering, Installation & AMC | Bengaluru",
+  description: "Vertix Techno Elevator designs, installs, and maintains safe, energy-efficient elevator systems for homes, commercial buildings, hospitals, and industrial facilities across Bengaluru and Karnataka.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Vertix Techno Elevator — Elevating Nature. Enriching Life.",
+    description: "Premium elevator installation, annual maintenance contracts (AMC), and modernization services across Bengaluru, Karnataka. Passenger lifts, home lifts, hospital lifts, goods elevators.",
+    url: "https://www.vertix-techno-elevator.com",
+    type: "website"
+  },
+  keywords: ["elevator installation Bangalore", "elevator company Bengaluru", "passenger lift", "home lift Bangalore", "elevator AMC", "hospital elevator", "goods elevator", "MRL elevator Bangalore", "hydraulic lift"]
 };
 
 export default async function HomePage() {
