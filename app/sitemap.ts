@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getProducts, getProjects, getPosts, getServices } from "@/lib/data";
 
-const CANONICAL_URL = "https://www.vertix-techno-elevator.com";
+const CANONICAL_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://vertix-techno-elevator.onrender.com").replace(/\/$/, "");
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE_URL = "https://www.vertix-techno-elevator.com";
+// SITE_URL: use NEXT_PUBLIC_SITE_URL env var on Render so this is easy to update
+// when a real domain is purchased — just change the env var, no code change needed.
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://vertix-techno-elevator.onrender.com").replace(/\/$/, "");
 const LOGO_URL = `${SITE_URL}/images/vertix-logo.png`;
 
 export const metadata: Metadata = {

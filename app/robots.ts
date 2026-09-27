@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const CANONICAL_URL = "https://www.vertix-techno-elevator.com";
+const CANONICAL_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://vertix-techno-elevator.onrender.com").replace(/\/$/, "");
 
 export default function robots(): MetadataRoute.Robots {
   return {
