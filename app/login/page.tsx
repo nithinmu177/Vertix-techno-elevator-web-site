@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { LoginForm } from "@/components/forms/auth-forms";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
-  title: "Sign In",
+  title: "Admin Sign In | Vertix Operations",
   robots: { index: false, follow: false }
 };
 

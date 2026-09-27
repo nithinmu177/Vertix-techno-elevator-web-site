@@ -44,6 +44,13 @@ function NavItem({ label, href, Icon }: { label: string; href: string; Icon: any
 }
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
+  const handleLogout = async () => {
+    try {
+      await signOut({ redirect: false });
+    } catch {}
+    window.location.href = "/login";
+  };
+
   return (
     <div className="min-h-screen bg-[#06090e] text-slate-100 lg:grid lg:grid-cols-[280px_1fr]">
       {/* Sidebar */}
@@ -96,8 +103,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           </Link>
           <button
             type="button"
-            onClick={() => signOut({ callbackUrl: "/login" })}
-            className="w-full flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 px-3.5 py-2.5 text-xs font-bold text-red-400 hover:bg-red-500/15 hover:border-red-500/40 active:scale-95 transition"
+            onClick={handleLogout}
+            className="w-full flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 px-3.5 py-2.5 text-xs font-bold text-red-400 hover:bg-red-500/15 hover:border-red-500/40 active:scale-95 transition cursor-pointer"
           >
             <span>Sign Out Admin</span>
             <LogOut className="size-3.5" />
@@ -125,8 +132,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </Link>
             <button
               type="button"
-              onClick={() => signOut({ callbackUrl: "/login" })}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-red-400 hover:bg-red-500/20 active:scale-95 transition"
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-red-400 hover:bg-red-500/20 active:scale-95 transition cursor-pointer"
             >
               <LogOut className="size-3.5" />
               <span>Logout</span>

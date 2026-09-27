@@ -19,33 +19,35 @@ export function LoginForm() {
     const body = Object.fromEntries(new FormData(e.currentTarget));
     const result = await signIn("credentials", { ...body, redirect: false });
     setLoading(false);
-    if (result?.error) return setStatus("Invalid email or password. Please try again.");
+    if (result?.error) return setStatus("Invalid admin login ID or password. Please try again.");
     router.push(params.get("callbackUrl") || "/admin");
   }
 
   return (
     <form onSubmit={submit} className="grid gap-5">
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">
-          Email Address
+        <label className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
+          Admin Login ID (Email)
         </label>
         <input
           name="email"
           type="email"
           required
-          placeholder="you@example.com"
+          autoComplete="username"
+          placeholder="admin@vertix.local"
           className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">
-          Password
+        <label className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
+          Admin Password
         </label>
         <input
           name="password"
           type="password"
           required
+          autoComplete="current-password"
           placeholder="••••••••"
           className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
         />
@@ -54,10 +56,10 @@ export function LoginForm() {
       <Button
         type="submit"
         variant="gold"
-        className="mt-2 w-full py-3 text-base font-bold tracking-widest"
+        className="mt-2 w-full py-3 text-base font-bold tracking-widest uppercase"
         disabled={loading}
       >
-        {loading ? "Authenticating…" : "Sign In"}
+        {loading ? "Verifying Credentials…" : "Admin Log In"}
       </Button>
 
       {status && (
