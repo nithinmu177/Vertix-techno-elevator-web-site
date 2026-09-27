@@ -6,10 +6,32 @@ import { MediaCategory, MediaType } from "@prisma/client";
 const uploadRoot = path.join(process.cwd(), "public", "uploads");
 
 export const mediaRules = {
-  maxImageSize: 30 * 1024 * 1024, // 30 MB
-  maxVideoSize: 250 * 1024 * 1024, // 250 MB
-  allowedImages: ["image/jpeg", "image/png", "image/webp", "image/svg+xml", "image/gif", "image/heic", "image/heif", "image/bmp"],
-  allowedVideos: ["video/mp4", "video/webm", "video/quicktime", "video/x-matroska", "video/m4v", "video/avi"]
+  maxImageSize: 50 * 1024 * 1024, // 50 MB
+  maxVideoSize: 500 * 1024 * 1024, // 500 MB
+  allowedImages: [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/svg+xml",
+    "image/gif",
+    "image/heic",
+    "image/heif",
+    "image/bmp",
+    "image/tiff",
+    "image/avif"
+  ],
+  allowedVideos: [
+    "video/mp4",
+    "video/webm",
+    "video/quicktime",
+    "video/x-matroska",
+    "video/m4v",
+    "video/avi",
+    "video/3gpp",
+    "video/x-msvideo",
+    "video/x-flv",
+    "video/ogg"
+  ]
 };
 
 function extensionFromName(name: string) {
@@ -25,8 +47,8 @@ export function detectMediaType(mimeType: string, filename?: string): MediaType 
   if (lowerMime.startsWith("video/") || mediaRules.allowedVideos.includes(lowerMime)) return MediaType.VIDEO;
 
   // 2. Fallback to file extension
-  const imageExts = [".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif", ".heic", ".heif", ".bmp"];
-  const videoExts = [".mp4", ".webm", ".mov", ".mkv", ".m4v", ".avi", ".3gp"];
+  const imageExts = [".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif", ".heic", ".heif", ".bmp", ".tiff", ".tif", ".avif"];
+  const videoExts = [".mp4", ".webm", ".mov", ".mkv", ".m4v", ".avi", ".3gp", ".wmv", ".flv", ".ts", ".mts"];
 
   if (imageExts.includes(ext)) return MediaType.IMAGE;
   if (videoExts.includes(ext)) return MediaType.VIDEO;

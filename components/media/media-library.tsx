@@ -30,6 +30,12 @@ export function MediaLibrary({ picker = false, onSelect }: { picker?: boolean; o
   const [status, setStatus] = useState<{ text: string; ok: boolean } | null>(null);
   const [loading, setLoading] = useState(false);
   const [previewMedia, setPreviewMedia] = useState<any | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<{
+    current: number;
+    total: number;
+    fileName: string;
+    percent: number;
+  } | null>(null);
 
   async function load() {
     try {
@@ -87,44 +93,145 @@ export function MediaLibrary({ picker = false, onSelect }: { picker?: boolean; o
     const files = event.target.files;
     if (!files?.length) return;
 
+    const fileList = Array.from(files);
+    const total = fileList.length;
+
     setLoading(true);
-    setStatus({ text: `Uploading ${files.length} file(s)... Please wait.`, ok: true });
+    setUploadProgress({ current: 0, total, fileName: fileList[0].name, percent: 0 });
+    setStatus({ text: `Preparing to upload ${total} file(s)...`, ok: true });
 
+    // Step 1: Request signed direct upload credentials from backend
+    let signData: any = null;
     try {
-      const body = new FormData();
-      Array.from(files).forEach((file) => body.append("files", file));
-      body.append("category", "GENERAL");
+      const signRes = await fetch(apiUrl("/api/media/sign"), { credentials: "include" });
+      if (signRes.ok) {
+        signData = await signRes.json();
+      }
+    } catch (err) {
+      console.warn("Could not retrieve Cloudinary sign credentials, falling back to server route:", err);
+    }
 
-      const response = await fetch(apiUrl("/api/media"), {
-        method: "POST",
-        body,
-        credentials: "include"
+    let successCount = 0;
+    const errors: string[] = [];
+
+    // Step 2: Upload each file individually (ensures large media doesn't timeout or overload memory)
+    for (let i = 0; i < total; i++) {
+      const file = fileList[i];
+      const percent = Math.round((i / total) * 100);
+
+      setUploadProgress({
+        current: i + 1,
+        total,
+        fileName: file.name,
+        percent
       });
 
-      const data = await response.json().catch(() => null);
-
-      if (response.ok) {
-        setStatus({
-          text: `Successfully uploaded ${Array.isArray(data) ? data.length : files.length} file(s) to Cloudinary & Database!`,
-          ok: true
-        });
-        await load();
-      } else {
-        setStatus({
-          text: data?.error || "Upload failed. Please check file type, size and admin login.",
-          ok: false
-        });
-      }
-    } catch (err: any) {
       setStatus({
-        text: err?.message || "Upload network error. Please verify your connection.",
+        text: `Uploading file ${i + 1} of ${total}: "${file.name}" (${(file.size / (1024 * 1024)).toFixed(1)} MB)...`,
+        ok: true
+      });
+
+      let uploadedSuccessfully = false;
+
+      // Primary strategy: Direct client-to-Cloudinary upload (bypasses all server body limits & timeouts)
+      if (signData?.uploadUrl && signData?.apiKey) {
+        try {
+          const cldBody = new FormData();
+          cldBody.append("file", file);
+          cldBody.append("api_key", signData.apiKey);
+          cldBody.append("timestamp", String(signData.timestamp));
+          cldBody.append("signature", signData.signature);
+          cldBody.append("folder", signData.folder);
+
+          const cldRes = await fetch(signData.uploadUrl, {
+            method: "POST",
+            body: cldBody
+          });
+
+          if (cldRes.ok) {
+            const cldJson = await cldRes.json();
+            const isVideo = file.type.startsWith("video/") || cldJson.resource_type === "video";
+
+            // Save metadata record into database
+            const saveRes = await fetch(apiUrl("/api/media"), {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                directUpload: true,
+                url: cldJson.secure_url,
+                filename: cldJson.public_id,
+                originalName: file.name,
+                mimeType: file.type || (isVideo ? "video/mp4" : "image/jpeg"),
+                type: isVideo ? "VIDEO" : "IMAGE",
+                size: cldJson.bytes || file.size,
+                category: "GENERAL"
+              }),
+              credentials: "include"
+            });
+
+            if (saveRes.ok) {
+              uploadedSuccessfully = true;
+              successCount++;
+            }
+          } else {
+            const cldErr = await cldRes.json().catch(() => null);
+            console.warn("Direct Cloudinary upload response not ok:", cldErr);
+          }
+        } catch (directErr) {
+          console.warn("Direct upload error, falling back to server route:", directErr);
+        }
+      }
+
+      // Fallback strategy: Upload via standard Next.js /api/media route
+      if (!uploadedSuccessfully) {
+        try {
+          const body = new FormData();
+          body.append("files", file);
+          body.append("category", "GENERAL");
+
+          const response = await fetch(apiUrl("/api/media"), {
+            method: "POST",
+            body,
+            credentials: "include"
+          });
+
+          if (response.ok) {
+            uploadedSuccessfully = true;
+            successCount++;
+          } else {
+            const data = await response.json().catch(() => null);
+            errors.push(`${file.name}: ${data?.error || "Upload failed"}`);
+          }
+        } catch (serverErr: any) {
+          errors.push(`${file.name}: ${serverErr?.message || "Network error"}`);
+        }
+      }
+    }
+
+    setUploadProgress({ current: total, total, fileName: "Finished", percent: 100 });
+
+    if (successCount === total) {
+      setStatus({
+        text: `Successfully uploaded all ${successCount} file(s) to Cloudinary & Database!`,
+        ok: true
+      });
+      await load();
+    } else if (successCount > 0) {
+      setStatus({
+        text: `Uploaded ${successCount} of ${total} file(s). (Errors: ${errors.join("; ")})`,
         ok: false
       });
-    } finally {
-      setLoading(false);
-      // Reset input value so same files can be re-selected if desired
-      event.target.value = "";
+      await load();
+    } else {
+      setStatus({
+        text: `Upload failed: ${errors.join("; ") || "Please check file sizes and admin login."}`,
+        ok: false
+      });
     }
+
+    setLoading(false);
+    setTimeout(() => setUploadProgress(null), 3000);
+    event.target.value = "";
   }
 
   async function removeSingle(id: string, name: string) {
@@ -241,6 +348,33 @@ export function MediaLibrary({ picker = false, onSelect }: { picker?: boolean; o
           </label>
         </div>
       </div>
+
+      {/* Upload Progress Indicator */}
+      {uploadProgress && (
+        <div className="rounded-2xl border border-[#d4af37]/40 bg-[#0c121e] p-5 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+            <div className="flex items-center gap-3">
+              <Loader2 className="size-5 animate-spin text-[#d4af37]" />
+              <div>
+                <p className="font-bold text-white">
+                  Uploading ({uploadProgress.current} of {uploadProgress.total}):{" "}
+                  <span className="text-[#00e5ff] font-mono">{uploadProgress.fileName}</span>
+                </p>
+                <p className="text-xs text-slate-400">
+                  Uploading directly to Cloudinary cloud storage & syncing to database...
+                </p>
+              </div>
+            </div>
+            <span className="text-base font-black text-[#d4af37] font-mono">{uploadProgress.percent}%</span>
+          </div>
+          <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-800">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-[#d4af37] via-[#00e5ff] to-[#d4af37] transition-all duration-300 shadow-[0_0_12px_rgba(212,175,55,0.6)]"
+              style={{ width: `${uploadProgress.percent}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Status banner */}
       {status && (

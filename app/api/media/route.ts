@@ -45,14 +45,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized. Please log in as Admin." }, { status: 401 });
     }
 
-    const formData = await request.formData();
-    const files = formData.getAll("files").filter((file): file is File => file instanceof File);
-    if (!files.length) {
-      return NextResponse.json({ error: "No files provided for upload." }, { status: 400 });
-    }
-
-    const category = (String(formData.get("category") ?? "GENERAL") || "GENERAL") as MediaCategory;
-
     // Verify if session user actually exists in the User table for foreign key safety
     let validUserId: string | null = null;
     if (process.env.DATABASE_URL && session?.user?.id) {
@@ -66,6 +58,55 @@ export async function POST(request: Request) {
         console.warn("[Media upload user verification warning]:", err);
       }
     }
+
+    const contentType = request.headers.get("content-type") || "";
+
+    // 1. Direct Upload (JSON payload after direct-to-cloud upload)
+    if (contentType.includes("application/json")) {
+      const body = await request.json();
+      const items = Array.isArray(body) ? body : [body];
+
+      const recordsToSave = items.map((item) => ({
+        filename: String(item.filename || item.publicId || `${Date.now()}`),
+        originalName: String(item.originalName || item.title || "Uploaded Media"),
+        url: String(item.url || item.secure_url),
+        type: (item.type || (item.resource_type === "video" ? "VIDEO" : "IMAGE")) as any,
+        category: (item.category || "GENERAL") as MediaCategory,
+        mimeType: String(item.mimeType || (item.resource_type === "video" ? "video/mp4" : "image/jpeg")),
+        size: Number(item.size || item.bytes || 0),
+        title: String(item.title || item.originalName || "Uploaded Media"),
+        altText: String(item.altText || (item.originalName ? String(item.originalName).replace(/\.[^.]+$/, "") : "Uploaded Media"))
+      }));
+
+      if (!process.env.DATABASE_URL) {
+        const saved = await createLocalMediaBatch(recordsToSave);
+        try { revalidatePath("/", "layout"); } catch {}
+        return NextResponse.json(saved, { status: 201 });
+      }
+
+      const savedRecords = [];
+      for (const data of recordsToSave) {
+        const rec = await prisma.media.create({
+          data: {
+            ...data,
+            uploadedById: validUserId
+          }
+        });
+        savedRecords.push(rec);
+      }
+
+      try { revalidatePath("/", "layout"); } catch {}
+      return NextResponse.json(savedRecords, { status: 201 });
+    }
+
+    // 2. Multipart Form Upload (standard upload fallback)
+    const formData = await request.formData();
+    const files = formData.getAll("files").filter((file): file is File => file instanceof File);
+    if (!files.length) {
+      return NextResponse.json({ error: "No files provided for upload." }, { status: 400 });
+    }
+
+    const category = (String(formData.get("category") ?? "GENERAL") || "GENERAL") as MediaCategory;
 
     if (!process.env.DATABASE_URL) {
       const payloads = [];

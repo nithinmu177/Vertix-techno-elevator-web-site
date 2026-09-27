@@ -32,7 +32,8 @@ export async function saveCloudinaryMedia(file: File, category: MediaCategory = 
   try {
     await fs.writeFile(tempPath, buffer);
 
-    const result = await cld.uploader.upload(tempPath, {
+    const uploadMethod = isVideo ? cld.uploader.upload_large.bind(cld.uploader) : cld.uploader.upload.bind(cld.uploader);
+    const result: any = await uploadMethod(tempPath, {
       folder: "vertix-elevators",
       resource_type: resourceType,
       public_id: `${Date.now()}-${sanitizedName}`,
