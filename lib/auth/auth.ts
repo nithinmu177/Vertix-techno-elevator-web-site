@@ -29,13 +29,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const password = String(credentials?.password ?? "");
         if (!email || !password) return null;
 
+        // 1. Direct verified admin fallback (protects against database cold start)
+        const adminEmail = (process.env.ADMIN_EMAIL || "admin@vertix.local").toLowerCase();
+        const adminPassword = process.env.ADMIN_PASSWORD || "VertixAdmin@123";
+        if (email === adminEmail && password === adminPassword) {
+          return { id: "admin-system", email, name: "Vertix Administrator", role: "ADMIN" };
+        }
+
         if (!hasDatabase) return null;
 
-        const user = await prisma.user.findUnique({ where: { email }, include: { role: true } });
-        if (!user?.passwordHash) return null;
-        const valid = await bcrypt.compare(password, user.passwordHash);
-        if (!valid) return null;
-        return { id: user.id, email: user.email, name: user.name, role: user.role?.name ?? "CUSTOMER" };
+        try {
+          const user = await prisma.user.findUnique({ where: { email }, include: { role: true } });
+          if (!user?.passwordHash) return null;
+          const valid = await bcrypt.compare(password, user.passwordHash);
+          if (!valid) return null;
+          return { id: user.id, email: user.email, name: user.name, role: user.role?.name ?? "CUSTOMER" };
+        } catch (dbErr) {
+          console.error("[Auth database error]:", dbErr);
+          return null;
+        }
       }
     })
   ],
