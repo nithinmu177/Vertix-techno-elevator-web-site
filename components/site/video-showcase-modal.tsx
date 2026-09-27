@@ -93,7 +93,7 @@ export function VideoShowcaseModal() {
             {/* Video Player */}
             <div className="relative aspect-video w-full bg-black">
               <video
-                src="/uploads/1789547309580-d2573b19337303eb.mp4"
+                src="https://res.cloudinary.com/tt4rgc2n/video/upload/v1790515714/vertix-elevators/1789547309580-d2573b19337303eb_i8pywy.mp4"
                 controls
                 autoPlay
                 className="h-full w-full object-contain"

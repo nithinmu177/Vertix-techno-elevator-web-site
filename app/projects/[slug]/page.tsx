@@ -17,11 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export function generateStaticParams() {
   return [
+    { slug: "elysium-residence-villa" },
+    { slug: "skyline-prestige-tower" },
+    { slug: "ns-elevators-live-installations" },
     { slug: "skyline-prestige-corporate-tower" },
     { slug: "the-elysium-luxury-villa-estate" },
     { slug: "apollo-multi-specialty-healthcare-wing" },
-    { slug: "zenith-business-bay-atrium" },
-    { slug: "ns-elevators-live-installations" }
+    { slug: "zenith-business-bay-atrium" }
   ];
 }
 
