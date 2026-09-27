@@ -7,80 +7,100 @@ import { Sparkles, Check as _Check, Gauge as _Gauge, ShieldCheck as _ShieldCheck
 
 const buildingTypes = [
   {
-    id: "villa",
-    name: "Luxury Villa",
-    capacity: "320 - 450 kg (4-6 Persons)",
-    speed: "0.65 m/s - 1.0 m/s",
-    power: "Single Phase / 3-Phase Eco",
-    idealFor: "Private residences, bungalows & duplexes"
+    id: "passenger",
+    name: "Passenger Lift (LMR / MRL)",
+    capacity: "4P to 17P (272 - 1150 kg)",
+    speed: "1.0 m/s - 2.5 m/s",
+    power: "Montanari / Torin 5HP & 10HP Gearless",
+    idealFor: "Residential towers, corporate hubs & tech parks"
   },
   {
-    id: "commercial",
-    name: "Commercial High-Rise",
-    capacity: "800 - 1600 kg (11-21 Persons)",
-    speed: "1.75 - 4.0 m/s High-Speed",
-    power: "Regenerative 32-Bit PMSM",
-    idealFor: "Corporate towers, IT parks & hotels"
+    id: "home",
+    name: "Home Lift (Villa Lift)",
+    capacity: "320 - 450 kg (4-6 Persons)",
+    speed: "0.4 m/s - 0.65 m/s",
+    power: "Single Phase / 3-Phase Eco-Drive",
+    idealFor: "Private residences, bungalows & duplexes (low pit 250mm)"
   },
   {
     id: "hospital",
-    name: "Hospital & Healthcare",
-    capacity: "1020 - 2000 kg (Bed & Stretcher)",
-    speed: "1.0 - 1.5 m/s Smooth Ramp",
+    name: "Hospital Lift (Bed Cum Passenger)",
+    capacity: "15P to 26P (1000 - 1800 kg Bed)",
+    speed: "1.0 m/s - 1.75 m/s Smooth Ramp",
     power: "Emergency Backup UPS Ready",
-    idealFor: "Hospitals, medical centers & clinics"
+    idealFor: "Multi-specialty hospitals, trauma centers & clinics"
   },
   {
-    id: "penthouse",
-    name: "Panoramic Skydeck",
-    capacity: "630 - 1000 kg (8-13 Persons)",
-    speed: "1.5 - 2.5 m/s",
-    power: "Zero-Vibration Magnetic Levitation Drive",
-    idealFor: "Rooftop lounges, malls & scenic villas"
+    id: "hydraulic",
+    name: "Hydraulic Lift (Low Overhead)",
+    capacity: "300 - 3000 kg",
+    speed: "0.35 m/s - 0.6 m/s",
+    power: "Direct/Indirect Hydraulic Power Pack",
+    idealFor: "Buildings with 10-12 feet restricted overhead"
+  },
+  {
+    id: "goods",
+    name: "Goods Lift (Goods Cum Passenger)",
+    capacity: "11P to 74P (750 - 5000 kg)",
+    speed: "0.35 m/s - 1.0 m/s Heavy Torque",
+    power: "High-Torque Heavy Hoisting Machine",
+    idealFor: "Industrial manufacturing, logistics hubs & retail"
   }
 ];
 
 const cabinStyles = [
   {
-    id: "gold",
-    name: "Imperial Champagne Gold",
-    image: "/images/brochure-extracts/extract-31.jpg",
-    description: "Laser-etched golden stainless steel with mirrored brass inlays and acoustic panels.",
-    tag: "Bespoke Presidential"
-  },
-  {
-    id: "glass",
-    name: "Panoramic Vision Glass",
-    image: "/images/brochure-extracts/extract-13.jpg",
-    description: "Curved laminated security glass with ultra-slim structural perimeter framing.",
-    tag: "360° Architectural"
-  },
-  {
-    id: "wood",
-    name: "Italian Walnut & Titanium",
+    id: "ss-silver",
+    name: "SS Silver Finish Designer Cabin",
     image: "/images/brochure-extracts/extract-15.jpg",
-    description: "Hand-finished natural timber accents juxtaposed with hairline brushed stainless steel.",
-    tag: "Contemporary Warmth"
+    description: "Vertix Lift Standard: Hairline stainless steel with precision acoustic dampening.",
+    tag: "Standard Elite"
   },
   {
-    id: "marble",
-    name: "Grand Lobby Marble & Steel",
+    id: "ms-powder",
+    name: "MS Power-Coated Designer Cabin",
     image: "/images/brochure-extracts/extract-02.jpg",
-    description: "Monolithic book-matched stone panels paired with illuminated digital call stations.",
-    tag: "Corporate Prestige"
+    description: "Vertix Lift Standard: Electrostatic powder-coated high-durability finish.",
+    tag: "Vibrant Contemporary"
+  },
+  {
+    id: "ms-pre",
+    name: "MS Pre-Coated Designer Cabin",
+    image: "/images/brochure-extracts/extract-15.jpg",
+    description: "Architectural dual-tone pre-coated steel with warm textured wall panels.",
+    tag: "Modern Architectural"
+  },
+  {
+    id: "gold",
+    name: "Designer Gold (304 Grade)",
+    image: "/images/brochure-extracts/extract-31.jpg",
+    description: "Etched 0.8-1.2mm design: Mapple Gold, Checks Big Gold, Splendor, and Egyptian Gold.",
+    tag: "304 Grade Luxury"
+  },
+  {
+    id: "rose-gold",
+    name: "Rose Gold & Wooden Gold Cabin",
+    image: "/images/brochure-extracts/extract-31.jpg",
+    description: "Premium cabin solution combining mirrored rose gold brass and hand-finished timber.",
+    tag: "Presidential Villa"
   }
 ];
 
 const ceilingStyles = [
-  "Starry Night Fiber-Optic Array",
-  "Indirect Architectural Halo",
-  "Flush Glare-Free Linear LED"
+  "Model 1: Spot LED & Central Louvre Array",
+  "Model 2: Translucent Linear LED Panel",
+  "Model 3: Quad Spotlights with Center Diffuser",
+  "Model 4: Warm Grid Backlit Gold Chandelier",
+  "Model 5: Multi-Spot Geometric Inset",
+  "Model 6: Triple Recessed Halo LED",
+  "Model 7: Star Spot Array",
+  "Model 8: Dual-Tone Symmetrical Backlit"
 ];
 
 const floorMaterials = [
-  "Carrara White Marble",
-  "Royal Black Pearl Granite",
-  "Bespoke Engineered Teak"
+  "Marble Flooring (Premium Polish)",
+  "Wooden Flooring (Warm Acoustic Timber)",
+  "Anti-Skid Heavy-Duty PVC Flooring"
 ];
 
 export function ElevatorConfigurator() {

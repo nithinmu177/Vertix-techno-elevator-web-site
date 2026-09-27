@@ -6,17 +6,28 @@ import Link from "next/link";
 
 export default async function AdminDashboard() {
   let counts = { products: 0, projects: 0, quotes: 0, messages: 0, media: 0 };
-  if (process.env.DATABASE_URL) {
+  let dbConnected = true;
+
+  // Safe count: never let a database failure reject the whole dashboard.
+  const safeCount = async (query: () => Promise<number>) => {
     try {
-      const [products, projects, quotes, messages, media] = await Promise.all([
-        prisma.product.count(),
-        prisma.project.count(),
-        prisma.quoteRequest.count(),
-        prisma.contactMessage.count(),
-        prisma.media.count(),
-      ]);
-      counts = { products, projects, quotes, messages, media };
-    } catch {}
+      return await query();
+    } catch (err) {
+      dbConnected = false;
+      console.error("[Dashboard count error]:", err instanceof Error ? err.message : err);
+      return 0;
+    }
+  };
+
+  if (process.env.DATABASE_URL) {
+    const [products, projects, quotes, messages, media] = await Promise.all([
+      safeCount(() => prisma.product.count()),
+      safeCount(() => prisma.project.count()),
+      safeCount(() => prisma.quoteRequest.count()),
+      safeCount(() => prisma.contactMessage.count()),
+      safeCount(() => prisma.media.count()),
+    ]);
+    counts = { products, projects, quotes, messages, media };
   } else {
     try {
       const [products, projects, quotes, messages, media] = await Promise.all([
@@ -34,7 +45,8 @@ export default async function AdminDashboard() {
         media: media?.length ?? 0,
       };
     } catch (err) {
-      console.error("[Dashboard count error]:", err);
+      dbConnected = false;
+      console.error("[Dashboard count error]:", err instanceof Error ? err.message : err);
     }
   }
 
@@ -64,11 +76,25 @@ export default async function AdminDashboard() {
             A live view of the content and customer signals shaping your elevator business.
           </p>
         </div>
-        <div className="flex items-center gap-2 rounded-full border border-[#00e5ff]/20 bg-[#00e5ff]/5 px-4 py-2 text-xs font-bold text-[#00e5ff]">
-          <Radio className="size-3" />
-          System Connected
+        <div className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold ${dbConnected ? "border-[#00e5ff]/20 bg-[#00e5ff]/5 text-[#00e5ff]" : "border-[#f87171]/25 bg-[#f87171]/10 text-[#f87171]"}`}>
+          <Radio className={`size-3 ${dbConnected ? "" : "animate-pulse"}`} />
+          {dbConnected ? "System Connected" : "Database Unreachable"}
         </div>
       </div>
+
+      {!dbConnected && (
+        <div className="flex items-start gap-3 rounded-2xl border border-[#f87171]/25 bg-[#f87171]/[0.06] p-5">
+          <Database className="mt-0.5 size-5 shrink-0 text-[#f87171]" />
+          <div>
+            <p className="text-sm font-bold text-[#f87171]">Cannot reach the database</p>
+            <p className="mt-1 text-sm leading-6 text-slate-400">
+              The dashboard is showing zeroed counts because the database is offline or misconfigured.
+              Verify that <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">DATABASE_URL</code> points to a
+              running PostgreSQL server, then reload this page.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Stats grid */}
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">

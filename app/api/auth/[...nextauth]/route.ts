@@ -1,9 +1,26 @@
 import type { NextRequest } from "next/server";
 import { handlers } from "@/lib/auth/auth";
 
+function isSelfUrl(backendUrl: string, request: NextRequest) {
+	const normalizeHost = (value: string) => value.replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
+
+	if (backendUrl === request.nextUrl.origin) return true;
+
+	// Behind a reverse proxy (Render, Vercel, etc.) request.nextUrl.origin is the
+	// internal address (e.g. http://localhost:10000), so compare hosts instead to
+	// avoid proxying a request back to this same server (which causes an
+	// infinite loop / HTTP 508).
+	const backendHost = normalizeHost(backendUrl);
+	const forwardedHost = normalizeHost(request.headers.get("x-forwarded-host") || "");
+	const hostHeader = normalizeHost(request.headers.get("host") || "");
+	const requestOrigin = normalizeHost(request.nextUrl.origin);
+
+	return [forwardedHost, hostHeader, requestOrigin].filter(Boolean).includes(backendHost);
+}
+
 async function proxyToBackend(request: NextRequest, fallback: (request: NextRequest) => Promise<Response>) {
 	const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
-	if (!backendUrl || backendUrl === request.nextUrl.origin) return fallback(request);
+	if (!backendUrl || isSelfUrl(backendUrl, request)) return fallback(request);
 
 	const requestUrl = new URL(request.url);
 	const targetUrl = `${backendUrl}${requestUrl.pathname}${requestUrl.search}`;

@@ -131,12 +131,14 @@ export function QuoteCalculator() {
               <label className="text-xs font-bold uppercase tracking-wider text-[#d4af37]">
                 Passenger Load Capacity
               </label>
-              <div className="mt-2 grid grid-cols-2 gap-2">
+              <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {[
-                  "4 Persons (320 kg)",
-                  "6 Persons (450 kg)",
+                  "4 Persons (272 kg)",
+                  "6 Persons (408 kg)",
                   "8 Persons (544 kg)",
-                  "13 Persons (884 kg)"
+                  "10 Persons (680 kg)",
+                  "13 Persons (884 kg)",
+                  "15 Persons (1020 kg Bed)"
                 ].map((cap) => (
                   <button
                     type="button"
@@ -162,9 +164,9 @@ export function QuoteCalculator() {
               <div className="mt-2 grid grid-cols-2 gap-2">
                 {[
                   "MRL (Machine Room-Less) PMSM",
-                  "Overhead Traction PMSM",
-                  "Hydraulic Villa Drive",
-                  "High-Speed Gearless Eco"
+                  "LMR (Traction with Machine Room)",
+                  "Hydraulic Lift (10-12ft Overhead)",
+                  "Goods / Freight Heavy Duty"
                 ].map((d) => (
                   <button
                     type="button"

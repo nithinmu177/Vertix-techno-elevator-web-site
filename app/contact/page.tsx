@@ -73,7 +73,7 @@ export default function ContactPage() {
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Headquarters & Manufacturing</span>
                       <p className="text-sm font-semibold text-white leading-relaxed mt-0.5">
-                        Ground Floor, Building No. 36/2, Sarck Preci Tech, Rajgopal Nagar Main Road, 3rd Phase, 9th Cross Road, Peenya, Bengaluru, Karnataka 560058
+                        Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Beadie Kamadhenu Auto CNC Private Limited, Peenya, Bengaluru, Karnataka - 560058
                       </p>
                       <div className="mt-4 inline-flex items-center gap-2.5 rounded-lg border border-white/[0.06] bg-[#0c121e] px-3 py-2 shadow-sm">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">GSTIN</span>

@@ -62,7 +62,7 @@ export default function TechnologyPage() {
             </div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
             {techModules.map((mod) => {
               const Icon = mod.icon;
               return (
@@ -80,7 +80,93 @@ export default function TechnologyPage() {
             })}
           </div>
 
-          <div className="mt-20 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+          {/* Drive & Motor Engineering (From Brochure Page 4) */}
+          <div className="rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0e1626] to-[#080c14] p-8 lg:p-12 shadow-2xl mb-16">
+            <div className="max-w-2xl mb-8">
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37]">
+                MOTOR SELECTION • DIRECT OEM PARTNERSHIPS
+              </span>
+              <h2 className="display-type text-2xl font-black text-white md:text-3xl mt-2">
+                Heavy-Duty Drive Motors (Gearless & Geared)
+              </h2>
+              <p className="mt-2 text-sm text-slate-300">
+                Vertix partners with world-leading motor manufacturers to guarantee silent acoustic operation, zero lubrication maintenance, and decades of operational endurance.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {/* Montanari */}
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0c121e] p-6">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                  <h3 className="text-lg font-black text-white">Montanari Giulio & C.</h3>
+                  <span className="text-xs font-bold text-[#d4af37]">Italy</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-slate-300">
+                  <li className="flex items-center justify-between"><span>5 HP Gearless PMSM</span><span className="font-mono text-[#00e5ff]">Smooth Traction</span></li>
+                  <li className="flex items-center justify-between"><span>10 HP Gearless PMSM</span><span className="font-mono text-[#00e5ff]">High-Speed</span></li>
+                  <li className="flex items-center justify-between"><span>5 HP Geared Motor</span><span className="font-mono text-slate-400">High-Torque</span></li>
+                </ul>
+              </div>
+
+              {/* Torin */}
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0c121e] p-6">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                  <h3 className="text-lg font-black text-white">Torin Drive Motors</h3>
+                  <span className="text-xs font-bold text-[#00e5ff]">Global Leader</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-slate-300">
+                  <li className="flex items-center justify-between"><span>5 HP Gearless Motor</span><span className="font-mono text-[#00e5ff]">Ultra-Compact</span></li>
+                  <li className="flex items-center justify-between"><span>10 HP Gearless Motor</span><span className="font-mono text-[#00e5ff]">Commercial Duty</span></li>
+                  <li className="flex items-center justify-between"><span>5 HP Geared Hoisting</span><span className="font-mono text-slate-400">Continuous Duty</span></li>
+                </ul>
+              </div>
+
+              {/* Mona */}
+              <div className="rounded-2xl border border-white/[0.08] bg-[#0c121e] p-6">
+                <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                  <h3 className="text-lg font-black text-white">Mona Drive Systems</h3>
+                  <span className="text-xs font-bold text-emerald-400">Precision</span>
+                </div>
+                <ul className="space-y-2.5 text-xs text-slate-300">
+                  <li className="flex items-center justify-between"><span>5 HP Gearless PMSM</span><span className="font-mono text-[#00e5ff]">Villa / Low-Rise</span></li>
+                  <li className="flex items-center justify-between"><span>10 HP Gearless PMSM</span><span className="font-mono text-[#00e5ff]">Mid-Rise Tower</span></li>
+                  <li className="flex items-center justify-between"><span>5 HP Geared Motor</span><span className="font-mono text-slate-400">Heavy Goods</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Overhead & Shaft Requirements (From Brochure Page 13, 15, 19) */}
+          <div className="grid gap-6 md:grid-cols-3 mb-16">
+            <div className="rounded-2xl border border-white/[0.08] bg-[#0c121e] p-6 text-center">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#d4af37]">Hydraulic Lift</span>
+              <p className="mt-2 text-3xl font-black text-white">10 – 12 Feet</p>
+              <p className="mt-1 text-xs text-slate-400">Minimum Overhead Requirement</p>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                Ideal for restricted roof headroom, low-rise villas, and heavy industrial freight.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-[#00e5ff]/30 bg-[#0c121e] p-6 text-center">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#00e5ff]">MRL (Machine Room Less)</span>
+              <p className="mt-2 text-3xl font-black text-white">14+ Feet Min</p>
+              <p className="mt-1 text-xs text-slate-400">Headroom Overhead (4500mm / Pit: 1500mm)</p>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                Motor mounted directly in shaft ceiling. Completely eliminates rooftop concrete penthouse.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-white/[0.08] bg-[#0c121e] p-6 text-center">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">LMR (With Machine Room)</span>
+              <p className="mt-2 text-3xl font-black text-white">7+ to 10+ Feet</p>
+              <p className="mt-1 text-xs text-slate-400">Overhead: 4500mm • MR: 2100mm • Pit: 1350mm</p>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                Dedicated overhead machine room for high-traffic, high-speed commercial passenger towers.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
             <div>
               <h3 className="text-2xl font-black text-white">Review Engineering Blueprints</h3>
               <p className="mt-1 text-sm text-slate-300">

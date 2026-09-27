@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { MediaCategory } from "@prisma/client";
 import { auth } from "@/lib/auth/auth";
 import { prisma } from "@/lib/db/prisma";
-import { deleteLocalMedia, saveLocalMedia } from "@/lib/storage/local";
+import { deleteMedia, saveMedia } from "@/lib/storage";
 import { mediaUpdateSchema } from "@/lib/validations/schemas";
 import { createLocalMedia, createLocalMediaBatch, deleteLocalMediaRecord, listLocalMedia, updateLocalMedia } from "@/lib/local-store";
 
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
   if (!process.env.DATABASE_URL) {
     const payloads = [];
     for (const file of files) {
-      const payload = await saveLocalMedia(file, category);
+      const payload = await saveMedia(file, category);
       payloads.push({ ...payload, title: file.name, altText: file.name.replace(/\.[^.]+$/, "") });
     }
     const saved = await createLocalMediaBatch(payloads);
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
   const saved = [];
   for (const file of files) {
-    const payload = await saveLocalMedia(file, category);
+    const payload = await saveMedia(file, category);
     saved.push(await prisma.media.create({ data: { ...payload, uploadedById: session.user.id, title: file.name, altText: file.name.replace(/\.[^.]+$/, "") } }));
   }
   return NextResponse.json(saved, { status: 201 });
@@ -83,10 +83,10 @@ export async function DELETE(request: Request) {
   if (!id) return NextResponse.json({ error: "Missing media id." }, { status: 400 });
   if (!process.env.DATABASE_URL) {
     const media = await deleteLocalMediaRecord(id);
-    if (media) await deleteLocalMedia(media.url);
+    if (media) await deleteMedia(media.url);
     return NextResponse.json({ ok: true });
   }
   const media = await prisma.media.delete({ where: { id } });
-  await deleteLocalMedia(media.url);
+  await deleteMedia(media.url);
   return NextResponse.json({ ok: true });
 }

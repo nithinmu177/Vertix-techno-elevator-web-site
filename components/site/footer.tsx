@@ -100,7 +100,7 @@ export function Footer() {
           <div className="mt-5 space-y-3.5 text-sm text-slate-400">
             <div className="flex items-start gap-3">
               <MapPin className="mt-1 size-4 shrink-0 text-[#00e5ff]" />
-              <span>Ground Floor, 36/2, Sarck Preci Tech, Rajgopal Nagar Main Road, 3rd Phase, 9th Cross Road, Peenya, Bengaluru, Karnataka 560058</span>
+              <span>Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Beadie Kamadhenu Auto CNC Private Limited, Peenya, Bengaluru, Karnataka - 560058</span>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="size-4 shrink-0 text-[#00e5ff]" />

@@ -5,41 +5,53 @@ import { CtaLink } from "@/components/ui/button";
 import { Award, CheckCircle2, Cpu, Eye, ShieldCheck, Target, Users, Zap } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | Vertix Techno Elevators",
-  description: "Learn about Vertix Techno Elevators: our engineering roots, mission, architectural craftsmanship, and safety-first philosophy."
+  title: "About Company | VERTIX TECHNO ELEVATOR",
+  description: "VERTIX TECHNO ELEVATOR provides innovative, safe, and reliable solutions for vertical transportation in India across residential, commercial, industrial, and institutional buildings."
 };
 
 export default function AboutPage() {
-  const pillars = [
+  const coreValues = [
     {
-      title: "Our Mission",
-      icon: Target,
-      desc: "To deliver vertical mobility solutions that seamlessly blend precision drive engineering, uncompromised passenger safety, and bespoke architectural aesthetics for premier buildings."
-    },
-    {
-      title: "Our Vision",
-      icon: Eye,
-      desc: "To be the foremost trusted partner for architects, developers, and homeowners seeking high-reliability, zero-breakdown vertical transport systems across India and global markets."
-    },
-    {
-      title: "Engineering Discipline",
-      icon: Cpu,
-      desc: "Every Vertix elevator operates on synchronous permanent magnet technology with closed-loop 32-bit vector controllers, guaranteeing millimeter-accurate leveling and whisper-quiet acoustics."
-    },
-    {
-      title: "Safety as a Moral Imperative",
+      num: "01",
+      title: "SAFETY FIRST",
       icon: ShieldCheck,
-      desc: "We engineer redundant safety protections into every mechanical and electrical subsystem, strictly adhering to EN 81-20/50 and Bureau of Indian Standards IS 14665."
+      desc: "We prioritize the safety of passengers, customers, technicians, and everyone who interacts with our elevator systems."
     },
     {
-      title: "Architectural Bespoke Craft",
+      num: "02",
+      title: "QUALITY",
       icon: Award,
-      desc: "We collaborate directly with interior designers and structural consultants to tailor cabin textures—from laser-etched champagne gold mirror brass to acoustic Italian timber and panoramic glass."
+      desc: "We are committed to delivering reliable elevator solutions with a strong focus on quality components, engineering, installation, and service."
     },
     {
-      title: "Lifecycle Care & 24/7 SLA",
+      num: "03",
+      title: "RELIABILITY",
+      icon: CheckCircle2,
+      desc: "We strive to provide dependable elevator systems and responsive maintenance support that our customers can rely on."
+    },
+    {
+      num: "04",
+      title: "INNOVATION",
+      icon: Cpu,
+      desc: "We embrace modern technology and innovative engineering solutions to improve elevator performance, comfort, and efficiency."
+    },
+    {
+      num: "05",
+      title: "CUSTOMER FOCUS",
+      icon: Users,
+      desc: "We understand each customer's requirements and provide solutions tailored to their building, application, and expectations."
+    },
+    {
+      num: "06",
+      title: "INTEGRITY",
+      icon: Target,
+      desc: "We believe in honest communication, transparency, ethical business practices, and building long-term trust with our customers and partners."
+    },
+    {
+      num: "07",
+      title: "SUSTAINABILITY",
       icon: Zap,
-      desc: "Beyond manufacturing and installation, our dedicated emergency rescue and preventive maintenance teams guarantee 99.9% uptime and 30-minute rapid response."
+      desc: "We aim to promote energy-conscious and environmentally responsible solutions while contributing to a more sustainable future."
     }
   ];
 
@@ -48,50 +60,107 @@ export default function AboutPage() {
       <Navbar />
       <main className="min-h-screen bg-[#06090e] py-16 text-slate-100">
         <div className="container">
-          {/* Header */}
+          {/* Header & About Company */}
           <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-3 block">
-                The Vertix Story & Heritage
+                ABOUT COMPANY • ELEVATING NATURE. ENRICHING LIFE.
               </span>
               <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
-                Engineering The Way Up With Passion & Discipline
+                VERTIX TECHNO ELEVATOR
               </h1>
+              <p className="mt-2 text-lg font-bold text-[#00e5ff]">
+                Elevating Safety, Comfort & Reliability
+              </p>
+
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-300">
+                <p>
+                  VERTIX TECHNO ELEVATOR is committed to providing innovative, safe, and reliable solutions for vertical transportation in India. We offer a range of high-quality elevator products and services designed to meet the diverse requirements of residential, commercial, industrial, and institutional buildings, with a strong focus on safety, efficiency, comfort, and reliability.
+                </p>
+                <p>
+                  At our core, we believe in putting our customers first. We are dedicated to understanding the unique requirements of every project and providing personalized elevator solutions, installation support, maintenance services, and after-sales assistance. Our team is committed to ensuring that our customers receive professional service and dependable solutions throughout the life of their elevator systems.
+                </p>
+                <p>
+                  We are a company that values quality, innovation, sustainability, and customer satisfaction. We continuously focus on adopting modern technologies and improving our products and services to meet the changing needs of the vertical transportation industry. Our commitment to quality and professional standards enables us to deliver elevator solutions that combine performance, safety, functionality, and contemporary design.
+                </p>
+                <p>
+                  We also believe in operating with integrity and transparency, building strong and lasting relationships with our customers, partners, suppliers, and employees. Collaboration and teamwork are important to us, encouraging continuous improvement, creativity, and responsible growth.
+                </p>
+                <p>
+                  Our commitment is to contribute to a safer, more efficient, and sustainable future by providing dependable vertical transportation solutions. We are proud to be part of India&apos;s growing elevator industry and look forward to working with our customers to provide safe, reliable, efficient, and modern elevator solutions that enhance everyday mobility and improve the way people move through buildings.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Mission & Vision Section */}
+          <div className="grid gap-8 md:grid-cols-2 mb-16">
+            {/* Mission */}
+            <div className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-b from-[#0e1626] to-[#080c14] p-8 lg:p-10 shadow-2xl">
+              <div className="flex size-14 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#d4af37] mb-6">
+                <Target className="size-7" />
+              </div>
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider">Our Mission</h2>
               <p className="mt-4 text-base leading-relaxed text-slate-300">
-                Founded on the premise that elevators are not merely mechanical lifting devices, but vital architectural centerpieces that define the daily rhythm and safety of every modern building.
+                Our mission is to provide safe, reliable, innovative, and efficient elevator solutions that meet the evolving needs of our customers. We are committed to delivering quality products, professional installation, dependable maintenance, and responsive after-sales service while maintaining the highest standards of safety and customer satisfaction.
+              </p>
+            </div>
+
+            {/* Vision */}
+            <div className="rounded-3xl border border-[#00e5ff]/30 bg-gradient-to-b from-[#0e1626] to-[#080c14] p-8 lg:p-10 shadow-2xl">
+              <div className="flex size-14 items-center justify-center rounded-2xl border border-[#00e5ff]/40 bg-[#00e5ff]/10 text-[#00e5ff] mb-6">
+                <Eye className="size-7" />
+              </div>
+              <h2 className="text-2xl font-black text-white uppercase tracking-wider">Our Vision</h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-300">
+                Our vision is to become a trusted and leading elevator solutions provider in India, recognized for quality, innovation, safety, sustainability, and customer-focused service. We aim to create modern vertical transportation solutions that make buildings more accessible, efficient, comfortable, and connected.
               </p>
             </div>
           </div>
 
-          {/* Pillars Grid */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {pillars.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <div
-                  key={pillar.title}
-                  className="rounded-3xl border border-white/[0.08] bg-[#0c121e]/80 p-8 shadow-xl backdrop-blur-xl transition hover:border-[#d4af37]/40 hover:-translate-y-1"
-                >
-                  <div className="flex size-12 items-center justify-center rounded-2xl border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] mb-6">
-                    <Icon className="size-6" />
+          {/* Core Values */}
+          <div className="mb-16">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37]">
+                GUIDING PRINCIPLES
+              </span>
+              <h2 className="display-type text-3xl font-black text-white md:text-4xl mt-2">
+                Our Core Values
+              </h2>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {coreValues.map((val) => {
+                const Icon = val.icon;
+                return (
+                  <div
+                    key={val.title}
+                    className="rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-6 shadow-xl backdrop-blur-xl transition hover:border-[#d4af37]/40 hover:-translate-y-1"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-2xl font-black text-[#d4af37]/40">{val.num}</span>
+                      <div className="flex size-10 items-center justify-center rounded-xl border border-white/[0.1] bg-white/[0.05] text-[#d4af37]">
+                        <Icon className="size-5" />
+                      </div>
+                    </div>
+                    <h3 className="text-base font-black text-white tracking-wide">{val.title}</h3>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-400">{val.desc}</p>
                   </div>
-                  <h3 className="text-xl font-black text-white">{pillar.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{pillar.desc}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Bottom Banner */}
-          <div className="mt-20 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+          <div className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-black text-white">Looking for an Engineered Elevator Solution?</h3>
+              <h3 className="text-2xl font-black text-white">Ready to Discuss Your Elevator Project?</h3>
               <p className="mt-1 text-sm text-slate-300">
-                Connect directly with our senior applications team for a site feasibility assessment.
+                Contact our Bangalore headquarters for site surveys, CAD designs, and quotes.
               </p>
             </div>
             <CtaLink href="/contact" variant="primary">
-              CONNECT WITH OUR LEADERSHIP
+              CONTACT OUR ENGINEERS
             </CtaLink>
           </div>
         </div>

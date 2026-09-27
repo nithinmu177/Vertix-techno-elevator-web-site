@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: vertix-techno-elevator-web-site
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build && npm run db:push && npm run db:seed
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATABASE_URL
+        sync: false
+      - key: AUTH_SECRET
+        sync: false
+      - key: AUTH_TRUST_HOST
+        value: "true"
+      - key: NEXTAUTH_URL
+        value: https://vertix-techno-elevator-web-site.onrender.com
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://vertix-techno-elevator-web-site.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        value: https://vertix-techno-elevator-web-site.onrender.com
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: STORAGE_PROVIDER
+        value: local
+      - key: API_RATE_LIMIT_PER_MINUTE
+        value: "120"
+
+# The database is hosted externally on Neon. Set DATABASE_URL manually in the
+# Render dashboard using your Neon connection string, e.g.
+# postgresql://USER:PASSWORD@HOST/DBNAME?sslmode=require

@@ -11,7 +11,7 @@ Full-stack Next.js website and admin dashboard for Vertix Techno Elevator.
 - Media library supports image/video upload, multi-upload, preview, search, type filters, copy reference and delete.
 - Reusable media picker for assigning uploaded media to products, projects, services, blog posts and testimonials.
 - Quote and contact forms validate input, save to the database and show user-facing status messages.
-- Local media storage abstraction in `lib/storage/local.ts`, ready to swap for cloud storage later.
+- Media storage supports local disk or GitHub repository storage through `STORAGE_PROVIDER`.
 - SEO metadata, `robots.txt`, `sitemap.xml`, responsive layout and reduced-motion support.
 
 ## Tech Stack
@@ -86,6 +86,22 @@ The build was tested without a local `DATABASE_URL`, so public pages used demo f
 
 ## Production Notes
 
+### Render deployment
+
+The root `render.yaml` deploys the public frontend and the `backend/` API as two Render web services, plus a PostgreSQL database. In Render, create a Blueprint from this repository and enter the prompted values:
+
+- Use the same strong `AUTH_SECRET` for both services.
+- Set a unique `ADMIN_EMAIL` and `ADMIN_PASSWORD` for the backend.
+- Keep `DATABASE_URL` managed by the Blueprint database connection.
+
+After the first deploy, run the backend seed command from Render Shell:
+
+```bash
+npm run db:seed
+```
+
+The backend uses local instance storage for uploads, so uploaded media is not durable on Render Free. Use object storage before treating uploads as production data.
+
 ### Architecture
 
 The repository now includes a copy-ready `backend/` service. Copy that folder into a separate private GitHub repository when you are ready to deploy the API independently. It contains the API routes, Auth.js, Prisma schema/client setup, database seed script, media storage, validation, CORS middleware, and its own deployment configuration.
@@ -106,6 +122,7 @@ Prisma connects to PostgreSQL only on the backend server. No database credential
 - Set a long random `AUTH_SECRET`, `AUTH_TRUST_HOST=true`, `DATABASE_URL` with TLS enabled, and administrator credentials only in the host secret manager.
 - Run `npx prisma migrate deploy`, then `npm run db:seed` with `ADMIN_EMAIL` and `ADMIN_PASSWORD` supplied securely.
 - Use managed object storage for uploads in production. The current local upload adapter writes to the instance filesystem, which is not durable on serverless hosts.
+- For GitHub media storage, set `STORAGE_PROVIDER=github`, a fine-grained `GITHUB_TOKEN` with Contents read/write access, `GITHUB_REPOSITORY=owner/repository`, `GITHUB_BRANCH=main`, and optionally `GITHUB_UPLOAD_PATH=public/uploads`.
 - Keep the database on a private network or provider allowlist and do not expose its port publicly.
 - The API is same-origin by default, so no wildcard CORS policy is needed. If the frontend and API are split later, configure an explicit allowlist at the API host and use secure cross-site cookie settings.
 
