@@ -5,12 +5,13 @@ import { CtaLink } from "@/components/ui/button";
 import { Award, CheckCircle2, Cpu, Eye, ShieldCheck, Target, Users, Zap } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | Our Mission, Vision & Core Values",
-  description: "Learn about Vertix Techno Elevator — our mission to deliver safe, reliable, and innovative vertical transportation solutions across Bengaluru and Karnataka.",
+  title: "About Us | Elevator Company in Bengaluru",
+  description: "Learn about VERTIX TECHNO ELEVATOR — premier elevator company based in Peenya, Bengaluru, Karnataka specializing in passenger, home, and commercial lifts.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Vertix Techno Elevator | Our Story & Values",
-    description: "Vertix Techno Elevator is committed to safety, quality, and innovation in elevator engineering across residential, commercial, and industrial segments."
+    title: "About Us | VERTIX TECHNO ELEVATOR Bengaluru",
+    description: "VERTIX TECHNO ELEVATOR is a certified elevator company in Bengaluru delivering safe, reliable, and energy-efficient vertical transportation solutions.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/about"
   }
 };
 
@@ -72,27 +73,24 @@ export default function AboutPage() {
                 ABOUT COMPANY • ELEVATING NATURE. ENRICHING LIFE.
               </span>
               <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
-                VERTIX TECHNO ELEVATOR
+                About VERTIX TECHNO ELEVATOR
               </h1>
               <p className="mt-2 text-lg font-bold text-[#00e5ff]">
-                Elevating Safety, Comfort & Reliability
+                Elevator Company in Bengaluru | Elevating Safety, Comfort & Reliability
               </p>
 
               <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-300">
                 <p>
-                  VERTIX TECHNO ELEVATOR is committed to providing innovative, safe, and reliable solutions for vertical transportation in India. We offer a range of high-quality elevator products and services designed to meet the diverse requirements of residential, commercial, industrial, and institutional buildings, with a strong focus on safety, efficiency, comfort, and reliability.
+                  Headquartered in Peenya Industrial Area, Bengaluru, Karnataka, VERTIX TECHNO ELEVATOR is committed to providing innovative, safe, and reliable solutions for vertical transportation in India. We offer a comprehensive range of high-quality elevator products and services designed to meet the diverse requirements of residential villas, commercial complexes, healthcare facilities, and industrial buildings.
                 </p>
                 <p>
-                  At our core, we believe in putting our customers first. We are dedicated to understanding the unique requirements of every project and providing personalized elevator solutions, installation support, maintenance services, and after-sales assistance. Our team is committed to ensuring that our customers receive professional service and dependable solutions throughout the life of their elevator systems.
+                  At our core, we believe in putting our customers first. We are dedicated to understanding the unique architectural and shaft requirements of every project in Bengaluru and across Karnataka, providing personalized elevator solutions, professional installation, proactive preventive maintenance, and dependable after-sales assistance.
                 </p>
                 <p>
-                  We are a company that values quality, innovation, sustainability, and customer satisfaction. We continuously focus on adopting modern technologies and improving our products and services to meet the changing needs of the vertical transportation industry. Our commitment to quality and professional standards enables us to deliver elevator solutions that combine performance, safety, functionality, and contemporary design.
+                  VERTIX TECHNO ELEVATOR is a company that values quality, innovation, sustainability, and customer satisfaction. We continuously adopt modern propulsion technologies such as Permanent Magnet Synchronous (PMSM) gearless drives and 32-bit closed-loop microprocessor leveling controllers to deliver elevator systems that combine superior ride comfort, uncompromised safety, energy efficiency, and contemporary design.
                 </p>
                 <p>
-                  We also believe in operating with integrity and transparency, building strong and lasting relationships with our customers, partners, suppliers, and employees. Collaboration and teamwork are important to us, encouraging continuous improvement, creativity, and responsible growth.
-                </p>
-                <p>
-                  Our commitment is to contribute to a safer, more efficient, and sustainable future by providing dependable vertical transportation solutions. We are proud to be part of India&apos;s growing elevator industry and look forward to working with our customers to provide safe, reliable, efficient, and modern elevator solutions that enhance everyday mobility and improve the way people move through buildings.
+                  We operate with integrity and transparency, building long-term relationships with builders, architects, facility managers, and homeowners across Bengaluru and South India.
                 </p>
               </div>
             </div>

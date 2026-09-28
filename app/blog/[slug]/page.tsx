@@ -6,7 +6,17 @@ import type { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const post = await getPost((await params).slug);
-  return post ? { title: post.title, description: post.excerpt, alternates: { canonical: `/blog/${post.slug}` } } : { title: "Elevator Engineering Insight" };
+  return post ? {
+    title: `${post.title} | VERTIX TECHNO ELEVATOR`,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: `${post.title} | VERTIX TECHNO ELEVATOR`,
+      description: post.excerpt,
+      url: `https://vertix-techno-elevator-web-site.onrender.com/blog/${post.slug}`,
+      images: [{ url: "https://vertix-techno-elevator-web-site.onrender.com/images/vertix-logo.png", alt: post.title }]
+    }
+  } : { title: "Elevator Engineering Insight" };
 }
 
 export function generateStaticParams() {

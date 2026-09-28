@@ -6,29 +6,9 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        // Allow all legitimate crawlers to index public pages
+        // Allow all legitimate crawlers to index public pages, CSS, JS, and assets
         userAgent: "*",
-        allow: [
-          "/",
-          "/about",
-          "/about/technology",
-          "/about/safety",
-          "/about/quality",
-          "/products",
-          "/products/",
-          "/services",
-          "/projects",
-          "/projects/",
-          "/blog",
-          "/blog/",
-          "/faq",
-          "/contact",
-          "/quote",
-          "/terms",
-          "/privacy",
-          "/cookies",
-          "/images/"
-        ],
+        allow: "/",
         disallow: [
           "/admin",
           "/admin/",

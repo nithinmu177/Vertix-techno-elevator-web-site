@@ -7,7 +7,7 @@ export function Brand({ light: _light = true }: { light?: boolean }) {
       <div className="relative flex items-center py-1">
         <Image
           src="/images/vertix-logo.png"
-          alt="Vertix Techno Elevator"
+          alt="VERTIX TECHNO ELEVATOR"
           width={220}
           height={60}
           priority

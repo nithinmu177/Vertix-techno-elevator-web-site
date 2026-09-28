@@ -9,34 +9,48 @@ const LOGO_URL = `${SITE_URL}/images/vertix-logo.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Vertix Techno Elevator | Engineering the Way Up",
-    template: "%s | Vertix Techno Elevator"
+    default: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
+    template: "%s | VERTIX TECHNO ELEVATOR"
   },
-  description: "Vertix Techno Elevator designs, installs, and maintains safe, energy-efficient elevator systems for homes, commercial buildings, hospitals, and industrial facilities across Bengaluru and Karnataka.",
-  keywords: ["elevator company Bangalore", "elevator installation Bengaluru", "elevator maintenance", "passenger elevator", "home lift", "hospital elevator", "goods elevator", "hydraulic lift", "MRL elevator", "Vertix Techno Elevator"],
-  authors: [{ name: "Vertix Techno Elevator" }],
-  creator: "Vertix Techno Elevator",
-  publisher: "Vertix Techno Elevator",
+  description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
+  keywords: [
+    "Vertix Techno Elevator",
+    "Vertix Techno Elevator Bangalore",
+    "Vertix Techno Elevator Bengaluru",
+    "elevator company in Bangalore",
+    "elevator company in Bengaluru",
+    "lift company in Bangalore",
+    "elevator installation Bangalore",
+    "elevator maintenance Bangalore",
+    "elevator manufacturer Bangalore",
+    "passenger elevator Bangalore",
+    "goods elevator Bangalore",
+    "residential elevator Bangalore",
+    "commercial elevator Bangalore"
+  ],
+  authors: [{ name: "VERTIX TECHNO ELEVATOR" }],
+  creator: "VERTIX TECHNO ELEVATOR",
+  publisher: "VERTIX TECHNO ELEVATOR",
   openGraph: {
-    title: "Vertix Techno Elevator — Elevating Nature. Enriching Life.",
-    description: "Premium elevator engineering, installation, maintenance, and modernization across Bengaluru and Karnataka. Safe, energy-efficient vertical mobility solutions.",
+    title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
+    description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
     type: "website",
     locale: "en_IN",
-    siteName: "Vertix Techno Elevator",
+    siteName: "VERTIX TECHNO ELEVATOR",
     url: SITE_URL,
     images: [
       {
         url: LOGO_URL,
         width: 400,
         height: 120,
-        alt: "Vertix Techno Elevator Logo"
+        alt: "VERTIX TECHNO ELEVATOR Logo"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vertix Techno Elevator — Elevating Nature. Enriching Life.",
-    description: "Premium elevator engineering, installation, maintenance, and modernization.",
+    title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
+    description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka.",
     images: [LOGO_URL]
   },
   robots: {
@@ -51,7 +65,11 @@ export const metadata: Metadata = {
     }
   },
   icons: {
-    icon: "/images/vertix-logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/images/vertix-logo.png", type: "image/png" }
+    ],
+    shortcut: "/favicon.ico",
     apple: "/images/vertix-logo.png"
   },
   alternates: {
@@ -65,14 +83,15 @@ export const metadata: Metadata = {
   }
 };
 
-// JSON-LD Organization + LocalBusiness structured data
+// JSON-LD Organization + LocalBusiness structured data using genuine business information
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "Vertix Techno Elevator",
+      name: "VERTIX TECHNO ELEVATOR",
+      legalName: "VERTIX TECHNO ELEVATOR",
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
@@ -81,53 +100,119 @@ const jsonLd = {
         height: 120
       },
       sameAs: [],
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+91-6360598915",
-        contactType: "customer service",
-        areaServed: "IN",
-        availableLanguage: ["English", "Kannada"]
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+91-6360598915",
+          contactType: "customer service",
+          areaServed: ["IN", "Karnataka", "Bengaluru"],
+          availableLanguage: ["English", "Kannada", "Hindi"]
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: "+91-6360598915",
+          contactType: "emergency",
+          areaServed: "Bengaluru",
+          availableLanguage: ["English", "Kannada"]
+        }
+      ],
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Beadie Kamadhenu Auto CNC Private Limited, Peenya",
+        addressLocality: "Bengaluru",
+        addressRegion: "Karnataka",
+        postalCode: "560058",
+        addressCountry: "IN"
       }
     },
     {
       "@type": "LocalBusiness",
       "@id": `${SITE_URL}/#localbusiness`,
-      name: "Vertix Techno Elevator",
-      description: "Elevator design, installation, maintenance, and modernization services across Bengaluru and Karnataka.",
-      url: SITE_URL,
-      logo: LOGO_URL,
+      name: "VERTIX TECHNO ELEVATOR",
       image: LOGO_URL,
+      url: SITE_URL,
       telephone: "+91-6360598915",
-      email: "info@vertix-techno-elevator.com",
+      email: "manthmint@gmail.com",
+      priceRange: "₹₹₹",
+      taxID: "29EIDPM7520J1ZX",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Beadie Kamadhenu Auto CNC Private Limited, Peenya",
         addressLocality: "Bengaluru",
         addressRegion: "Karnataka",
+        postalCode: "560058",
         addressCountry: "IN"
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: 12.9716,
-        longitude: 77.5946
+        latitude: 13.0285,
+        longitude: 77.5197
       },
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:00",
-        closes: "18:00"
-      },
-      priceRange: "₹₹",
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "09:00",
+          closes: "19:00"
+        }
+      ],
       areaServed: [
         { "@type": "City", name: "Bengaluru" },
+        { "@type": "City", name: "Bangalore" },
         { "@type": "State", name: "Karnataka" }
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Elevator Products & Services",
+        name: "Elevator Products & Engineering Services",
         itemListElement: [
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Elevator Installation" } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Elevator Maintenance & AMC" } },
-          { "@type": "Offer", itemOffered: { "@type": "Service", name: "Elevator Modernization" } }
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Elevator Installation in Bengaluru",
+              description: "Turnkey elevator installation for residential villas, commercial towers, and industrial buildings in Bengaluru."
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Elevator Maintenance & AMC in Bengaluru",
+              description: "Preventive monthly elevator maintenance and 24/7 breakdown assistance across Bengaluru, Karnataka."
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Elevator Modernization in Bengaluru",
+              description: "Modernization of legacy traction and hydraulic elevators with energy-saving PMSM gearless drives."
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Passenger Elevators",
+              description: "Smooth, high-speed passenger elevators conforming to EN 81-20/50 and IS 14665 standards."
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Residential Home Lifts",
+              description: "Compact, luxury home villa elevators requiring minimal pit depth and headroom."
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Product",
+              name: "Goods & Freight Elevators",
+              description: "Heavy-duty freight and industrial elevators engineered for safe material handling."
+            }
+          }
         ]
       }
     }

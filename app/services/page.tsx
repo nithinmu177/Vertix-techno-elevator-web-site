@@ -9,9 +9,14 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Engineering Services & 24/7 AMC Support",
-  description: "Comprehensive elevator lifecycle services: custom installation, preventive maintenance, modernization, and rapid emergency breakdown rescue.",
-  alternates: { canonical: "/services" }
+  title: "Elevator Installation, Maintenance & AMC in Bengaluru",
+  description: "Professional elevator installation, preventive maintenance, 24/7 AMC support, and modernization in Bengaluru, Karnataka by VERTIX TECHNO ELEVATOR.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Elevator Installation, Maintenance & AMC in Bengaluru | VERTIX TECHNO ELEVATOR",
+    description: "Expert elevator engineering, turnkey installation, 24/7 emergency repair, and preventive AMC maintenance across Bengaluru and Karnataka.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/services"
+  }
 };
 
 export default async function ServicesPage() {
@@ -26,13 +31,13 @@ export default async function ServicesPage() {
           <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
             <div className="max-w-3xl">
               <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-3 block">
-                Lifecycle Elevator Engineering
+                Elevator Company in Bengaluru • Lifecycle Engineering
               </span>
               <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
-                Turnkey Installation, Modernization & 24/7 AMC
+                Elevator Installation, Maintenance & Modernization in Bengaluru
               </h1>
               <p className="mt-4 text-base leading-relaxed text-slate-300">
-                From initial 3D laser shaft feasibility surveys to ongoing round-the-clock telemetry diagnostics, Vertix delivers uninterrupted vertical reliability backed by guaranteed response times.
+                From initial 3D laser shaft feasibility surveys in Bengaluru and across Karnataka to ongoing round-the-clock telemetry diagnostics, VERTIX TECHNO ELEVATOR delivers uninterrupted vertical mobility backed by guaranteed emergency response times.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4 text-xs font-bold text-slate-300">
@@ -110,8 +115,29 @@ export default async function ServicesPage() {
             ))}
           </div>
 
+          {/* Internal Linking: Quote & Contact CTAs */}
+          <div className="mt-16 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#101828] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+            <div className="max-w-xl">
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-2 block">
+                Free Technical Consultation
+              </span>
+              <h2 className="text-2xl font-black text-white">Need an Elevator Installation or AMC Contract in Bengaluru?</h2>
+              <p className="mt-2 text-sm text-slate-300">
+                Our application engineers provide free site feasibility surveys, custom CAD shaft layouts, and transparent pricing across Bengaluru and Karnataka.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <CtaLink href="/quote" variant="primary">
+                REQUEST ELEVATOR QUOTE
+              </CtaLink>
+              <CtaLink href="/contact" variant="secondary">
+                CONTACT ENGINEERING DESK
+              </CtaLink>
+            </div>
+          </div>
+
           {/* 24/7 Breakdown Hotline Banner */}
-          <div className="mt-20 rounded-3xl border border-red-500/30 bg-gradient-to-r from-red-950/40 via-[#0c121e] to-red-950/40 p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+          <div className="mt-12 rounded-3xl border border-red-500/30 bg-gradient-to-r from-red-950/40 via-[#0c121e] to-red-950/40 p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
             <div className="max-w-xl">
               <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-red-400 mb-2">
                 <AlertTriangle className="size-4" />

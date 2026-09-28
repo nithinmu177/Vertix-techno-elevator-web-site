@@ -61,7 +61,7 @@ export function Footer() {
         <div className="space-y-6">
           <Brand />
           <p className="max-w-md text-sm leading-relaxed text-slate-400">
-            Vertix Techno Elevators is a premier vertical mobility engineering firm specializing in bespoke residential villa lifts, high-speed commercial passenger elevators, and precision industrial transport.
+            VERTIX TECHNO ELEVATOR is a premier vertical mobility engineering firm in Bengaluru specializing in bespoke residential villa lifts, high-speed commercial passenger elevators, and precision industrial freight elevators across Karnataka.
           </p>
 
           <div className="grid grid-cols-2 gap-3 pt-2">
@@ -137,7 +137,7 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/[0.06] bg-[#020306] py-6 text-center text-xs text-slate-500">
         <div className="container flex flex-wrap items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Vertix Techno Elevators. Engineered with precision.</p>
+          <p>© {new Date().getFullYear()} VERTIX TECHNO ELEVATOR. All rights reserved.</p>
           <div className="flex items-center gap-3">
             <span className="inline-block size-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-slate-400">All elevator systems operational • Telemetry live</span>

@@ -5,9 +5,14 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { PhoneCall, Mail, MapPin, Clock, ShieldCheck, AlertCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Engineering & 24/7 Hotline | Vertix",
-  description: "Get in touch with Vertix Techno Elevators for new project consultations, 24/7 emergency dispatch, and technical customer service.",
-  alternates: { canonical: "/contact" }
+  title: "Contact Us | Elevator Company in Peenya, Bengaluru",
+  description: "Contact VERTIX TECHNO ELEVATOR at Peenya, Bengaluru, Karnataka. Call +91 63605 98915 for elevator installation, AMC maintenance, or site surveys.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact VERTIX TECHNO ELEVATOR | Bengaluru, Karnataka",
+    description: "Get in touch with VERTIX TECHNO ELEVATOR in Peenya, Bengaluru for elevator installation quotes, AMC contracts, and 24/7 emergency service.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/contact"
+  }
 };
 
 export default function ContactPage() {
@@ -16,14 +21,24 @@ export default function ContactPage() {
       <Navbar />
       <main className="min-h-screen bg-[#06090e] py-16 text-slate-100">
         <div className="container">
+          {/* Header Banner */}
+          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-12 shadow-2xl mb-12">
+            <div className="max-w-3xl">
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-3 block">
+                Elevator Company in Bengaluru • Direct Communications
+              </span>
+              <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
+                Contact VERTIX TECHNO ELEVATOR
+              </h1>
+              <p className="mt-3 text-base leading-relaxed text-slate-300">
+                Connect with our applications engineering desk in Peenya, Bengaluru for new elevator project consultations, on-site shaft feasibility surveys, and 24/7 emergency dispatch.
+              </p>
+            </div>
+          </div>
+
           <div className="grid gap-12 lg:grid-cols-2 items-start">
             {/* Left Contact Details & Hotline */}
             <div>
-              <SectionHeading
-                eyebrow="Direct Communications"
-                title="Connect With Our Applications Engineering Desk."
-                text="Whether discussing custom elevator shaft dimensions for an upcoming project, scheduling an on-site feasibility survey, or requesting emergency service."
-              />
 
               <div className="mt-8 space-y-4">
                 {/* Emergency Card */}

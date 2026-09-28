@@ -11,7 +11,19 @@ import { ProjectGalleryGrid } from "@/components/site/project-gallery-grid";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const product = await getProduct((await params).slug);
-  return product ? { title: product.name, description: product.shortDescription, alternates: { canonical: `/products/${product.slug}` } } : { title: "Elevator Product" };
+  if (!product) return { title: "Elevator Model" };
+  const firstImg = firstMedia(product.media, "IMAGE")?.url || "https://vertix-techno-elevator-web-site.onrender.com/images/vertix-logo.png";
+  return {
+    title: `${product.name} | Elevators in Bengaluru`,
+    description: product.shortDescription || `${product.name} engineered and installed by VERTIX TECHNO ELEVATOR in Bengaluru, Karnataka.`,
+    alternates: { canonical: `/products/${product.slug}` },
+    openGraph: {
+      title: `${product.name} | VERTIX TECHNO ELEVATOR`,
+      description: product.shortDescription,
+      url: `https://vertix-techno-elevator-web-site.onrender.com/products/${product.slug}`,
+      images: [{ url: firstImg, alt: product.name }]
+    }
+  };
 }
 
 export function generateStaticParams() {

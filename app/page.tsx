@@ -17,16 +17,39 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Elevator Engineering, Installation & AMC | Bengaluru",
-  description: "Vertix Techno Elevator designs, installs, and maintains safe, energy-efficient elevator systems for homes, commercial buildings, hospitals, and industrial facilities across Bengaluru and Karnataka.",
+  title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
+  description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Vertix Techno Elevator — Elevating Nature. Enriching Life.",
-    description: "Premium elevator installation, annual maintenance contracts (AMC), and modernization services across Bengaluru, Karnataka. Passenger lifts, home lifts, hospital lifts, goods elevators.",
-    url: "https://www.vertix-techno-elevator.com",
-    type: "website"
+    title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
+    description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/",
+    type: "website",
+    siteName: "VERTIX TECHNO ELEVATOR",
+    images: [
+      {
+        url: "https://vertix-techno-elevator-web-site.onrender.com/images/vertix-logo.png",
+        width: 400,
+        height: 120,
+        alt: "VERTIX TECHNO ELEVATOR Logo"
+      }
+    ]
   },
-  keywords: ["elevator installation Bangalore", "elevator company Bengaluru", "passenger lift", "home lift Bangalore", "elevator AMC", "hospital elevator", "goods elevator", "MRL elevator Bangalore", "hydraulic lift"]
+  keywords: [
+    "Vertix Techno Elevator",
+    "Vertix Techno Elevator Bangalore",
+    "Vertix Techno Elevator Bengaluru",
+    "elevator company in Bangalore",
+    "elevator company in Bengaluru",
+    "lift company in Bangalore",
+    "elevator installation Bangalore",
+    "elevator maintenance Bangalore",
+    "elevator manufacturer Bangalore",
+    "passenger elevator Bangalore",
+    "goods elevator Bangalore",
+    "residential elevator Bangalore",
+    "commercial elevator Bangalore"
+  ]
 };
 
 export default async function HomePage() {
@@ -47,25 +70,25 @@ export default async function HomePage() {
   const showcaseImages = [
     {
       src: "/images/brochure-extracts/extract-02.jpg",
-      alt: "Modern elevator entrance with plants and marble wall finish",
+      alt: "Modern elevator entrance with Italian marble finish by VERTIX TECHNO ELEVATOR",
       label: "Entrance Architecture",
       subtitle: "Book-matched Italian marble & brushed titanium framing"
     },
     {
       src: "/images/brochure-extracts/extract-31.jpg",
-      alt: "Premium golden elevator cabin with decorative ceiling and floor",
+      alt: "Imperial gold elevator cabin designed by VERTIX TECHNO ELEVATOR in Bengaluru",
       label: "Imperial Gold Cabin",
       subtitle: "Laser-etched champagne gold mirror finishes"
     },
     {
       src: "/images/brochure-extracts/extract-13.jpg",
-      alt: "Panoramic glass elevator cabin with contemporary interior finish",
+      alt: "Panoramic glass elevator cabin for commercial building in Bengaluru",
       label: "Panoramic Glass",
       subtitle: "360° architectural structural observation"
     },
     {
       src: "/images/brochure-extracts/extract-15.jpg",
-      alt: "Wood finish elevator cabin with stainless steel wall panels",
+      alt: "Residential timber elevator cab with stainless steel panels",
       label: "Italian Timber Cabs",
       subtitle: "Hand-finished walnut paired with acoustic dampening"
     }
@@ -82,7 +105,7 @@ export default async function HomePage() {
         <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-white/[0.08] bg-[#070a12]">
           <Image
             src={heroMedia}
-            alt="Vertix Techno Elevators Architectural Hero"
+            alt="VERTIX TECHNO ELEVATOR - Commercial & Residential Elevator Engineering in Bengaluru"
             fill
             priority
             sizes="100vw"
@@ -97,31 +120,34 @@ export default async function HomePage() {
           <div className="container relative z-10 grid min-h-[calc(100vh-80px)] items-center gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="max-w-3xl">
               {/* Telemetry pill */}
-              <div className="mb-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-white/[0.1] bg-white/[0.03] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] backdrop-blur-md">
+              <div className="mb-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] backdrop-blur-md">
                 <span className="flex items-center gap-2">
                   <span className="size-2 rounded-full bg-[#00e5ff] animate-ping" />
-                  <span>GERMAN & JAPANESE DRIVE ENGINEERING</span>
+                  <span>ELEVATOR COMPANY IN BENGALURU, KARNATAKA</span>
                 </span>
                 <span className="hidden sm:inline-block h-3 w-px bg-white/20" />
                 <span className="hidden sm:inline-flex items-center gap-1.5 text-slate-300">
-                  <Gauge className="size-3.5 text-[#00e5ff]" /> 24/7 TELEMETRY
+                  <Gauge className="size-3.5 text-[#00e5ff]" /> 24/7 AMC SUPPORT
                 </span>
               </div>
 
               <h1 className="display-type text-4xl font-black leading-[1.08] text-white sm:text-6xl md:text-7xl lg:text-8xl tracking-tight">
-                {homepage.heroTitle || "THE PINNACLE OF VERTICAL MOBILITY."}
+                VERTIX TECHNO ELEVATOR
+                <span className="block text-xl sm:text-2xl md:text-3xl font-bold tracking-normal text-slate-300 mt-4 leading-snug">
+                  Elevator Company in Bengaluru | Installation, Maintenance & Modernization
+                </span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                {homepage.heroSubtitle || "Precision permanent magnet gearless drives, whisper-quiet leveling, and bespoke architectural cabin finishes engineered for premier residences and commercial towers."}
+                VERTIX TECHNO ELEVATOR is a leading elevator company in Bengaluru providing precision permanent magnet gearless passenger elevators, residential home lifts, hospital elevators, and heavy industrial freight lifts across Karnataka.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CtaLink href="#configurator" variant="primary">
-                  EXPLORE 3D CONFIGURATOR
+                <CtaLink href="/products" variant="primary">
+                  EXPLORE ELEVATOR MODELS
                 </CtaLink>
-                <CtaLink href="#calculator" variant="secondary">
-                  INSTANT COST ESTIMATOR
+                <CtaLink href="/quote" variant="secondary">
+                  REQUEST OFFICIAL QUOTE
                 </CtaLink>
               </div>
 
@@ -206,18 +232,18 @@ export default async function HomePage() {
             <section className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#0e1626] to-[#080c14] p-8 lg:p-14 shadow-2xl backdrop-blur-xl">
               <div className="relative z-10 max-w-3xl">
                 <SectionHeading
-                  eyebrow="Architectural Discipline"
+                  eyebrow="Elevator Company in Bengaluru"
                   title="REDEFINING VERTICAL MOBILITY WITH PASSION & PRECISION."
-                  text="Vertix Techno Elevators combines precision engineering, clean architectural aesthetics, and proactive customer lifecycle management for luxury villas, commercial towers, healthcare facilities, and urban developments."
+                  text="VERTIX TECHNO ELEVATOR combines precision engineering, clean architectural aesthetics, and proactive lifecycle maintenance for passenger elevators, residential home lifts, goods elevators, and commercial towers across Bengaluru and Karnataka."
                 />
 
-                <div className="mt-8 flex flex-wrap gap-6 text-xs font-black uppercase tracking-[0.16em] text-slate-300">
-                  <span className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5">
-                    <ShieldCheck className="size-4 text-[#d4af37]" /> Built on Uncompromising Safety
-                  </span>
-                  <span className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5">
-                    <Wrench className="size-4 text-[#00e5ff]" /> Factory Direct Commissioning
-                  </span>
+                <div className="mt-8 flex flex-wrap gap-4 text-xs font-black uppercase tracking-[0.16em] text-slate-300">
+                  <Link href="/about" className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 hover:border-[#d4af37] transition">
+                    <ShieldCheck className="size-4 text-[#d4af37]" /> About Our Company
+                  </Link>
+                  <Link href="/services" className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 hover:border-[#00e5ff] transition">
+                    <Wrench className="size-4 text-[#00e5ff]" /> Installation & AMC Services
+                  </Link>
                 </div>
               </div>
             </section>

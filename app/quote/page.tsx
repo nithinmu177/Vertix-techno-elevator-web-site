@@ -6,9 +6,14 @@ import { QuoteCalculator } from "@/components/site/quote-calculator";
 import { ShieldCheck, Award, Clock, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Request Formal Elevator Quote & Pricing | Vertix",
-  description: "Receive instant customized elevator cost estimates and submit formal architectural specifications to the Vertix engineering team.",
-  alternates: { canonical: "/quote" }
+  title: "Request an Elevator Quote | Bengaluru, Karnataka",
+  description: "Get a customized elevator quote from VERTIX TECHNO ELEVATOR for passenger elevators, residential home lifts, or goods elevators in Bengaluru.",
+  alternates: { canonical: "/quote" },
+  openGraph: {
+    title: "Request an Elevator Quote | VERTIX TECHNO ELEVATOR Bengaluru",
+    description: "Receive instant customized elevator estimates and submit project specifications to the VERTIX TECHNO ELEVATOR engineering team in Bengaluru.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/quote"
+  }
 };
 
 export default function QuotePage() {
@@ -21,13 +26,13 @@ export default function QuotePage() {
           <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
             <div className="max-w-3xl">
               <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-3 block">
-                Technical Pricing & Feasibility
+                Elevator Company in Bengaluru • Technical Pricing & Feasibility
               </span>
               <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
-                Request An Engineered Elevator Quote
+                Request An Engineered Elevator Quote in Bengaluru
               </h1>
               <p className="mt-4 text-base leading-relaxed text-slate-300">
-                Receive accurate turnkey pricing including drive equipment, car architectural finishes, structural guide rails, automatic doors, installation commissioning, and factory warranty.
+                Receive accurate turnkey pricing from VERTIX TECHNO ELEVATOR including drive equipment, car architectural finishes, structural guide rails, automatic doors, installation commissioning, and factory warranty across Karnataka.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4 text-xs font-bold text-slate-300">
