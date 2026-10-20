@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Play, X, Film, Image as ImageIcon, Maximize2 } from "lucide-react";
+import { Play, X, Film, Maximize2 } from "lucide-react";
 
 interface MediaItem {
   id?: string;
@@ -29,14 +29,14 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
 
   return (
     <>
-      <section className="container pb-20">
-        <div className="mb-8 flex items-end justify-between">
+      <section className="container pb-16">
+        <div className="mb-6 flex items-end justify-between">
           <div>
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37]">
-              Engineering Assets & Evidence
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">
+              Project Media & Gallery
             </span>
-            <h2 className="text-2xl font-black text-white uppercase tracking-wider mt-1">
-              Project Gallery ({items.length} Items)
+            <h2 className="text-2xl font-bold text-[#172B4D] tracking-tight mt-1">
+              Project Gallery ({items.length} Photos & Clips)
             </h2>
           </div>
         </div>
@@ -49,25 +49,24 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
               <div
                 key={m.id || idx}
                 onClick={() => setActiveMedia(m)}
-                className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c121e] shadow-lg transition duration-300 hover:border-[#00e5ff]/50 hover:shadow-2xl hover:shadow-[#00e5ff]/10"
+                className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:border-[#2563EB] hover:shadow-md"
               >
                 {isVid ? (
-                  <div className="relative h-full w-full bg-slate-950">
-                    {/* Video poster background */}
+                  <div className="relative h-full w-full bg-slate-900">
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                      <div className="mb-3 flex size-14 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-xl backdrop-blur-md transition group-hover:scale-110 group-hover:border-[#00e5ff] group-hover:text-[#00e5ff]">
-                        <Play className="size-6 fill-current ml-0.5" />
+                      <div className="mb-2 flex size-12 items-center justify-center rounded-full bg-[#2563EB] text-white shadow-lg transition group-hover:scale-110 group-hover:bg-[#1D4ED8]">
+                        <Play className="size-5 fill-current ml-0.5" />
                       </div>
-                      <span className="text-xs font-black tracking-wider text-slate-300 uppercase line-clamp-1">
+                      <span className="text-xs font-semibold tracking-wider text-slate-200 uppercase line-clamp-1">
                         {m.title || `Installation Video Clip #${idx + 1}`}
                       </span>
                     </div>
 
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-bold">
-                      <span className="inline-flex items-center gap-1 rounded bg-black/60 px-2 py-0.5 text-[#00e5ff]">
+                      <span className="inline-flex items-center gap-1 rounded bg-black/60 px-2 py-0.5 text-blue-300">
                         <Film className="size-3" /> Video
                       </span>
-                      <span className="rounded bg-black/60 px-2 py-0.5 text-slate-400 font-mono">
+                      <span className="rounded bg-black/60 px-2 py-0.5 text-slate-300 font-mono">
                         Tap to Play
                       </span>
                     </div>
@@ -81,7 +80,7 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
                       sizes="(min-width: 1024px) 33vw, 50vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
                     <div className="absolute bottom-3 right-3 rounded-full bg-black/60 p-2 text-white opacity-0 transition group-hover:opacity-100">
                       <Maximize2 className="size-4" />
                     </div>
@@ -96,51 +95,37 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
       {/* Lightbox / Video Player Modal */}
       {activeMedia && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveMedia(null)}
         >
           <div
-            className="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-white/[0.15] bg-[#0c121e] shadow-2xl"
+            className="relative max-h-[90vh] max-w-4xl w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Bar */}
-            <div className="flex items-center justify-between border-b border-white/[0.08] px-6 py-4">
-              <div className="flex items-center gap-2">
-                <span className="size-2 rounded-full bg-[#00e5ff] animate-pulse" />
-                <h4 className="text-sm font-black uppercase tracking-wider text-white line-clamp-1">
-                  {activeMedia.title || activeMedia.altText || `${projectName} Media Viewer`}
-                </h4>
-              </div>
-              <button
-                onClick={() => setActiveMedia(null)}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-white/[0.1] hover:text-white transition"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
+            <button
+              onClick={() => setActiveMedia(null)}
+              className="absolute right-4 top-4 z-10 flex size-9 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-md hover:bg-slate-100 transition cursor-pointer"
+            >
+              <X className="size-5" />
+            </button>
 
-            {/* Media Content */}
-            <div className="relative aspect-video w-full bg-black">
-              {activeMedia.type === "VIDEO" || activeMedia.url?.endsWith(".mp4") || activeMedia.url?.endsWith(".webm") ? (
-                <video
+            {activeMedia.type === "VIDEO" || activeMedia.url?.endsWith(".mp4") || activeMedia.url?.endsWith(".webm") ? (
+              <video
+                src={activeMedia.url}
+                controls
+                autoPlay
+                className="max-h-[80vh] w-full rounded-xl bg-black object-contain"
+              />
+            ) : (
+              <div className="relative aspect-[16/10] max-h-[80vh] w-full">
+                <Image
                   src={activeMedia.url}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="h-full w-full object-contain"
+                  alt={activeMedia.altText || projectName}
+                  fill
+                  className="rounded-xl object-contain"
                 />
-              ) : (
-                <div className="relative h-full w-full">
-                  <Image
-                    src={activeMedia.url}
-                    alt={activeMedia.altText || projectName}
-                    fill
-                    sizes="100vw"
-                    className="object-contain"
-                  />
-                </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -64,22 +64,22 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#06090e] py-16 text-slate-100">
+      <main className="min-h-screen bg-white py-16 text-[#475569]">
         <div className="container">
           {/* Header & About Company */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#F3F6FA] p-8 lg:p-14 shadow-sm mb-16">
             <div className="max-w-4xl">
-              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] mb-3 block">
-                ABOUT COMPANY • ELEVATING NATURE. ENRICHING LIFE.
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-3 block">
+                About Company • Moving You Higher, Safely and Reliably
               </span>
-              <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
+              <h1 className="display-type text-3xl font-extrabold text-[#172B4D] md:text-5xl lg:text-6xl tracking-tight">
                 About VERTIX TECHNO ELEVATOR
               </h1>
-              <p className="mt-2 text-lg font-bold text-[#00e5ff]">
+              <p className="mt-2 text-base sm:text-lg font-bold text-[#2563EB]">
                 Elevator Company in Bengaluru | Elevating Safety, Comfort & Reliability
               </p>
 
-              <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-300">
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-[#475569]">
                 <p>
                   Headquartered in Peenya Industrial Area, Bengaluru, Karnataka, VERTIX TECHNO ELEVATOR is committed to providing innovative, safe, and reliable solutions for vertical transportation in India. We offer a comprehensive range of high-quality elevator products and services designed to meet the diverse requirements of residential villas, commercial complexes, healthcare facilities, and industrial buildings.
                 </p>
@@ -99,23 +99,23 @@ export default function AboutPage() {
           {/* Mission & Vision Section */}
           <div className="grid gap-8 md:grid-cols-2 mb-16">
             {/* Mission */}
-            <div className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-b from-[#0e1626] to-[#080c14] p-8 lg:p-10 shadow-2xl">
-              <div className="flex size-14 items-center justify-center rounded-2xl border border-[#d4af37]/40 bg-[#d4af37]/10 text-[#d4af37] mb-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 lg:p-10 shadow-sm">
+              <div className="flex size-14 items-center justify-center rounded-2xl bg-blue-50 text-[#2563EB] mb-6">
                 <Target className="size-7" />
               </div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-wider">Our Mission</h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-300">
+              <h2 className="text-2xl font-bold text-[#172B4D]">Our Mission</h2>
+              <p className="mt-4 text-base leading-relaxed text-[#475569]">
                 Our mission is to provide safe, reliable, innovative, and efficient elevator solutions that meet the evolving needs of our customers. We are committed to delivering quality products, professional installation, dependable maintenance, and responsive after-sales service while maintaining the highest standards of safety and customer satisfaction.
               </p>
             </div>
 
             {/* Vision */}
-            <div className="rounded-3xl border border-[#00e5ff]/30 bg-gradient-to-b from-[#0e1626] to-[#080c14] p-8 lg:p-10 shadow-2xl">
-              <div className="flex size-14 items-center justify-center rounded-2xl border border-[#00e5ff]/40 bg-[#00e5ff]/10 text-[#00e5ff] mb-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-8 lg:p-10 shadow-sm">
+              <div className="flex size-14 items-center justify-center rounded-2xl bg-green-50 text-[#16A34A] mb-6">
                 <Eye className="size-7" />
               </div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-wider">Our Vision</h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-300">
+              <h2 className="text-2xl font-bold text-[#172B4D]">Our Vision</h2>
+              <p className="mt-4 text-base leading-relaxed text-[#475569]">
                 Our vision is to become a trusted and leading elevator solutions provider in India, recognized for quality, innovation, safety, sustainability, and customer-focused service. We aim to create modern vertical transportation solutions that make buildings more accessible, efficient, comfortable, and connected.
               </p>
             </div>
@@ -124,10 +124,10 @@ export default function AboutPage() {
           {/* Core Values */}
           <div className="mb-16">
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-black uppercase tracking-[0.24em] text-[#d4af37]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">
                 GUIDING PRINCIPLES
               </span>
-              <h2 className="display-type text-3xl font-black text-white md:text-4xl mt-2">
+              <h2 className="display-type text-3xl font-bold text-[#172B4D] md:text-4xl mt-2">
                 Our Core Values
               </h2>
             </div>
@@ -138,16 +138,16 @@ export default function AboutPage() {
                 return (
                   <div
                     key={val.title}
-                    className="rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-6 shadow-xl backdrop-blur-xl transition hover:border-[#d4af37]/40 hover:-translate-y-1"
+                    className="rounded-2xl border border-slate-200 bg-[#F3F6FA] p-6 shadow-sm transition hover:border-[#2563EB] hover:bg-white hover:shadow-md"
                   >
                     <div className="flex items-center justify-between mb-4">
-                      <span className="font-mono text-2xl font-black text-[#d4af37]/40">{val.num}</span>
-                      <div className="flex size-10 items-center justify-center rounded-xl border border-white/[0.1] bg-white/[0.05] text-[#d4af37]">
+                      <span className="font-mono text-xl font-bold text-slate-300">{val.num}</span>
+                      <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#2563EB] border border-slate-200">
                         <Icon className="size-5" />
                       </div>
                     </div>
-                    <h3 className="text-base font-black text-white tracking-wide">{val.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-400">{val.desc}</p>
+                    <h3 className="text-base font-bold text-[#172B4D]">{val.title}</h3>
+                    <p className="mt-2 text-xs leading-relaxed text-[#475569]">{val.desc}</p>
                   </div>
                 );
               })}
@@ -155,15 +155,15 @@ export default function AboutPage() {
           </div>
 
           {/* Bottom Banner */}
-          <div className="rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+          <div className="rounded-3xl border border-slate-200 bg-[#F3F6FA] p-8 lg:p-12 shadow-sm flex flex-wrap items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-black text-white">Ready to Discuss Your Elevator Project?</h3>
-              <p className="mt-1 text-sm text-slate-300">
-                Contact our Bangalore headquarters for site surveys, CAD designs, and quotes.
+              <h3 className="text-2xl font-bold text-[#172B4D]">Ready to Discuss Your Elevator Project?</h3>
+              <p className="mt-1 text-sm text-[#475569]">
+                Contact our Bengaluru headquarters for site surveys, CAD designs, and free quotes.
               </p>
             </div>
             <CtaLink href="/contact" variant="primary">
-              CONTACT OUR ENGINEERS
+              Contact Our Engineers
             </CtaLink>
           </div>
         </div>

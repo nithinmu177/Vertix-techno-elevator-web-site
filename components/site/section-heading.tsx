@@ -10,16 +10,16 @@ export function SectionHeading({
   centered?: boolean;
 }) {
   return (
-    <div className={`mb-12 ${centered ? "mx-auto text-center max-w-3xl" : "max-w-3xl"}`}>
-      <div className={`mb-3.5 flex items-center gap-2 text-xs font-black uppercase tracking-[0.24em] text-[#d4af37] ${centered ? "justify-center" : ""}`}>
-        <span className="inline-block size-1.5 rounded-full bg-[#d4af37] shadow-[0_0_8px_#d4af37]" />
+    <div className={`mb-10 ${centered ? "mx-auto text-center max-w-3xl" : "max-w-3xl"}`}>
+      <div className={`mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB] ${centered ? "justify-center" : ""}`}>
+        <span className="inline-block size-2 rounded-full bg-[#2563EB]" />
         <span>{eyebrow}</span>
-        <span className="h-px w-8 bg-gradient-to-r from-[#d4af37] to-transparent" />
+        <span className="h-0.5 w-6 bg-blue-100" />
       </div>
-      <h2 className="display-type text-3xl font-black tracking-tight text-white md:text-5xl lg:text-5xl leading-[1.15]">
+      <h2 className="display-type text-3xl font-bold tracking-tight text-[#172B4D] md:text-4xl lg:text-5xl leading-[1.2]">
         {title}
       </h2>
-      {text && <p className="mt-4 text-base leading-relaxed text-slate-300/80 md:text-lg">{text}</p>}
+      {text && <p className="mt-3.5 text-base leading-relaxed text-[#475569] md:text-lg">{text}</p>}
     </div>
   );
 }

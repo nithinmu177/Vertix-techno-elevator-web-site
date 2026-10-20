@@ -33,13 +33,13 @@ function NavItem({ label, href, Icon }: { label: string; href: string; Icon: any
       href={href}
       className={`group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
         isActive
-          ? "bg-gradient-to-r from-[#d4af37]/15 to-transparent border border-[#d4af37]/20 text-[#f5e2a3] shadow-[0_0_20px_rgba(212,175,55,0.06)]"
-          : "text-slate-400 hover:bg-white/[0.04] hover:text-[#f5e2a3] border border-transparent"
+          ? "bg-[#2563EB] text-white shadow-xs"
+          : "text-slate-300 hover:bg-white/10 hover:text-white"
       }`}
     >
-      <Icon className={`size-4 transition ${isActive ? "text-[#d4af37]" : "text-slate-500 group-hover:text-[#d4af37]"}`} />
+      <Icon className={`size-4 transition ${isActive ? "text-white" : "text-slate-400 group-hover:text-white"}`} />
       <span className="flex-1">{label}</span>
-      {isActive && <ChevronRight className="size-3 text-[#d4af37]/60" />}
+      {isActive && <ChevronRight className="size-3 text-white/80" />}
     </Link>
   );
 }
@@ -53,41 +53,38 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#06090e] text-slate-100 lg:grid lg:grid-cols-[280px_1fr]">
+    <div className="min-h-screen bg-[#F3F6FA] text-[#172B4D] lg:grid lg:grid-cols-[280px_1fr]">
       {/* Sidebar */}
-      <aside className="relative flex flex-col border-r border-white/[0.06] bg-[#080c14]">
-        {/* Sidebar glow */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-[#d4af37]/8 blur-[60px]" />
-        </div>
-
+      <aside className="relative flex flex-col border-r border-slate-200 bg-[#172B4D] text-white">
         <div className="relative flex-1 p-5">
           {/* Brand */}
-          <Link href="/" className="group flex items-center pb-5 border-b border-white/[0.06]">
-            <Image
-              src="/images/vertix-logo.png"
-              alt="Vertix Techno Elevator"
-              width={200}
-              height={50}
-              priority
-              className="h-10 w-auto object-contain transition group-hover:scale-105 filter drop-shadow-[0_2px_10px_rgba(212,175,55,0.2)]"
-            />
+          <Link href="/" className="group flex items-center pb-5 border-b border-white/10">
+            <div className="bg-white px-2.5 py-1 rounded-xl shadow-xs">
+              <Image
+                src="/images/vertix-logo.png"
+                alt="Vertix Techno Elevator"
+                width={200}
+                height={50}
+                priority
+                className="h-9 w-auto object-contain transition group-hover:scale-105"
+              />
+            </div>
           </Link>
 
           {/* Status pill */}
-          <div className="mt-5 flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3.5 py-3">
+          <div className="mt-5 flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5">
             <div className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00e5ff] opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00e5ff]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#16A34A] opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#16A34A]" />
             </div>
             <div>
-              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#00e5ff]">Live System Connected</p>
-              <p className="text-[10px] text-slate-500">Real-time operations active</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-green-300">Live System Connected</p>
+              <p className="text-[11px] text-slate-300">Operations desk active</p>
             </div>
           </div>
 
           {/* Nav */}
-          <nav className="mt-6 grid gap-0.5">
+          <nav className="mt-6 grid gap-1">
             {nav.map((item) => (
               <NavItem key={item.href} {...item} />
             ))}
@@ -95,18 +92,18 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Back link & Logout */}
-        <div className="relative border-t border-white/[0.06] p-4 space-y-2">
+        <div className="relative border-t border-white/10 p-4 space-y-2">
           <Link
             href="/"
-            className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-white/[0.02] px-3.5 py-2.5 text-xs font-bold text-slate-400 hover:border-[#d4af37]/30 hover:text-[#d4af37] transition"
+            className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs font-semibold text-slate-200 hover:bg-white/10 hover:text-white transition"
           >
             <span>↗ Back to Live Site</span>
-            <ArrowUpRight className="size-3.5" />
+            <ArrowUpRight className="size-3.5 text-[#2563EB]" />
           </Link>
           <button
             type="button"
             onClick={handleLogout}
-            className="w-full flex items-center justify-between rounded-xl border border-red-500/20 bg-red-500/5 px-3.5 py-2.5 text-xs font-bold text-red-400 hover:bg-red-500/15 hover:border-red-500/40 active:scale-95 transition cursor-pointer"
+            className="w-full flex items-center justify-between rounded-xl border border-red-400/20 bg-red-500/10 px-3.5 py-2.5 text-xs font-semibold text-red-300 hover:bg-red-500/20 transition cursor-pointer"
           >
             <span>Sign Out Admin</span>
             <LogOut className="size-3.5" />
@@ -117,27 +114,27 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       {/* Main */}
       <div className="flex min-w-0 flex-col">
         {/* Topbar */}
-        <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-white/[0.06] bg-[#080c14]/90 px-6 backdrop-blur-xl">
+        <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between border-b border-slate-200 bg-white px-6 shadow-xs">
           <div className="flex items-center gap-3">
-            <Activity className="size-4 text-[#00e5ff]" />
+            <Activity className="size-4 text-[#2563EB]" />
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#d4af37]">Command Console</p>
-              <strong className="text-sm font-black text-white">Vertix Operations Admin</strong>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#2563EB]">Command Console</p>
+              <strong className="text-sm font-bold text-[#172B4D]">Vertix Operations Admin</strong>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#d4af37] via-[#f5e2a3] to-[#c59e33] px-4 py-2 text-xs font-black uppercase tracking-wider text-[#06090e] shadow-lg shadow-[#d4af37]/20 hover:brightness-110 transition"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#2563EB] px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#1D4ED8] transition"
             >
-              Live Site <ArrowUpRight className="size-3.5" />
+              <span>Live Site</span> <ArrowUpRight className="size-3.5" />
             </Link>
             <button
               type="button"
               onClick={handleLogout}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-red-400 hover:bg-red-500/20 active:scale-95 transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-[#F3F6FA] px-3.5 py-2 text-xs font-semibold text-[#172B4D] hover:bg-slate-200 transition cursor-pointer"
             >
-              <LogOut className="size-3.5" />
+              <LogOut className="size-3.5 text-red-500" />
               <span>Logout</span>
             </button>
           </div>

@@ -26,7 +26,7 @@ export function LoginForm() {
   return (
     <form onSubmit={submit} className="grid gap-5">
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
+        <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
           Admin Login ID (Email)
         </label>
         <input
@@ -35,12 +35,12 @@ export function LoginForm() {
           required
           autoComplete="username"
           placeholder="admin@vertix.local"
-          className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-4 py-3 text-[#172B4D] placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-[#d4af37]">
+        <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
           Admin Password
         </label>
         <input
@@ -49,21 +49,21 @@ export function LoginForm() {
           required
           autoComplete="current-password"
           placeholder="••••••••"
-          className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-4 py-3 text-[#172B4D] placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <Button
         type="submit"
-        variant="gold"
-        className="mt-2 w-full py-3 text-base font-bold tracking-widest uppercase"
+        variant="primary"
+        className="mt-2 w-full py-3 text-sm font-bold tracking-wider uppercase"
         disabled={loading}
       >
         {loading ? "Verifying Credentials…" : "Admin Log In"}
       </Button>
 
       {status && (
-        <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-sm font-medium text-red-400">
+        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-600">
           {status}
         </p>
       )}
@@ -97,19 +97,19 @@ export function RegisterForm() {
   return (
     <form onSubmit={submit} className="grid gap-5">
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">
+        <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
           Full Name
         </label>
         <input
           name="name"
           required
           placeholder="John Smith"
-          className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-4 py-3 text-[#172B4D] placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">
+        <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
           Email Address
         </label>
         <input
@@ -117,12 +117,12 @@ export function RegisterForm() {
           type="email"
           required
           placeholder="you@example.com"
-          className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-4 py-3 text-[#172B4D] placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <div className="grid gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-widest text-slate-400">
+        <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
           Password
         </label>
         <input
@@ -130,21 +130,21 @@ export function RegisterForm() {
           type="password"
           required
           placeholder="Min. 8 characters"
-          className="w-full rounded-xl border border-white/[0.08] bg-[#080c14] px-4 py-3 text-white placeholder:text-slate-600 outline-none transition-all duration-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20"
+          className="w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-4 py-3 text-[#172B4D] placeholder:text-slate-400 outline-none transition-all duration-200 focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
         />
       </div>
 
       <Button
         type="submit"
-        variant="gold"
-        className="mt-2 w-full py-3 text-base font-bold tracking-widest"
+        variant="primary"
+        className="mt-2 w-full py-3 text-sm font-bold tracking-wider uppercase"
         disabled={loading}
       >
         {loading ? "Creating Account…" : "Create Account"}
       </Button>
 
       {status && (
-        <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-sm font-medium text-red-400">
+        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-600">
           {status}
         </p>
       )}

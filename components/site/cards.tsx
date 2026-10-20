@@ -8,51 +8,50 @@ export function ProductCard({ product }: { product: any }) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-1 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:border-[#d4af37]/40 hover:shadow-[0_20px_50px_rgba(212,175,55,0.12)]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#2563EB] hover:shadow-lg"
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#131b2e]">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-slate-100">
         <Image
           src={media.url}
           alt={media.altText || product.name}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0c121e] via-[#0c121e]/20 to-transparent" />
         <div className="absolute left-3.5 top-3.5">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#d4af37]/30 bg-[#06090e]/80 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#f5e2a3] backdrop-blur-md">
-            <span className="size-1.5 rounded-full bg-[#d4af37]" />
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-white/95 px-3 py-1 text-xs font-bold text-[#2563EB] shadow-xs backdrop-blur-md">
+            <span className="size-1.5 rounded-full bg-[#2563EB]" />
             {product.category?.name ?? "Elevator Model"}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-xl font-black text-white transition duration-300 group-hover:text-[#f5e2a3]">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <h3 className="text-lg font-bold text-[#172B4D] transition-colors duration-200 group-hover:text-[#2563EB]">
           {product.name}
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-400">
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[#475569]">
           {product.shortDescription}
         </p>
 
         {/* Quick Specs Badges */}
-        <div className="mt-4 grid grid-cols-2 gap-2 border-t border-white/[0.06] pt-3 text-[11px] text-slate-300">
+        <div className="mt-4 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3 text-xs text-[#475569]">
           <div className="flex items-center gap-1.5">
-            <Layers className="size-3.5 text-[#d4af37]" />
-            <span>Cap: {product.capacity || "Bespoke"}</span>
+            <Layers className="size-4 text-[#2563EB]" />
+            <span>Cap: {product.capacity || "Custom"}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Gauge className="size-3.5 text-[#00e5ff]" />
-            <span>Speed: {product.speed || "Up to 2.5m/s"}</span>
+            <Gauge className="size-4 text-[#16A34A]" />
+            <span>Speed: {product.speed || "Up to 2.5 m/s"}</span>
           </div>
         </div>
 
-        <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
-          <span className="text-xs font-black uppercase tracking-wider text-[#d4af37] group-hover:text-white transition">
-            Explore Specifications
+        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#2563EB]">
+            View Details
           </span>
-          <div className="flex size-8 items-center justify-center rounded-full border border-white/[0.1] bg-white/[0.04] text-white transition-all duration-300 group-hover:border-[#d4af37] group-hover:bg-[#d4af37] group-hover:text-[#06090e]">
-            <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+          <div className="flex size-7 items-center justify-center rounded-full bg-blue-50 text-[#2563EB] transition-colors duration-200 group-hover:bg-[#2563EB] group-hover:text-white">
+            <ArrowRight className="size-3.5" />
           </div>
         </div>
       </div>
@@ -65,9 +64,9 @@ export function ProjectCard({ project }: { project: any }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-1 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:border-[#00e5ff]/40 hover:shadow-[0_20px_50px_rgba(0,229,255,0.12)]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#2563EB] hover:shadow-lg"
     >
-      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-[#131b2e]">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100">
         {media.type === "VIDEO" ? (
           <video
             src={media.url}
@@ -75,7 +74,7 @@ export function ProjectCard({ project }: { project: any }) {
             loop
             muted
             playsInline
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <Image
@@ -83,31 +82,32 @@ export function ProjectCard({ project }: { project: any }) {
             alt={media.altText || project.name}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0c121e] via-transparent to-transparent" />
         <div className="absolute left-3.5 top-3.5">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[#00e5ff]/30 bg-[#06090e]/80 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#00e5ff] backdrop-blur-md">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-white/95 px-3 py-1 text-xs font-bold text-[#2563EB] shadow-xs backdrop-blur-md">
             {project.category?.name ?? project.elevatorType}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-xl font-black text-white transition duration-300 group-hover:text-[#00e5ff]">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <h3 className="text-lg font-bold text-[#172B4D] transition-colors duration-200 group-hover:text-[#2563EB]">
           {project.name}
         </h3>
-        <p className="mt-1 text-sm font-semibold text-slate-400">
+        <p className="mt-1 text-xs font-semibold text-[#475569]">
           {project.location}
         </p>
-        <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-slate-500">
+        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[#475569]">
           {project.description}
         </p>
 
-        <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-xs font-bold text-slate-300">
+        <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-bold text-[#475569]">
           <span>{project.elevatorType}</span>
-          <span className="text-[#d4af37] group-hover:translate-x-1 transition">Case Study →</span>
+          <span className="text-[#2563EB] transition-transform duration-200 group-hover:translate-x-1">
+            View Case Study →
+          </span>
         </div>
       </div>
     </Link>
@@ -116,23 +116,23 @@ export function ProjectCard({ project }: { project: any }) {
 
 export function ServiceCard({ service }: { service: any }) {
   return (
-    <article className="group relative flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#0c121e]/70 p-6 shadow-xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:border-[#d4af37]/40 hover:bg-[#0f1728]/90">
+    <article className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#2563EB] hover:shadow-lg">
       <div>
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-[#d4af37]/30 bg-gradient-to-br from-[#d4af37]/20 to-transparent text-[#d4af37]">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB] border border-blue-100 transition-colors duration-300 group-hover:bg-[#2563EB] group-hover:text-white">
           <Wrench className="size-5" />
         </div>
-        <h3 className="text-xl font-black text-white group-hover:text-[#f5e2a3] transition">
+        <h3 className="text-lg font-bold text-[#172B4D] transition-colors duration-200 group-hover:text-[#2563EB]">
           {service.name}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-slate-400">
+        <p className="mt-2.5 text-sm leading-relaxed text-[#475569]">
           {service.description}
         </p>
       </div>
 
-      <div className="mt-6 border-t border-white/[0.06] pt-4">
-        <div className="flex items-center gap-2 text-xs font-bold text-slate-300">
-          <ShieldCheck className="size-4 text-[#00e5ff]" />
-          <span>Full Certified SLA & Warranty Included</span>
+      <div className="mt-6 border-t border-slate-100 pt-4">
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#475569]">
+          <ShieldCheck className="size-4 text-[#16A34A]" />
+          <span>Full Certified Safety & Warranty</span>
         </div>
       </div>
     </article>

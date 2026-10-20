@@ -4,14 +4,32 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { CtaLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/site/section-heading";
-import { ProductCard, ProjectCard, ServiceCard } from "@/components/site/cards";
+import { ProductCard, ProjectCard } from "@/components/site/cards";
 import { QuoteForm } from "@/components/forms/quote-form";
-import { VertixMotion } from "@/components/site/vertix-motion";
 import { ElevatorConfigurator } from "@/components/site/elevator-configurator";
 import { QuoteCalculator } from "@/components/site/quote-calculator";
 import { VideoShowcaseModal } from "@/components/site/video-showcase-modal";
-import { getFaqs, getPosts, getProducts, getProjects, getServices, getSettings, getTestimonials } from "@/lib/data";
-import { ArrowDownRight, ArrowUpRight, Check, Gauge, ShieldCheck, Sparkles, Wrench, Cpu, Zap, Activity, Award } from "lucide-react";
+import { getFaqs, getProducts, getProjects, getSettings, getTestimonials } from "@/lib/data";
+import {
+  ShieldCheck,
+  CheckCircle2,
+  Wrench,
+  Clock,
+  PhoneCall,
+  Mail,
+  MapPin,
+  Sparkles,
+  Award,
+  Layers,
+  Building2,
+  Home,
+  Briefcase,
+  Hotel,
+  MessageSquare,
+  Cpu,
+  Check,
+  ArrowRight
+} from "lucide-react";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -53,169 +71,244 @@ export const metadata = {
 };
 
 export default async function HomePage() {
-  const [settings, products, projects, services, faqs, posts, testimonials] = await Promise.all([
+  const [settings, products, projects, faqs, testimonials] = await Promise.all([
     getSettings(),
     getProducts(),
     getProjects(),
-    getServices(),
     getFaqs(),
-    getPosts(),
     getTestimonials()
   ]);
 
-  const homepage = settings.homepage as any;
-  const stats = settings.statistics as Array<{ value: string; label: string }>;
-  const heroMedia = (homepage?.media as any)?.url || "/images/brochure-extracts/extract-02.jpg";
+  const stats = (settings.statistics as Array<{ value: string; label: string }>) || [
+    { value: "500+", label: "Lifts Installed" },
+    { value: "99.8%", label: "System Uptime" },
+    { value: "24/7", label: "Breakdown Support" },
+    { value: "100%", label: "Safety Code Compliance" }
+  ];
 
-  const showcaseImages = [
+  // Specific 7 Services required by the prompt
+  const coreServices = [
     {
-      src: "/images/brochure-extracts/extract-02.jpg",
-      alt: "Modern elevator entrance with Italian marble finish by VERTIX TECHNO ELEVATOR",
-      label: "Entrance Architecture",
-      subtitle: "Book-matched Italian marble & brushed titanium framing"
+      id: "passenger",
+      name: "Passenger Elevators",
+      description: "Smooth, energy-efficient passenger lifts for residential apartments and corporate towers.",
+      icon: UsersIcon,
+      href: "/products/passenger-lift"
     },
     {
-      src: "/images/brochure-extracts/extract-31.jpg",
-      alt: "Imperial gold elevator cabin designed by VERTIX TECHNO ELEVATOR in Bengaluru",
-      label: "Imperial Gold Cabin",
-      subtitle: "Laser-etched champagne gold mirror finishes"
+      id: "residential",
+      name: "Residential Elevators",
+      description: "Quiet, elegant home and villa lifts with compact footprint and minimal civil shaft requirements.",
+      icon: Home,
+      href: "/products/home-lift"
     },
     {
-      src: "/images/brochure-extracts/extract-13.jpg",
-      alt: "Panoramic glass elevator cabin for commercial building in Bengaluru",
-      label: "Panoramic Glass",
-      subtitle: "360° architectural structural observation"
+      id: "commercial",
+      name: "Commercial Elevators",
+      description: "High-capacity, high-traffic elevators built for office complexes, tech parks, and commercial hubs.",
+      icon: Briefcase,
+      href: "/products/mrl-lift"
     },
     {
-      src: "/images/brochure-extracts/extract-15.jpg",
-      alt: "Residential timber elevator cab with stainless steel panels",
-      label: "Italian Timber Cabs",
-      subtitle: "Hand-finished walnut paired with acoustic dampening"
+      id: "installation",
+      name: "Elevator Installation",
+      description: "Turnkey structural erection, rail alignment, and testing carried out by certified elevator engineers.",
+      icon: Building2,
+      href: "/services"
+    },
+    {
+      id: "maintenance",
+      name: "Elevator Maintenance",
+      description: "Proactive preventive maintenance programs and 24/7 AMC support to maximize equipment lifespan.",
+      icon: ShieldCheck,
+      href: "/services"
+    },
+    {
+      id: "repair",
+      name: "Elevator Repair",
+      description: "Fast-dispatch emergency repair service with genuine OEM spare parts and prompt breakdown resolution.",
+      icon: Wrench,
+      href: "/services"
+    },
+    {
+      id: "modernization",
+      name: "Elevator Modernization",
+      description: "Upgrades for legacy elevator equipment with modern energy-saving PMSM drives and smart controllers.",
+      icon: Cpu,
+      href: "/services"
+    }
+  ];
+
+  // Why Choose Us points required by prompt
+  const whyChooseUsPoints = [
+    {
+      title: "Safety-Focused Solutions",
+      desc: "Built to strict IS 14665 and EN 81-20/50 standards with multi-layer emergency brakes and infrared door curtains.",
+      icon: ShieldCheck
+    },
+    {
+      title: "Reliable Customer Support",
+      desc: "Dedicated 24/7 emergency response hotline and prompt on-call technicians across Bengaluru and Karnataka.",
+      icon: PhoneCall
+    },
+    {
+      title: "Quality Products & Installation",
+      desc: "High-grade components, gearless synchronous motors, and precision millimeter laser shaft alignment.",
+      icon: Award
+    },
+    {
+      title: "Professional Maintenance",
+      desc: "Scheduled preventive maintenance contracts ensuring smooth operation, zero vibration, and high uptime.",
+      icon: Wrench
+    },
+    {
+      title: "Transparent Communication",
+      desc: "Honest advice, straightforward pricing, clear project timelines, and regular updates throughout the process.",
+      icon: MessageSquare
+    },
+    {
+      title: "Solutions for Different Buildings",
+      desc: "Tailored engineering for duplex villas, low-pit residences, high-rise apartments, and commercial complexes.",
+      icon: Layers
+    }
+  ];
+
+  // Project Gallery Categories
+  const projectShowcase = [
+    {
+      title: "Residential Apartments",
+      category: "Multi-Story Residential",
+      image: "/images/brochure-extracts/extract-02.jpg",
+      desc: "Modern passenger elevator installation in a contemporary Bengaluru apartment complex."
+    },
+    {
+      title: "Independent Houses & Villas",
+      category: "Luxury Villa",
+      image: "/images/brochure-extracts/extract-15.jpg",
+      desc: "Custom residential home lift with elegant acoustic timber interior and minimal pit depth."
+    },
+    {
+      title: "Office Buildings",
+      category: "Corporate Facility",
+      image: "/images/brochure-extracts/extract-13.jpg",
+      desc: "High-speed MRL elevator installation for an IT business park in Bengaluru."
+    },
+    {
+      title: "Commercial Complexes",
+      category: "Commercial Mall",
+      image: "/images/brochure-extracts/extract-31.jpg",
+      desc: "Designer stainless steel passenger elevator with high passenger dispatch capacity."
+    },
+    {
+      title: "Hotels & Hospitality",
+      category: "Hospitality Suite",
+      image: "/images/brochure-extracts/extract-28.jpg",
+      desc: "Whisper-quiet passenger elevator designed for hotel guest comfort and seamless ride quality."
     }
   ];
 
   return (
     <>
       <Navbar />
-      <main className="relative overflow-hidden bg-[#06090e] text-slate-100">
-        {/* Ambient Glows */}
-        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-gradient-to-b from-[#d4af37]/10 via-[#00e5ff]/5 to-transparent blur-[120px]" />
 
-        {/* 1. Grand Cinematic Hero Section */}
-        <section className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b border-white/[0.08] bg-[#070a12]">
-          <Image
-            src={heroMedia}
-            alt="VERTIX TECHNO ELEVATOR - Commercial & Residential Elevator Engineering in Bengaluru"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-35 filter brightness-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#06090e] via-[#06090e]/85 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#06090e] via-transparent to-[#06090e]/40" />
-
-          {/* Architectural Grid Overlay */}
-          <div className="absolute inset-0 architectural-grid opacity-60" />
-
-          <div className="container relative z-10 grid min-h-[calc(100vh-80px)] items-center gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="max-w-3xl">
-              {/* Telemetry pill */}
-              <div className="mb-6 inline-flex flex-wrap items-center gap-3 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] backdrop-blur-md">
-                <span className="flex items-center gap-2">
-                  <span className="size-2 rounded-full bg-[#00e5ff] animate-ping" />
-                  <span>ELEVATOR COMPANY IN BENGALURU, KARNATAKA</span>
-                </span>
-                <span className="hidden sm:inline-block h-3 w-px bg-white/20" />
-                <span className="hidden sm:inline-flex items-center gap-1.5 text-slate-300">
-                  <Gauge className="size-3.5 text-[#00e5ff]" /> 24/7 AMC SUPPORT
-                </span>
+      <main className="bg-white text-[#475569]">
+        {/* =========================================================================
+            1. HERO SECTION (Bright, clean, high-contrast, modern elevator photograph)
+           ========================================================================= */}
+        <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-[#F3F6FA] via-white to-white py-16 lg:py-24">
+          <div className="container grid items-center gap-12 lg:grid-cols-12">
+            {/* Left Content */}
+            <div className="lg:col-span-7 max-w-2xl">
+              {/* Badge */}
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-[#2563EB]">
+                <span className="size-2 rounded-full bg-[#16A34A] animate-pulse" />
+                <span>Elevator Company in Bengaluru, Karnataka</span>
               </div>
 
-              <h1 className="display-type text-4xl font-black leading-[1.08] text-white sm:text-6xl md:text-7xl lg:text-8xl tracking-tight">
-                VERTIX TECHNO ELEVATOR
-                <span className="block text-xl sm:text-2xl md:text-3xl font-bold tracking-normal text-slate-300 mt-4 leading-snug">
-                  Elevator Company in Bengaluru | Installation, Maintenance & Modernization
-                </span>
+              {/* Exact Required Headline */}
+              <h1 className="display-type text-4xl font-extrabold tracking-tight text-[#172B4D] sm:text-5xl md:text-6xl leading-[1.15]">
+                Moving You Higher, Safely and Reliably.
               </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                VERTIX TECHNO ELEVATOR is a leading elevator company in Bengaluru providing precision permanent magnet gearless passenger elevators, residential home lifts, hospital elevators, and heavy industrial freight lifts across Karnataka.
+              {/* Exact Required Supporting Text */}
+              <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#475569]">
+                Discover dependable elevator solutions designed for comfort, safety, and convenience in residential and commercial buildings.
               </p>
 
+              {/* Two Prominent Buttons */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CtaLink href="/products" variant="primary">
-                  EXPLORE ELEVATOR MODELS
+                <CtaLink href="/quote" variant="primary">
+                  Get a Free Quote
                 </CtaLink>
-                <CtaLink href="/quote" variant="secondary">
-                  REQUEST OFFICIAL QUOTE
+                <CtaLink href="/services" variant="secondary">
+                  Explore Our Services
                 </CtaLink>
               </div>
 
-              {/* Bottom Quote & Arrow */}
-              <div className="mt-14 flex items-center justify-between border-t border-white/[0.1] pt-6 text-xs font-bold uppercase tracking-wider text-slate-400">
-                <span className="flex items-center gap-2">
-                  <Award className="size-4 text-[#d4af37]" /> Built for the moments between floors
-                </span>
-                <div className="flex items-center gap-1 text-[#d4af37]">
-                  <span>Scroll to explore</span>
-                  <ArrowDownRight className="size-4" />
+              {/* Quick Trust Indicators */}
+              <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-200 pt-6 text-xs text-[#172B4D] font-semibold">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="size-4 text-[#16A34A] shrink-0" />
+                  <span>IS 14665 & EN 81 Certified</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="size-4 text-[#2563EB] shrink-0" />
+                  <span>24/7 Emergency Support</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="size-4 text-[#16A34A] shrink-0" />
+                  <span>Transparent Pricing</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Technical Spec Card */}
-            <div className="glass-panel-luxury rounded-3xl p-6 lg:p-8">
-              <div className="mb-6 flex items-center justify-between border-b border-white/[0.08] pb-4">
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d4af37]">Core Technology</span>
-                  <h3 className="text-lg font-black text-white">Vertix Eco-Synchronous Architecture</h3>
-                </div>
-                <div className="flex size-9 items-center justify-center rounded-xl border border-[#00e5ff]/30 bg-[#00e5ff]/10 text-[#00e5ff]">
-                  <Cpu className="size-5" />
-                </div>
-              </div>
+            {/* Right: Modern High-Quality Elevator Photograph */}
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/3] sm:aspect-[1] overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-xl">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl bg-slate-100">
+                  <Image
+                    src="/images/brochure-extracts/extract-02.jpg"
+                    alt="Modern elevator installation in contemporary building by Vertix Techno Elevator"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172B4D]/60 via-transparent to-transparent" />
 
-              <div className="grid gap-3.5">
-                {[
-                  {
-                    num: "01",
-                    title: "Synchronous PMSM Eco-Drive",
-                    text: "Permanent magnet gearless traction delivers up to 40% power conservation and vibration-free ride comfort."
-                  },
-                  {
-                    num: "02",
-                    title: "Millimeter Leveling Precision",
-                    text: "Closed-loop 32-bit microprocessor vector controller guarantees seamless floor alignment with zero jerk."
-                  },
-                  {
-                    num: "03",
-                    title: "Automatic Rescue Device (ARD)",
-                    text: "Instant emergency backup drives the cabin to the nearest floor and unlocks doors during power interruption."
-                  }
-                ].map((item) => (
-                  <div key={item.num} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 transition hover:border-[#d4af37]/30 hover:bg-white/[0.05]">
+                  {/* Floating Highlight Card */}
+                  <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-3.5 shadow-lg backdrop-blur-md">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-black text-[#d4af37]">{item.num}</span>
-                      <span className="size-1.5 rounded-full bg-[#00e5ff]" />
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#2563EB]">
+                          Contemporary Architecture
+                        </span>
+                        <h2 className="text-sm font-bold text-[#172B4D]">
+                          Precision Gearless PMSM Elevators
+                        </h2>
+                      </div>
+                      <span className="rounded-full bg-green-50 px-2 py-0.5 text-[11px] font-bold text-[#16A34A] border border-green-200">
+                        Energy Class A+++
+                      </span>
                     </div>
-                    <h4 className="mt-2 text-sm font-black text-white">{item.title}</h4>
-                    <p className="mt-1 text-xs leading-relaxed text-slate-400">{item.text}</p>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 2. Live Key Statistics Bar */}
-        <section className="relative z-20 border-b border-white/[0.08] bg-[#0c121e]/90 backdrop-blur-xl">
-          <div className="container grid grid-cols-2 gap-6 py-8 md:grid-cols-4">
+        {/* =========================================================================
+            2. KEY STATISTICS BAR (Light Gray section)
+           ========================================================================= */}
+        <section className="border-b border-slate-200/80 bg-[#F3F6FA] py-8">
+          <div className="container grid grid-cols-2 gap-6 sm:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="border-l border-white/[0.08] pl-5 first:border-l-0">
-                <strong className="display-type block text-3xl font-black text-white lg:text-4xl">
-                  <span className="gold-gradient-text">{stat.value}</span>
+              <div key={stat.label} className="border-l border-slate-200 pl-5 first:border-l-0">
+                <strong className="block text-3xl font-extrabold text-[#172B4D] sm:text-4xl">
+                  {stat.value}
                 </strong>
-                <span className="mt-1 block text-xs font-black uppercase tracking-[0.16em] text-slate-400">
+                <span className="mt-1 block text-xs font-bold uppercase tracking-wider text-[#475569]">
                   {stat.label}
                 </span>
               </div>
@@ -223,278 +316,539 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 3. Main Body with Futuristic Vertical Lift HUD Motion */}
-        <div className="container flex gap-12 py-24">
-          <VertixMotion />
+        {/* =========================================================================
+            3. OUR SERVICES SECTION (White cards, subtle shadows, blue hover effect)
+           ========================================================================= */}
+        <section id="services" className="scroll-mt-20 py-20 bg-white">
+          <div className="container">
+            <SectionHeading
+              centered
+              eyebrow="What We Do"
+              title="Our Services"
+              text="Comprehensive vertical transportation solutions engineered for safety, ride comfort, and long-term durability."
+            />
 
-          <div className="min-w-0 flex-1 space-y-28">
-            {/* About Vertix Section */}
-            <section className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#0e1626] to-[#080c14] p-8 lg:p-14 shadow-2xl backdrop-blur-xl">
-              <div className="relative z-10 max-w-3xl">
-                <SectionHeading
-                  eyebrow="Elevator Company in Bengaluru"
-                  title="REDEFINING VERTICAL MOBILITY WITH PASSION & PRECISION."
-                  text="VERTIX TECHNO ELEVATOR combines precision engineering, clean architectural aesthetics, and proactive lifecycle maintenance for passenger elevators, residential home lifts, goods elevators, and commercial towers across Bengaluru and Karnataka."
-                />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {coreServices.map((srv) => {
+                const IconComponent = srv.icon;
+                return (
+                  <Link
+                    key={srv.id}
+                    href={srv.href}
+                    className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#2563EB] hover:shadow-lg"
+                  >
+                    <div>
+                      <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB] border border-blue-100 transition-colors duration-200 group-hover:bg-[#2563EB] group-hover:text-white">
+                        <IconComponent className="size-6" />
+                      </div>
+                      <h3 className="text-lg font-bold text-[#172B4D] transition-colors duration-200 group-hover:text-[#2563EB]">
+                        {srv.name}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+                        {srv.description}
+                      </p>
+                    </div>
 
-                <div className="mt-8 flex flex-wrap gap-4 text-xs font-black uppercase tracking-[0.16em] text-slate-300">
-                  <Link href="/about" className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 hover:border-[#d4af37] transition">
-                    <ShieldCheck className="size-4 text-[#d4af37]" /> About Our Company
+                    <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-3.5 text-xs font-bold text-[#2563EB]">
+                      <span>Learn More</span>
+                      <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                    </div>
                   </Link>
-                  <Link href="/services" className="flex items-center gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-2.5 hover:border-[#00e5ff] transition">
-                    <Wrench className="size-4 text-[#00e5ff]" /> Installation & AMC Services
-                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            4. ABOUT US SECTION (Light Gray section introducing Vertix)
+           ========================================================================= */}
+        <section id="about" className="py-20 bg-[#F3F6FA] border-y border-slate-200/80">
+          <div className="container grid items-center gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-md">
+                <div className="relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/images/brochure-extracts/extract-15.jpg"
+                    alt="Vertix Techno Elevator craftsmanship and engineering in Bengaluru"
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                  />
                 </div>
               </div>
-            </section>
+            </div>
 
-            {/* Interactive 3D Cabin Configurator */}
-            <section id="configurator" className="scroll-mt-24">
+            <div className="lg:col-span-6 max-w-xl">
               <SectionHeading
-                eyebrow="Interactive Customization Studio"
-                title="Design Your Custom Elevator Interior & Drive."
-                text="Experiment with luxury cabin finishes, application requirements, and illumination styles to see your vision materialize in real time."
+                eyebrow="Who We Are"
+                title="Elevator Solutions Engineered With Integrity."
               />
-              <ElevatorConfigurator />
-            </section>
+              <p className="text-base leading-relaxed text-[#475569]">
+                Headquartered in Peenya Industrial Area, Bengaluru, <strong className="text-[#172B4D]">Vertix Techno Elevator</strong> provides high-quality passenger lifts, residential villa elevators, and commercial elevator systems across Karnataka.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-[#475569]">
+                We partner with homeowners, builders, architects, and facility managers to design, install, and support elevator systems that deliver quiet ride quality, safety compliance, and energy savings.
+              </p>
 
-            {/* Solutions Matrix */}
-            <section>
-              <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-                <SectionHeading
-                  eyebrow="Core Elevator Models"
-                  title="Engineered Systems for Every Structural Typology."
-                  text="From luxury villa glass observation lifts to high-capacity industrial freights, explore certified elevator models designed for seamless building integration."
-                />
-                <CtaLink href="/products" variant="secondary" className="mb-10">
-                  VIEW COMPLETE CATALOG
-                </CtaLink>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {products.slice(0, 6).map((product: any) => (
-                  <ProductCard product={product} key={product.id} />
-                ))}
-              </div>
-            </section>
-
-            {/* Field Engineering Video Lightbox Showcase */}
-            <section>
-              <VideoShowcaseModal />
-            </section>
-
-            {/* Real Craftsmanship Gallery */}
-            <section>
-              <SectionHeading
-                eyebrow="Architectural Portfolio"
-                title="Craftsmanship Matched to Discerning Standards."
-                text="Inspect entrance designs, luxury cabin interiors, structural glass atriums, and heavy industrial shaft installations."
-              />
-              <div className="grid auto-rows-[240px] gap-5 md:grid-cols-4">
-                {showcaseImages.map((item, index) => (
-                  <figure
-                    key={item.src}
-                    className={`group relative overflow-hidden rounded-2xl border border-white/[0.1] bg-[#0c121e] shadow-2xl ${
-                      index === 0 ? "md:col-span-2 md:row-span-2" : ""
-                    }`}
-                  >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                    <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d4af37]">
-                        {item.label}
-                      </span>
-                      <p className="mt-1 text-sm font-bold text-white leading-snug">
-                        {item.subtitle}
-                      </p>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </section>
-
-            {/* High-Tech Safety & Compliance Blueprint */}
-            <section className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-[#0c121e] via-[#0f1728] to-[#080c14] p-8 lg:p-12 shadow-2xl">
-              <SectionHeading
-                eyebrow="Safety First"
-                title="Uncompromising Multi-Layer Safety Architecture."
-                text="Every Vertix installation integrates redundant mechanical and electronic safety backups conforming to EN 81-20/50 standards."
-              />
-
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {/* 5 Core Commitments Highlighted */}
+              <div className="mt-6 space-y-2.5">
                 {[
-                  {
-                    title: "Automatic Rescue Device (ARD)",
-                    desc: "Industrial emergency battery system automatically maneuvers cabin to nearest landing and opens doors during power outages."
-                  },
-                  {
-                    title: "Multi-Beam Infrared Curtain",
-                    desc: "Full-height 128-beam optical sensor web prevents door closure if passengers or objects break the threshold."
-                  },
-                  {
-                    title: "Overspeed Governor & Bi-Directional Clamp",
-                    desc: "Instant mechanical clamping locks car to guide rails in the event of abnormal downward or upward acceleration."
-                  }
-                ].map((s) => (
-                  <div key={s.title} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 backdrop-blur-md">
-                    <Check className="size-5 text-[#d4af37]" />
-                    <h3 className="mt-3 text-base font-black text-white">{s.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-400">{s.desc}</p>
+                  "Commitment to Safety and Reliability in every elevator installed",
+                  "Quality Installation by experienced elevator engineers",
+                  "Customer Satisfaction tailored to specific building requirements",
+                  "Professional Service with transparent communication",
+                  "Long-Term Maintenance Support with 24/7 emergency assistance"
+                ].map((commitment) => (
+                  <div key={commitment} className="flex items-center gap-2.5 text-sm font-semibold text-[#172B4D]">
+                    <CheckCircle2 className="size-4 text-[#16A34A] shrink-0" />
+                    <span>{commitment}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs font-bold text-slate-400">
-                  Full compliance with IS 14665, EN 81-20/50, and ISO 9001:2015 quality standards.
-                </span>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CtaLink href="/about" variant="primary">
+                  Learn More About Us
+                </CtaLink>
                 <CtaLink href="/about/safety" variant="secondary">
-                  EXPLORE SAFETY PROTOCOLS
+                  Safety Protocols
                 </CtaLink>
               </div>
-            </section>
+            </div>
+          </div>
+        </section>
 
-            {/* 5-Phase Turnkey Process */}
-            <section>
-              <SectionHeading
-                eyebrow="Execution Roadmap"
-                title="From Structural Survey to 24/7 AMC Support."
-                text="Our disciplined 5-phase engineering workflow ensures on-time delivery and millimeter-precise shaft alignment."
-              />
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                {[
-                  { step: "01", name: "Site Survey & 3D CAD", desc: "Detailed pit, headroom and shaft plumb verification." },
-                  { step: "02", name: "Custom Fabrication", desc: "Precision CNC laser cutting, drive and car assembly." },
-                  { step: "03", name: "Shaft Erection", desc: "Guide rails, counterweight and traction rigging installation." },
-                  { step: "04", name: "Load Testing & Cert", desc: "Dynamic brake testing, ARD verification and inspection." },
-                  { step: "05", name: "24/7 AMC Support", desc: "Proactive monthly maintenance and fast emergency rescue." }
-                ].map((p) => (
-                  <div key={p.step} className="rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-5 backdrop-blur-xl">
-                    <span className="font-mono text-2xl font-black text-[#d4af37]">{p.step}</span>
-                    <h3 className="mt-3 text-sm font-black text-white">{p.name}</h3>
-                    <p className="mt-1.5 text-xs text-slate-400 leading-relaxed">{p.desc}</p>
+        {/* =========================================================================
+            5. WHY CHOOSE US SECTION (White section with 6 key advantages)
+           ========================================================================= */}
+        <section id="why-choose-us" className="scroll-mt-20 py-20 bg-white">
+          <div className="container">
+            <SectionHeading
+              centered
+              eyebrow="Our Advantages"
+              title="Why Choose Vertix Techno Elevator"
+              text="We focus on dependable engineering, safety compliance, and attentive customer service."
+            />
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {whyChooseUsPoints.map((point) => {
+                const IconComponent = point.icon;
+                return (
+                  <div
+                    key={point.title}
+                    className="rounded-2xl border border-slate-200 bg-[#F3F6FA] p-6 transition-all duration-200 hover:border-[#2563EB] hover:bg-white hover:shadow-md"
+                  >
+                    <div className="mb-4 flex size-12 items-center justify-center rounded-xl bg-white text-[#2563EB] border border-slate-200 shadow-xs">
+                      <IconComponent className="size-6" />
+                    </div>
+                    <h3 className="text-base font-bold text-[#172B4D]">
+                      {point.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+                      {point.desc}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </section>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
-            {/* Featured Projects Showcase */}
-            <section>
-              <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
-                <SectionHeading
-                  eyebrow="Landmark Installations"
-                  title="Completed Elevator Commissioning Stories."
-                  text="See how Vertix solves complex structural constraints in corporate towers, private villa estates, and specialized healthcare centers."
-                />
-                <CtaLink href="/projects" variant="secondary" className="mb-10">
-                  VIEW ALL PROJECTS
-                </CtaLink>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {projects.slice(0, 4).map((project: any) => (
+        {/* =========================================================================
+            6. OUR PROJECTS GALLERY SECTION (White cards, large illustrative images)
+           ========================================================================= */}
+        <section id="projects" className="py-20 bg-[#F3F6FA] border-y border-slate-200/80">
+          <div className="container">
+            <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+              <SectionHeading
+                eyebrow="Real Installations & Applications"
+                title="Our Projects & Applications"
+                text="Explore modern elevator installations across diverse building types in Bengaluru and Karnataka."
+              />
+              <CtaLink href="/projects" variant="secondary" className="mb-10">
+                View All Case Studies
+              </CtaLink>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projectShowcase.map((proj) => (
+                <div
+                  key={proj.title}
+                  className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#2563EB] hover:shadow-lg"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={proj.image}
+                      alt={proj.title}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute left-3.5 top-3.5">
+                      <span className="inline-flex rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-[#2563EB] shadow-xs">
+                        {proj.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-bold text-[#172B4D] group-hover:text-[#2563EB] transition">
+                      {proj.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-[#475569]">
+                      {proj.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Existing dynamic project cards */}
+            {projects.length > 0 && (
+              <div className="mt-10 grid gap-6 md:grid-cols-2">
+                {projects.slice(0, 2).map((project: any) => (
                   <ProjectCard project={project} key={project.id} />
                 ))}
               </div>
-            </section>
+            )}
+          </div>
+        </section>
 
-            {/* Interactive Live Instant Cost Estimator */}
-            <section id="calculator" className="scroll-mt-24">
-              <QuoteCalculator />
-            </section>
-
-            {/* Prestigious Client Testimonials */}
-            <section>
+        {/* =========================================================================
+            7. CORE ELEVATOR MODELS (Products from database)
+           ========================================================================= */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
               <SectionHeading
-                eyebrow="Client Endorsements"
-                title="Trusted by Architects, Developers & Homeowners."
-                text="Read authentic project experiences from leading real estate infrastructure directors and architects."
+                eyebrow="Certified Elevator Models"
+                title="Engineered for Modern Buildings"
+                text="From compact villa elevators to high-speed passenger cars, explore our certified elevator models."
               />
-              <div className="grid gap-6 md:grid-cols-2">
-                {testimonials.map((t: any) => (
-                  <blockquote
-                    key={t.id}
-                    className="relative flex flex-col justify-between rounded-3xl border border-white/[0.08] bg-[#0c121e]/80 p-8 shadow-xl backdrop-blur-xl"
-                  >
-                    <div>
-                      <div className="flex items-center gap-1 text-[#d4af37] mb-4">
-                        {[...Array(5)].map((_, i) => (
-                          <Sparkles key={i} className="size-4 fill-current" />
-                        ))}
+              <CtaLink href="/products" variant="secondary" className="mb-10">
+                View Full Catalog
+              </CtaLink>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {products.slice(0, 6).map((product: any) => (
+                <ProductCard product={product} key={product.id} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            8. INTERACTIVE 3D CABIN CONFIGURATOR STUDIO
+           ========================================================================= */}
+        <section id="configurator" className="scroll-mt-24 py-20 bg-[#F3F6FA] border-y border-slate-200/80">
+          <div className="container">
+            <SectionHeading
+              centered
+              eyebrow="Interactive Customization"
+              title="Design Your Elevator Interior & Finish"
+              text="Select cabin finishes, ceiling lighting, and application requirements to preview options in real time."
+            />
+            <ElevatorConfigurator />
+          </div>
+        </section>
+
+        {/* =========================================================================
+            9. FIELD ENGINEERING VIDEO FOOTAGE SHOWCASE
+           ========================================================================= */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <VideoShowcaseModal />
+          </div>
+        </section>
+
+        {/* =========================================================================
+            10. MULTI-LAYER SAFETY ARCHITECTURE
+           ========================================================================= */}
+        <section className="py-20 bg-[#F3F6FA] border-y border-slate-200/80">
+          <div className="container">
+            <SectionHeading
+              eyebrow="Uncompromising Protection"
+              title="Multi-Layer Elevator Safety Architecture"
+              text="Every Vertix elevator incorporates redundant mechanical and electronic safety mechanisms conforming to EN 81-20/50 and IS 14665 standards."
+            />
+
+            <div className="grid gap-6 md:grid-cols-3 mt-8">
+              {[
+                {
+                  title: "Automatic Rescue Device (ARD)",
+                  desc: "Integrated emergency battery backup automatically maneuvers the cabin to the nearest floor and unlocks doors during mains power outages."
+                },
+                {
+                  title: "Multi-Beam Infrared Light Curtain",
+                  desc: "Full-height 128-beam optical sensor web prevents door closure if passengers, pets, or objects cross the doorway threshold."
+                },
+                {
+                  title: "Overspeed Governor & Safety Gear",
+                  desc: "Independent mechanical flyweight governor immediately locks the car to solid guide rails in the event of abnormal acceleration."
+                }
+              ].map((s) => (
+                <div key={s.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <div className="flex size-10 items-center justify-center rounded-xl bg-green-50 text-[#16A34A] mb-4">
+                    <Check className="size-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#172B4D]">{s.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#475569]">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-6">
+              <span className="text-xs font-semibold text-[#475569]">
+                Fully compliant with IS 14665, EN 81-20/50, and ISO 9001:2015 quality standards.
+              </span>
+              <CtaLink href="/about/safety" variant="secondary">
+                Read Safety Documentation
+              </CtaLink>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            11. TURNKEY 5-PHASE PROCESS
+           ========================================================================= */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <SectionHeading
+              centered
+              eyebrow="Our Workflow"
+              title="From Initial Survey to Ongoing Support"
+              text="A disciplined engineering roadmap that ensures on-time delivery and millimeter-precise shaft alignment."
+            />
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mt-10">
+              {[
+                { step: "01", name: "Site Survey & CAD", desc: "Detailed pit, headroom and shaft plumb verification." },
+                { step: "02", name: "Custom Fabrication", desc: "Precision laser cutting, drive calibration, and car assembly." },
+                { step: "03", name: "Shaft Erection", desc: "Guide rails, counterweight, and motor rigging installation." },
+                { step: "04", name: "Load Testing & Cert", desc: "Dynamic brake testing, ARD verification, and safety sign-off." },
+                { step: "05", name: "24/7 AMC Support", desc: "Proactive monthly maintenance and prompt breakdown assistance." }
+              ].map((p) => (
+                <div key={p.step} className="rounded-2xl border border-slate-200 bg-[#F3F6FA] p-5">
+                  <span className="font-mono text-2xl font-extrabold text-[#2563EB]">{p.step}</span>
+                  <h3 className="mt-2.5 text-sm font-bold text-[#172B4D]">{p.name}</h3>
+                  <p className="mt-1 text-xs text-[#475569] leading-relaxed">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================================
+            12. INSTANT COST ESTIMATOR CALCULATOR
+           ========================================================================= */}
+        <section id="calculator" className="scroll-mt-24 py-20 bg-[#F3F6FA] border-y border-slate-200/80">
+          <div className="container">
+            <QuoteCalculator />
+          </div>
+        </section>
+
+        {/* =========================================================================
+            13. TESTIMONIALS & FAQ (White section)
+           ========================================================================= */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            {/* Testimonials */}
+            {testimonials.length > 0 && (
+              <div className="mb-16">
+                <SectionHeading
+                  eyebrow="Customer Reviews"
+                  title="Trusted by Homeowners, Builders & Architects"
+                  text="Read genuine project experiences from clients who rely on Vertix elevators."
+                />
+                <div className="grid gap-6 md:grid-cols-2 mt-8">
+                  {testimonials.map((t: any) => (
+                    <blockquote
+                      key={t.id}
+                      className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-[#F3F6FA] p-6 shadow-sm"
+                    >
+                      <div>
+                        <div className="flex items-center gap-1 text-[#2563EB] mb-3">
+                          {[...Array(5)].map((_, i) => (
+                            <Sparkles key={i} className="size-4 fill-current" />
+                          ))}
+                        </div>
+                        <p className="text-sm leading-relaxed text-[#475569] italic">
+                          &quot;{t.quote}&quot;
+                        </p>
                       </div>
-                      <p className="text-sm leading-relaxed text-slate-300 italic">
-                        &quot;{t.quote}&quot;
-                      </p>
-                    </div>
-                    <footer className="mt-6 border-t border-white/[0.08] pt-4">
-                      <strong className="block text-sm font-black text-white">{t.customerName}</strong>
-                      <span className="block text-xs text-[#d4af37]">{t.designation} • {t.company}</span>
-                    </footer>
-                  </blockquote>
-                ))}
+                      <footer className="mt-6 border-t border-slate-200 pt-3">
+                        <strong className="block text-sm font-bold text-[#172B4D]">{t.customerName}</strong>
+                        <span className="block text-xs text-[#475569]">{t.designation} • {t.company}</span>
+                      </footer>
+                    </blockquote>
+                  ))}
+                </div>
               </div>
-            </section>
+            )}
 
-            {/* Technical FAQ */}
-            <section>
+            {/* Frequently Asked Questions */}
+            <div className="mt-16">
               <SectionHeading
-                eyebrow="Knowledge Base & FAQ"
-                title="Common Elevator Engineering Questions."
-                text="Clear answers regarding pit requirements, emergency rescue devices, AMC maintenance coverage, and fabrication timelines."
+                eyebrow="Common Questions"
+                title="Frequently Asked Questions"
+                text="Find clear answers on elevator requirements, shaft dimensions, and maintenance support."
               />
-              <div className="grid gap-3.5">
+              <div className="grid gap-3.5 mt-8 max-w-4xl">
                 {faqs.slice(0, 6).map((faq: any) => (
                   <details
                     key={faq.id}
-                    className="group rounded-2xl border border-white/[0.08] bg-[#0c121e]/80 p-5 shadow-lg backdrop-blur-xl transition hover:border-[#d4af37]/30"
+                    className="group rounded-2xl border border-slate-200 bg-[#F3F6FA] p-5 transition hover:border-[#2563EB]"
                   >
-                    <summary className="flex cursor-pointer items-center justify-between text-sm font-black text-white">
+                    <summary className="flex cursor-pointer items-center justify-between text-sm font-bold text-[#172B4D]">
                       <span>{faq.question}</span>
-                      <span className="size-6 shrink-0 rounded-full border border-white/[0.1] text-center text-xs leading-6 text-[#d4af37] transition group-open:rotate-45">
+                      <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-slate-300 text-xs text-[#2563EB] group-open:rotate-45 transition">
                         +
                       </span>
                     </summary>
-                    <p className="mt-3 text-xs leading-relaxed text-slate-300 border-t border-white/[0.06] pt-3">
+                    <p className="mt-3 text-xs leading-relaxed text-[#475569] border-t border-slate-200 pt-3">
                       {faq.answer}
                     </p>
                   </details>
                 ))}
               </div>
-            </section>
+            </div>
+          </div>
+        </section>
 
-            {/* Direct Engineering Quote Section */}
-            <section id="quote-section" className="grid gap-8 rounded-3xl border border-[#d4af37]/25 bg-gradient-to-r from-[#0c121e] via-[#101828] to-[#0c121e] p-8 lg:p-12 shadow-2xl backdrop-blur-2xl lg:grid-cols-2 items-center">
-              <div>
-                <SectionHeading
-                  eyebrow="Formal Technical Quote"
-                  title="Plan Your Vertical Mobility System With Our Engineering Desk."
-                  text="Share your site location and requirements to receive transparent factory pricing, preliminary CAD drawings, and load calculations."
-                />
-                <div className="space-y-3 text-xs text-slate-300 mt-6">
-                  <div className="flex items-center gap-2">
-                    <Check className="size-4 text-[#d4af37]" />
-                    <span>Free architectural site feasibility review</span>
+        {/* =========================================================================
+            14. CUSTOMER ENQUIRY & CONTACT SECTION (Required by Prompt #8 & #9)
+           ========================================================================= */}
+        <section id="quote-section" className="py-20 bg-[#F3F6FA] border-t border-slate-200/80">
+          <div className="container">
+            <div className="grid gap-12 lg:grid-cols-12 items-start">
+              {/* Contact Information & Team Support (#9) */}
+              <div className="lg:col-span-5 space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-2">
+                    <span className="inline-block size-2 rounded-full bg-[#2563EB]" />
+                    <span>Contact Our Team</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="size-4 text-[#d4af37]" />
-                    <span>Detailed power load & shaft dimension specifications</span>
+                  <h2 className="text-3xl font-extrabold text-[#172B4D]">
+                    Let&apos;s Discuss Your Elevator Project
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                    Whether you are planning an elevator for a new home, upgrading an existing building, or require preventive maintenance in Bengaluru, our engineering team is here to assist you.
+                  </p>
+                </div>
+
+                {/* Verified Contact Details Cards */}
+                <div className="space-y-3 pt-2">
+                  {/* Phone */}
+                  <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB]">
+                      <PhoneCall className="size-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#475569]">Phone & Hotline</span>
+                      <p className="text-base font-bold text-[#172B4D]">
+                        <a href="tel:+916360598915" className="hover:text-[#2563EB] transition">
+                          +91 63605 98915
+                        </a>
+                      </p>
+                      <span className="text-xs text-[#475569]">Mon – Sat, 9:00 AM – 7:00 PM IST (24/7 Breakdown)</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Check className="size-4 text-[#d4af37]" />
-                    <span>Official formal quotation within 2 to 4 business hours</span>
+
+                  {/* Email */}
+                  <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB]">
+                      <Mail className="size-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#475569]">Email Inquiries</span>
+                      <p className="text-base font-bold text-[#172B4D]">
+                        <a href="mailto:manthmint@gmail.com" className="hover:text-[#2563EB] transition">
+                          manthmint@gmail.com
+                        </a>
+                      </p>
+                      <span className="text-xs text-[#475569]">We reply within 2 to 4 business hours</span>
+                    </div>
+                  </div>
+
+                  {/* Business Address */}
+                  <div className="flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB]">
+                      <MapPin className="size-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#475569]">Headquarters & Plant</span>
+                      <p className="text-xs font-semibold text-[#172B4D] leading-relaxed mt-0.5">
+                        Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Beadie Kamadhenu Auto CNC Private Limited, Peenya, Bengaluru, Karnataka - 560058
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* WhatsApp Option */}
+                  <div className="flex items-center justify-between rounded-2xl border border-green-200 bg-green-50/70 p-4 shadow-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-10 items-center justify-center rounded-xl bg-[#16A34A] text-white">
+                        <MessageSquare className="size-5" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#172B4D]">Quick WhatsApp Chat</span>
+                        <p className="text-xs text-[#475569]">Chat with our technical desk</p>
+                      </div>
+                    </div>
+                    <a
+                      href="https://wa.me/916360598915?text=Hello%20Vertix%20Techno%20Elevator,%20I%20am%20interested%20in%20an%20elevator%20solution."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl bg-[#16A34A] px-3.5 py-2 text-xs font-bold text-white hover:bg-[#15803D] transition"
+                    >
+                      Open WhatsApp
+                    </a>
                   </div>
                 </div>
+
+                <div className="pt-2">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#172B4D] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#2563EB] transition"
+                  >
+                    <span>Contact Our Team</span>
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
-              <QuoteForm />
-            </section>
+
+              {/* Customer Enquiry Form (#8) */}
+              <div className="lg:col-span-7">
+                <QuoteForm />
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </main>
+
       <Footer />
     </>
+  );
+}
+
+// Helper icons
+function UsersIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
   );
 }

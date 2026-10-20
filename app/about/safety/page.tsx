@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
-import { SectionHeading } from "@/components/site/section-heading";
 import { CtaLink } from "@/components/ui/button";
 import { ShieldCheck, AlertOctagon, CheckCircle2, Lock, Flame, Activity } from "lucide-react";
 
@@ -28,7 +27,7 @@ const safetyProtocols = [
   {
     title: "Automatic Rescue Device (ARD)",
     icon: ShieldCheck,
-    desc: "Integrated industrial battery bank and invertor system that automatically activates upon total building power loss, bringing the car to the nearest floor and opening doors."
+    desc: "Integrated industrial battery bank and inverter system that automatically activates upon total building power loss, bringing the car to the nearest floor and opening doors."
   },
   {
     title: "128-Beam Optical Infrared Light Curtain",
@@ -38,7 +37,7 @@ const safetyProtocols = [
   {
     title: "Emergency Fireman Mode & Seismic Interlocks",
     icon: Flame,
-    desc: "Automatic integration with building fire alarm panels and ground accelerometers. In an emergency, cars immediately return non-stop to the evacuation exit floor."
+    desc: "Automatic integration with building fire alarm panels. In an emergency, cars immediately return non-stop to the designated evacuation exit floor."
   },
   {
     title: "Triple Electro-Mechanical Door Locks",
@@ -51,18 +50,18 @@ export default function SafetyPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#06090e] py-16 text-slate-100">
+      <main className="min-h-screen bg-white py-16 text-[#475569]">
         <div className="container">
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0c121e] via-[#111a2c] to-[#0c121e] p-8 lg:p-14 shadow-2xl mb-16">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#F3F6FA] p-8 lg:p-14 shadow-sm mb-16">
             <div className="max-w-3xl">
-              <span className="text-xs font-black uppercase tracking-[0.24em] text-emerald-400 mb-3 block">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#16A34A] mb-3 block">
                 Zero-Tolerance Safety Benchmark
               </span>
-              <h1 className="display-type text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
+              <h1 className="display-type text-3xl font-extrabold text-[#172B4D] md:text-5xl lg:text-6xl tracking-tight">
                 Multi-Layer Passenger Safety Architecture
               </h1>
-              <p className="mt-4 text-base leading-relaxed text-slate-300">
-                At Vertix, safety is not an afterthought or optional add-on—it is the foundational premise upon which every single structural rail, cable, drive, and circuit board is calculated and certified.
+              <p className="mt-4 text-base leading-relaxed text-[#475569]">
+                At Vertix, safety is the foundational premise upon which every single structural rail, cable, drive, and electronic controller is calculated, inspected, and certified.
               </p>
             </div>
           </div>
@@ -73,27 +72,27 @@ export default function SafetyPage() {
               return (
                 <div
                   key={p.title}
-                  className="rounded-3xl border border-white/[0.08] bg-[#0c121e]/80 p-8 shadow-xl backdrop-blur-xl transition hover:border-emerald-500/40 hover:-translate-y-1"
+                  className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:border-[#16A34A] hover:-translate-y-1 hover:shadow-md"
                 >
-                  <div className="flex size-12 items-center justify-center rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 mb-6">
+                  <div className="flex size-12 items-center justify-center rounded-2xl bg-green-50 text-[#16A34A] mb-6">
                     <Icon className="size-6" />
                   </div>
-                  <h2 className="text-xl font-black text-white">{p.title}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{p.desc}</p>
+                  <h3 className="text-lg font-bold text-[#172B4D]">{p.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#475569]">{p.desc}</p>
                 </div>
               );
             })}
           </div>
 
-          <div className="mt-20 rounded-3xl border border-[#d4af37]/30 bg-gradient-to-r from-[#0c121e] via-[#141f36] to-[#0c121e] p-8 lg:p-12 shadow-2xl flex flex-wrap items-center justify-between gap-6">
+          <div className="mt-16 rounded-3xl border border-slate-200 bg-[#F3F6FA] p-8 lg:p-12 shadow-sm flex flex-wrap items-center justify-between gap-6">
             <div>
-              <h3 className="text-2xl font-black text-white">Have Specific Municipal or High-Rise Safety Queries?</h3>
-              <p className="mt-1 text-sm text-slate-300">
-                Our licensed elevator safety consultants provide full code compliance documentation.
+              <h3 className="text-2xl font-bold text-[#172B4D]">Have Questions About Building Safety Standards?</h3>
+              <p className="mt-1 text-sm text-[#475569]">
+                Our safety engineering team conducts complete building structural reviews and code compliance checks.
               </p>
             </div>
             <CtaLink href="/contact" variant="primary">
-              CONSULT SAFETY ENGINEERS
+              Consult a Safety Engineer
             </CtaLink>
           </div>
         </div>

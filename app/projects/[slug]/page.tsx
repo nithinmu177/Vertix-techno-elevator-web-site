@@ -4,7 +4,7 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { CtaLink } from "@/components/ui/button";
 import { firstMedia, getProject } from "@/lib/data";
-import { MapPin, Clock, ArrowLeft, CheckCircle2, Award } from "lucide-react";
+import { MapPin, ArrowLeft, CheckCircle2, Award } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -49,9 +49,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#06090e] text-slate-100">
+      <main className="min-h-screen bg-white text-[#475569]">
         {/* Project Hero Header */}
-        <section className="relative min-h-[50vh] overflow-hidden border-b border-white/[0.08] bg-[#070a12]">
+        <section className="relative min-h-[45vh] overflow-hidden border-b border-slate-200 bg-slate-900">
           {cover.type === "VIDEO" || cover.url?.endsWith(".mp4") || cover.url?.endsWith(".webm") ? (
             <video
               src={cover.url}
@@ -59,7 +59,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               loop
               muted
               playsInline
-              className="absolute inset-0 h-full w-full object-cover opacity-45"
+              className="absolute inset-0 h-full w-full object-cover opacity-60"
             />
           ) : (
             <Image
@@ -68,29 +68,29 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               fill
               priority
               sizes="100vw"
-              className="object-cover opacity-45"
+              className="object-cover opacity-60"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#06090e] via-[#06090e]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#172B4D]/90 via-[#172B4D]/40 to-transparent" />
 
-          <div className="container relative flex min-h-[50vh] items-end pb-12 pt-24">
+          <div className="container relative flex min-h-[45vh] items-end pb-12 pt-20">
             <div className="max-w-3xl">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-[#d4af37] transition mb-4"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white transition mb-4"
               >
                 <ArrowLeft className="size-4" />
                 <span>Back to All Projects</span>
               </Link>
 
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#d4af37]">
-                <MapPin className="size-3.5 text-[#00e5ff]" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-300">
+                <MapPin className="size-3.5 text-[#2563EB]" />
                 <span>{project.location}</span>
                 <span className="size-1 rounded-full bg-white/40" />
-                <span>{project.category?.name ?? "Commissioned Installation"}</span>
+                <span>{project.category?.name ?? "Installation Case Study"}</span>
               </div>
 
-              <h1 className="mt-3 text-3xl font-black text-white md:text-5xl lg:text-6xl tracking-tight">
+              <h1 className="mt-3 text-3xl font-extrabold text-white md:text-5xl lg:text-6xl tracking-tight">
                 {project.name}
               </h1>
             </div>
@@ -99,47 +99,47 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
         {/* Case Study Content Grid */}
         <section className="container grid gap-12 py-16 lg:grid-cols-[1.5fr_0.8fr]">
-          <div className="space-y-10">
+          <div className="space-y-8">
             <div>
-              <h2 className="text-xl font-black text-white uppercase tracking-wider mb-4">
+              <h2 className="text-xl font-bold text-[#172B4D] uppercase tracking-wider mb-3">
                 Project Overview
               </h2>
-              <p className="text-base leading-relaxed text-slate-300">
+              <p className="text-base leading-relaxed text-[#475569]">
                 {project.description}
               </p>
             </div>
 
             {project.challenge && (
-              <div className="rounded-3xl border border-white/[0.08] bg-[#0c121e]/80 p-8 shadow-xl backdrop-blur-xl">
-                <h3 className="text-lg font-black text-white flex items-center gap-2">
-                  <span className="text-rose-400 font-mono text-sm">[01]</span>
+              <div className="rounded-3xl border border-slate-200 bg-[#F3F6FA] p-8 shadow-sm">
+                <h3 className="text-lg font-bold text-[#172B4D] flex items-center gap-2">
+                  <span className="text-[#2563EB] font-mono text-sm">[01]</span>
                   <span>Architectural Challenge</span>
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
                   {project.challenge}
                 </p>
               </div>
             )}
 
             {project.solution && (
-              <div className="rounded-3xl border border-emerald-500/30 bg-emerald-950/10 p-8 shadow-xl backdrop-blur-xl">
-                <h3 className="text-lg font-black text-white flex items-center gap-2">
-                  <CheckCircle2 className="size-5 text-emerald-400" />
+              <div className="rounded-3xl border border-green-200 bg-green-50/60 p-8 shadow-sm">
+                <h3 className="text-lg font-bold text-[#172B4D] flex items-center gap-2">
+                  <CheckCircle2 className="size-5 text-[#16A34A]" />
                   <span>The Vertix Engineering Solution</span>
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
                   {project.solution}
                 </p>
               </div>
             )}
 
             {project.results && (
-              <div className="rounded-3xl border border-[#d4af37]/30 bg-[#d4af37]/5 p-8 shadow-xl backdrop-blur-xl">
-                <h3 className="text-lg font-black text-white flex items-center gap-2">
-                  <Award className="size-5 text-[#d4af37]" />
+              <div className="rounded-3xl border border-blue-200 bg-blue-50/60 p-8 shadow-sm">
+                <h3 className="text-lg font-bold text-[#172B4D] flex items-center gap-2">
+                  <Award className="size-5 text-[#2563EB]" />
                   <span>Operational Results & Uptime</span>
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
                   {project.results}
                 </p>
               </div>
@@ -148,31 +148,31 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
           {/* Sidebar Project Parameters */}
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-white/[0.1] bg-[#0c121e] p-6 lg:p-8 shadow-2xl">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#d4af37] mb-6">
-                Technical Blueprint Specs
+            <div className="rounded-3xl border border-slate-200 bg-[#F3F6FA] p-6 lg:p-8 shadow-sm">
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-6">
+                Technical Specifications
               </h3>
 
               <div className="space-y-4 text-xs">
-                <div className="border-b border-white/[0.06] pb-3">
-                  <span className="text-slate-400 uppercase font-bold text-[10px]">Elevator Typology</span>
-                  <p className="mt-1 text-sm font-black text-white">{project.elevatorType}</p>
+                <div className="border-b border-slate-200 pb-3">
+                  <span className="text-[#475569] uppercase font-bold text-[10px]">Elevator Typology</span>
+                  <p className="mt-1 text-sm font-bold text-[#172B4D]">{project.elevatorType}</p>
                 </div>
 
-                <div className="border-b border-white/[0.06] pb-3">
-                  <span className="text-slate-400 uppercase font-bold text-[10px]">Commissioning Timeline</span>
-                  <p className="mt-1 text-sm font-black text-white">{project.timeline || "Turnkey on schedule"}</p>
+                <div className="border-b border-slate-200 pb-3">
+                  <span className="text-[#475569] uppercase font-bold text-[10px]">Commissioning Timeline</span>
+                  <p className="mt-1 text-sm font-bold text-[#172B4D]">{project.timeline || "Turnkey on schedule"}</p>
                 </div>
 
-                <div className="border-b border-white/[0.06] pb-3">
-                  <span className="text-slate-400 uppercase font-bold text-[10px]">Safety & Code Compliance</span>
-                  <p className="mt-1 text-sm font-black text-emerald-400">EN 81-20/50 & IS 14665 Passed</p>
+                <div className="border-b border-slate-200 pb-3">
+                  <span className="text-[#475569] uppercase font-bold text-[10px]">Safety & Code Compliance</span>
+                  <p className="mt-1 text-sm font-bold text-[#16A34A]">EN 81-20/50 & IS 14665 Passed</p>
                 </div>
               </div>
 
               <div className="mt-8">
                 <CtaLink href={`/quote?projectType=${encodeURIComponent(project.name)}`} variant="primary" className="w-full">
-                  DISCUSS SIMILAR PROJECT
+                  Discuss Similar Project
                 </CtaLink>
               </div>
             </div>
@@ -182,10 +182,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         {/* Video if available */}
         {video && (
           <section className="container pb-16">
-            <h2 className="text-xl font-black text-white uppercase tracking-wider mb-6">
+            <h2 className="text-xl font-bold text-[#172B4D] uppercase tracking-wider mb-6">
               Installation Video Walkthrough
             </h2>
-            <div className="overflow-hidden rounded-3xl border border-white/[0.1] bg-black">
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-black">
               <video className="w-full aspect-video" controls preload="metadata" src={video.url} />
             </div>
           </section>
