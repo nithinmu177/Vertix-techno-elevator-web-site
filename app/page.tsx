@@ -291,8 +291,9 @@ export default async function HomePage() {
                 <span>Elevator Company in Bengaluru, Karnataka</span>
               </div>
 
-              {/* Exact Required Headline */}
+              {/* H1: Brand name first — critical for Google to match "Vertix Techno Elevator" searches */}
               <h1 className="display-type text-4xl font-extrabold tracking-tight text-[#172B4D] sm:text-5xl md:text-6xl leading-[1.15]">
+                <span className="block text-[#2563EB]">Vertix Techno Elevator</span>
                 Moving You Higher, Safely and Reliably.
               </h1>
 
