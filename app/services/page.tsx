@@ -8,13 +8,15 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Elevator Installation, Maintenance & AMC in Bengaluru",
-  description: "Professional elevator installation, preventive maintenance, 24/7 AMC support, and modernization in Bengaluru, Karnataka by VERTIX TECHNO ELEVATOR.",
+  title: "Elevator Services in Bengaluru — Installation, AMC & Modernization | VERTIX TECHNO ELEVATOR",
+  description: "VERTIX TECHNO ELEVATOR provides professional elevator installation, annual maintenance contracts (AMC), 24/7 emergency repair, and modernization services in Bengaluru, Karnataka. Call +91 63605 98915.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Elevator Installation, Maintenance & AMC in Bengaluru | VERTIX TECHNO ELEVATOR",
-    description: "Expert elevator engineering, turnkey installation, 24/7 emergency repair, and preventive AMC maintenance across Bengaluru and Karnataka.",
-    url: "https://vertix-techno-elevator-web-site.onrender.com/services"
+    title: "Elevator Services in Bengaluru — Installation, AMC & Modernization | VERTIX TECHNO ELEVATOR",
+    description: "Expert elevator installation, preventive AMC maintenance, 24/7 emergency repair, and lift modernization across Bengaluru and Karnataka by VERTIX TECHNO ELEVATOR.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/services",
+    type: "website",
+    siteName: "VERTIX TECHNO ELEVATOR"
   }
 };
 

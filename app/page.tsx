@@ -35,38 +35,51 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
-  description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
+  // Page title: company name first so Google shows it on brand searches
+  title: "VERTIX TECHNO ELEVATOR — Elevator Company in Bengaluru, Karnataka",
+  description: "VERTIX TECHNO ELEVATOR offers elevator installation, annual maintenance (AMC), modernization, and repair in Bengaluru. Trusted by residential and commercial buildings across Karnataka. Call +91 63605 98915.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "VERTIX TECHNO ELEVATOR | Elevator Company in Bengaluru",
-    description: "VERTIX TECHNO ELEVATOR provides elevator installation, maintenance, modernization and AMC services in Bengaluru, Karnataka for residential & commercial lifts.",
+    title: "VERTIX TECHNO ELEVATOR — Elevator Company in Bengaluru",
+    description: "Trusted elevator installation, AMC maintenance, modernization and repair services in Bengaluru, Karnataka. Contact +91 63605 98915 for a free quote.",
     url: "https://vertix-techno-elevator-web-site.onrender.com/",
     type: "website",
+    locale: "en_IN",
     siteName: "VERTIX TECHNO ELEVATOR",
     images: [
       {
         url: "https://vertix-techno-elevator-web-site.onrender.com/images/vertix-logo.png",
-        width: 400,
-        height: 120,
-        alt: "VERTIX TECHNO ELEVATOR Logo"
+        width: 1024,
+        height: 408,
+        alt: "VERTIX TECHNO ELEVATOR — Elevator Company in Bengaluru"
       }
     ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "VERTIX TECHNO ELEVATOR | Elevator Company Bengaluru",
+    description: "Elevator installation, maintenance & modernization in Bengaluru. Call +91 63605 98915.",
+    images: ["https://vertix-techno-elevator-web-site.onrender.com/images/vertix-logo.png"]
   },
   keywords: [
     "Vertix Techno Elevator",
     "Vertix Techno Elevator Bangalore",
     "Vertix Techno Elevator Bengaluru",
+    "Vertix Techno Elevator Peenya",
+    "Vertix elevator company",
     "elevator company in Bangalore",
     "elevator company in Bengaluru",
-    "lift company in Bangalore",
+    "lift company Bangalore",
+    "lift installation Bengaluru",
     "elevator installation Bangalore",
     "elevator maintenance Bangalore",
-    "elevator manufacturer Bangalore",
+    "elevator AMC Bengaluru",
+    "elevator modernization Bangalore",
+    "elevator repair Bengaluru",
     "passenger elevator Bangalore",
-    "goods elevator Bangalore",
-    "residential elevator Bangalore",
-    "commercial elevator Bangalore"
+    "residential home lift Bangalore",
+    "commercial elevator Bengaluru",
+    "elevator service Peenya"
   ]
 };
 
@@ -78,6 +91,54 @@ export default async function HomePage() {
     getFaqs(),
     getTestimonials()
   ]);
+
+  // FAQ structured data — displayed by Google as rich results under the search listing
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What services does Vertix Techno Elevator offer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "VERTIX TECHNO ELEVATOR offers elevator installation, annual maintenance contracts (AMC), elevator modernization, emergency repair, and supply of passenger, residential, and commercial lifts in Bengaluru, Karnataka."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Where is Vertix Techno Elevator located?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "VERTIX TECHNO ELEVATOR is located at Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Peenya, Bengaluru, Karnataka 560058."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How do I contact Vertix Techno Elevator?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can contact VERTIX TECHNO ELEVATOR by calling +91 63605 98915 or emailing manthmint@gmail.com. We are available Monday to Saturday, 9 AM to 7 PM."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Does Vertix Techno Elevator provide residential home lifts?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. VERTIX TECHNO ELEVATOR supplies and installs compact residential home lifts and villa lifts that require minimal civil work and are suitable for independent houses and apartments in Bengaluru."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Does Vertix Techno Elevator offer AMC for existing elevators?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We provide Annual Maintenance Contracts (AMC) for elevators of all brands, including preventive maintenance, routine inspections, and 24/7 breakdown support across Bengaluru and Karnataka."
+        }
+      }
+    ]
+  };
 
   const stats = (settings.statistics as Array<{ value: string; label: string }>) || [
     { value: "500+", label: "Lifts Installed" },
@@ -209,6 +270,11 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* FAQ Structured Data for Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navbar />
 
       <main className="bg-white text-[#475569]">

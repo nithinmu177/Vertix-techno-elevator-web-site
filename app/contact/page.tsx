@@ -4,13 +4,15 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { PhoneCall, Mail, MapPin, Clock, AlertCircle, MessageSquare } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Us | Elevator Company in Peenya, Bengaluru",
-  description: "Contact VERTIX TECHNO ELEVATOR at Peenya, Bengaluru, Karnataka. Call +91 63605 98915 for elevator installation, AMC maintenance, or site surveys.",
+  title: "Contact Vertix Techno Elevator | Peenya, Bengaluru — +91 63605 98915",
+  description: "Contact VERTIX TECHNO ELEVATOR at Peenya, Bengaluru. Call +91 63605 98915 or email manthmint@gmail.com for elevator installation quotes, AMC contracts, and emergency lift repair across Karnataka.",
   alternates: { canonical: "/contact" },
   openGraph: {
-    title: "Contact VERTIX TECHNO ELEVATOR | Bengaluru, Karnataka",
-    description: "Get in touch with VERTIX TECHNO ELEVATOR in Peenya, Bengaluru for elevator installation quotes, AMC contracts, and 24/7 emergency service.",
-    url: "https://vertix-techno-elevator-web-site.onrender.com/contact"
+    title: "Contact Vertix Techno Elevator | Bengaluru, Karnataka",
+    description: "Reach VERTIX TECHNO ELEVATOR at +91 63605 98915. Based in Peenya, Bengaluru. Get a free quote for elevator installation, AMC, or emergency repair.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/contact",
+    type: "website",
+    siteName: "VERTIX TECHNO ELEVATOR"
   }
 };
 

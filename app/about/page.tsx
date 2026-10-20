@@ -5,13 +5,15 @@ import { CtaLink } from "@/components/ui/button";
 import { Award, CheckCircle2, Cpu, Eye, ShieldCheck, Target, Users, Zap } from "lucide-react";
 
 export const metadata = {
-  title: "About Us | Elevator Company in Bengaluru",
-  description: "Learn about VERTIX TECHNO ELEVATOR — premier elevator company based in Peenya, Bengaluru, Karnataka specializing in passenger, home, and commercial lifts.",
+  title: "About Vertix Techno Elevator | Elevator Company in Bengaluru",
+  description: "Learn about VERTIX TECHNO ELEVATOR — a professional elevator company based in Peenya, Bengaluru, Karnataka specialising in passenger lifts, home lifts, commercial elevators, installation, AMC and modernization.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Us | VERTIX TECHNO ELEVATOR Bengaluru",
-    description: "VERTIX TECHNO ELEVATOR is a certified elevator company in Bengaluru delivering safe, reliable, and energy-efficient vertical transportation solutions.",
-    url: "https://vertix-techno-elevator-web-site.onrender.com/about"
+    title: "About Vertix Techno Elevator | Elevator Company in Bengaluru",
+    description: "VERTIX TECHNO ELEVATOR is a trusted elevator company in Bengaluru delivering safe, reliable, and energy-efficient vertical transportation solutions for residential and commercial buildings.",
+    url: "https://vertix-techno-elevator-web-site.onrender.com/about",
+    type: "website",
+    siteName: "VERTIX TECHNO ELEVATOR"
   }
 };
 

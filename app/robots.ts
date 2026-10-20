@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        // Allow all search engines to crawl all public pages
         userAgent: "*",
         allow: "/",
         disallow: [
@@ -21,8 +22,9 @@ export default function robots(): MetadataRoute.Robots {
         ]
       }
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`
+    // Sitemap URL — tells Google exactly where to find all pages
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    // Host declaration helps Google identify the canonical domain
+    host: SITE_URL
   };
 }
-
-
