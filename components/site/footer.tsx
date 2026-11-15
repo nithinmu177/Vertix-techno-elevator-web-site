@@ -34,16 +34,16 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#172B4D] text-white">
+    <footer className="relative bg-[#241242] text-white">
       {/* Top Banner: 24/7 Breakdown Assistance & Free Quote */}
-      <div className="border-b border-white/10 bg-[#12223c] py-5">
+      <div className="border-b border-white/10 bg-[#1A0B33] py-5">
         <div className="container flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-blue-600/20 text-[#2563EB]">
+            <div className="flex size-10 items-center justify-center rounded-xl bg-violet-600/25 text-[#DDD6FE]">
               <Clock className="size-5" />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-blue-300">
+              <p className="text-xs font-bold uppercase tracking-wider text-violet-300">
                 24/7 Breakdown & Rescue Support
               </p>
               <p className="text-sm font-semibold text-slate-200">
@@ -56,7 +56,7 @@ export function Footer() {
               href="https://wa.me/916360598915?text=Hello%20Vertix%20Techno%20Elevator,%20I%20would%20like%20to%20enquire%20about%20elevators"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#16A34A] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#15803D]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#10B981] px-4 py-2 text-xs font-bold text-white transition hover:bg-[#059669]"
             >
               <MessageSquare className="size-3.5" />
               <span>WhatsApp Us</span>
@@ -65,12 +65,12 @@ export function Footer() {
               href="tel:+916360598915"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/10"
             >
-              <PhoneCall className="size-3.5 text-[#2563EB]" />
+              <PhoneCall className="size-3.5 text-violet-300" />
               <span>+91 63605 98915</span>
             </a>
             <Link
               href="/quote"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-[#1D4ED8]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#7C3AED] px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-[#6D28D9]"
             >
               <span>Get a Free Quote</span>
             </Link>
@@ -88,11 +88,11 @@ export function Footer() {
 
           <div className="space-y-2 pt-2">
             <div className="flex items-center gap-2 text-xs text-slate-300">
-              <ShieldCheck className="size-4 text-[#16A34A] shrink-0" />
+              <ShieldCheck className="size-4 text-[#10B981] shrink-0" />
               <span>IS 14665 & EN 81-20/50 Safety Standard Compliant</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-300">
-              <Award className="size-4 text-[#2563EB] shrink-0" />
+              <Award className="size-4 text-violet-300 shrink-0" />
               <span>ISO 9001:2015 Quality Manufacturing Practices</span>
             </div>
           </div>
@@ -100,7 +100,7 @@ export function Footer() {
 
         {/* 2. Quick Navigation */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-blue-300">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-violet-300">
             Quick Links
           </h3>
           <ul className="mt-4 space-y-2 text-xs text-slate-300">
@@ -119,7 +119,7 @@ export function Footer() {
 
         {/* 3. Our Services */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-blue-300">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-violet-300">
             Our Services
           </h3>
           <ul className="mt-4 space-y-2 text-xs text-slate-300">
@@ -138,22 +138,22 @@ export function Footer() {
 
         {/* 4. Verified Contact Info */}
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-blue-300">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-violet-300">
             Contact Information
           </h3>
           <div className="mt-4 space-y-3 text-xs text-slate-300">
             <div className="flex items-start gap-2.5">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-[#2563EB]" />
+              <MapPin className="mt-0.5 size-4 shrink-0 text-violet-300" />
               <span>Ground Floor, 3/3/2, Sarck Preci Tech, Rajagopal Nagar Main Road, 3rd Phase, 9th Cross Road, Peenya, Bengaluru, Karnataka - 560058</span>
             </div>
             <div className="flex items-center gap-2.5">
-              <PhoneCall className="size-4 shrink-0 text-[#2563EB]" />
+              <PhoneCall className="size-4 shrink-0 text-violet-300" />
               <a href="tel:+916360598915" className="hover:text-white transition">
                 +91 63605 98915
               </a>
             </div>
             <div className="flex items-center gap-2.5">
-              <Mail className="size-4 shrink-0 text-[#2563EB]" />
+              <Mail className="size-4 shrink-0 text-violet-300" />
               <a href="mailto:manthmint@gmail.com" className="hover:text-white transition">
                 manthmint@gmail.com
               </a>
@@ -168,7 +168,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal & Copyright Bar */}
-      <div className="border-t border-white/10 bg-[#12223c] py-5 text-xs text-slate-400">
+      <div className="border-t border-white/10 bg-[#1A0B33] py-5 text-xs text-slate-400">
         <div className="container flex flex-wrap items-center justify-between gap-4">
           <p>© {new Date().getFullYear()} Vertix Techno Elevator. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-5">

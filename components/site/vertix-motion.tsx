@@ -22,24 +22,24 @@ export function VertixMotion() {
     >
       <div className="relative mx-auto h-full w-full rounded-2xl border border-slate-200 bg-white/90 p-3 shadow-md backdrop-blur-md">
         {/* Header indicator */}
-        <div className="mb-4 text-center border-b border-slate-100 pb-2">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-[#2563EB]">Shaft Tracker</p>
+        <div className="mb-4 text-center border-b border-violet-100 pb-2">
+          <p className="text-[10px] font-bold uppercase tracking-wider text-[#7C3AED]">Shaft Tracker</p>
           <div className="flex items-center justify-center gap-1.5 mt-0.5">
-            <span className="size-2 rounded-full bg-[#16A34A] animate-pulse" />
-            <span className="text-[10px] font-semibold text-[#475569]">System Active</span>
+            <span className="size-2 rounded-full bg-[#10B981] animate-pulse" />
+            <span className="text-[10px] font-semibold text-[#4B5563]">System Active</span>
           </div>
         </div>
 
         {/* Vertical Guide Rail */}
-        <div className="relative h-[560px] mx-auto w-1 bg-slate-200 rounded-full">
+        <div className="relative h-[560px] mx-auto w-1 bg-violet-200/60 rounded-full">
           {/* Elevator Cab */}
           <motion.div
             style={{ y }}
-            className="absolute -left-4 top-0 z-20 flex size-9 items-center justify-center rounded-xl border-2 border-[#2563EB] bg-white text-[#172B4D] shadow-md shadow-blue-500/20"
+            className="absolute -left-4 top-0 z-20 flex size-9 items-center justify-center rounded-xl border-2 border-[#7C3AED] bg-white text-[#3B1F6E] shadow-md shadow-violet-500/20"
           >
             <div className="relative flex flex-col items-center justify-center">
-              <span className="text-[10px] font-black text-[#2563EB]">V</span>
-              <span className="size-1.5 rounded-full bg-[#16A34A]" />
+              <span className="text-[10px] font-black text-[#7C3AED]">V</span>
+              <span className="size-1.5 rounded-full bg-[#10B981]" />
             </div>
           </motion.div>
 
@@ -50,10 +50,10 @@ export function VertixMotion() {
               className="absolute left-6 flex items-center gap-2 -translate-y-1/2 whitespace-nowrap"
               style={{ top: `${(index / (floors.length - 1)) * 100}%` }}
             >
-              <span className="inline-block size-1.5 rounded-full bg-slate-300" />
+              <span className="inline-block size-1.5 rounded-full bg-violet-300" />
               <div>
-                <strong className="block text-[11px] font-bold text-[#172B4D]">{floor.code}</strong>
-                <span className="block text-[9px] font-medium text-[#475569]">
+                <strong className="block text-[11px] font-bold text-[#3B1F6E]">{floor.code}</strong>
+                <span className="block text-[9px] font-medium text-[#4B5563]">
                   {floor.label}
                 </span>
               </div>

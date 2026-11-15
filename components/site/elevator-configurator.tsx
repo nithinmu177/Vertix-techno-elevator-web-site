@@ -112,22 +112,22 @@ export function ElevatorConfigurator() {
   return (
     <div className="relative rounded-3xl border border-slate-200 bg-white p-6 lg:p-10 shadow-sm">
       {/* Decorative Top Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-violet-100 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#7C3AED]">
             <Sliders className="size-4" />
             <span>Interactive Selection Studio</span>
           </div>
-          <h3 className="mt-1 text-2xl font-bold text-[#172B4D] lg:text-3xl">
+          <h3 className="mt-1 text-2xl font-bold text-[#3B1F6E] lg:text-3xl">
             Cabin & Drive Configurator
           </h3>
-          <p className="text-sm text-[#475569]">
+          <p className="text-sm text-[#4B5563]">
             Select cabin finishes, application requirements, and styling in real time.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3.5 py-1.5 text-xs font-bold text-[#16A34A]">
-          <span className="size-2 rounded-full bg-[#16A34A] animate-pulse" />
+        <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-bold text-[#10B981]">
+          <span className="size-2 rounded-full bg-[#10B981] animate-pulse" />
           <span>Interactive Studio Ready</span>
         </div>
       </div>
@@ -136,7 +136,7 @@ export function ElevatorConfigurator() {
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_1.1fr]">
         {/* Left: Dynamic Visual Preview */}
         <div className="flex flex-col">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-violet-100 bg-violet-50/50 shadow-sm">
             <Image
               src={selectedCabin.image}
               alt={selectedCabin.name}
@@ -145,12 +145,12 @@ export function ElevatorConfigurator() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover transition-all duration-500 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#172B4D]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#241242]/80 via-transparent to-transparent" />
 
             {/* Floating Cabin Specs Badge */}
             <div className="absolute left-4 top-4">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-white/95 px-3.5 py-1 text-xs font-bold text-[#2563EB] shadow-sm backdrop-blur-md">
-                <Sparkles className="size-3.5 text-[#2563EB]" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-white/95 px-3.5 py-1 text-xs font-bold text-[#7C3AED] shadow-sm backdrop-blur-md">
+                <Sparkles className="size-3.5 text-[#7C3AED]" />
                 {selectedCabin.tag}
               </span>
             </div>
@@ -165,18 +165,18 @@ export function ElevatorConfigurator() {
           </div>
 
           {/* Telemetry Summary Bar */}
-          <div className="mt-4 grid grid-cols-3 gap-3 rounded-2xl border border-slate-200 bg-[#F3F6FA] p-4 text-center">
+          <div className="mt-4 grid grid-cols-3 gap-3 rounded-2xl border border-violet-100 bg-[#F5F3FF] p-4 text-center">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#475569]">Target Speed</span>
-              <p className="mt-0.5 text-sm font-bold text-[#2563EB]">{selectedType.speed}</p>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#4B5563]">Target Speed</span>
+              <p className="mt-0.5 text-sm font-bold text-[#7C3AED]">{selectedType.speed}</p>
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#475569]">Load Rating</span>
-              <p className="mt-0.5 text-sm font-bold text-[#172B4D]">{selectedType.capacity}</p>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#4B5563]">Load Rating</span>
+              <p className="mt-0.5 text-sm font-bold text-[#3B1F6E]">{selectedType.capacity}</p>
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#475569]">Efficiency</span>
-              <p className="mt-0.5 text-sm font-bold text-[#16A34A]">A+++ VDI 4707</p>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#4B5563]">Efficiency</span>
+              <p className="mt-0.5 text-sm font-bold text-[#10B981]">A+++ VDI 4707</p>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@ export function ElevatorConfigurator() {
         <div className="space-y-6">
           {/* Step 1: Building Archetype */}
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
+            <label className="text-xs font-bold uppercase tracking-wider text-[#3B1F6E]">
               1. Select Application Archetype
             </label>
             <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -197,12 +197,12 @@ export function ElevatorConfigurator() {
                     onClick={() => setSelectedType(type)}
                     className={`flex flex-col items-start rounded-xl p-3 text-left transition duration-200 cursor-pointer ${
                       active
-                        ? "border-2 border-[#2563EB] bg-blue-50 text-[#2563EB]"
-                        : "border border-slate-200 bg-[#F3F6FA] hover:bg-slate-100 hover:border-slate-300"
+                        ? "border-2 border-[#7C3AED] bg-violet-50 text-[#7C3AED]"
+                        : "border border-violet-100 bg-[#F5F3FF] hover:bg-violet-100/50 hover:border-violet-200"
                     }`}
                   >
-                    <span className="text-xs font-bold text-[#172B4D]">{type.name}</span>
-                    <span className="mt-0.5 text-[11px] text-[#475569]">{type.capacity}</span>
+                    <span className="text-xs font-bold text-[#3B1F6E]">{type.name}</span>
+                    <span className="mt-0.5 text-[11px] text-[#4B5563]">{type.capacity}</span>
                   </button>
                 );
               })}
@@ -211,7 +211,7 @@ export function ElevatorConfigurator() {
 
           {/* Step 2: Interior Cabin Finish */}
           <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
+            <label className="text-xs font-bold uppercase tracking-wider text-[#3B1F6E]">
               2. Choose Cabin Architecture & Walls
             </label>
             <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -223,14 +223,14 @@ export function ElevatorConfigurator() {
                     onClick={() => setSelectedCabin(style)}
                     className={`flex items-center gap-2.5 rounded-xl p-3 text-left transition duration-200 cursor-pointer ${
                       active
-                        ? "border-2 border-[#2563EB] bg-blue-50 text-[#2563EB]"
-                        : "border border-slate-200 bg-[#F3F6FA] hover:bg-slate-100 hover:border-slate-300"
+                        ? "border-2 border-[#7C3AED] bg-violet-50 text-[#7C3AED]"
+                        : "border border-violet-100 bg-[#F5F3FF] hover:bg-violet-100/50 hover:border-violet-200"
                     }`}
                   >
                     <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-slate-200">
                       <Image src={style.image} alt={style.name} fill className="object-cover" />
                     </div>
-                    <span className="text-xs font-bold text-[#172B4D] line-clamp-2">{style.name}</span>
+                    <span className="text-xs font-bold text-[#3B1F6E] line-clamp-2">{style.name}</span>
                   </button>
                 );
               })}
@@ -240,13 +240,13 @@ export function ElevatorConfigurator() {
           {/* Step 3: Ceiling & Floor Selectors */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#3B1F6E]">
                 3. Ceiling Illumination
               </label>
               <select
                 value={selectedCeiling}
                 onChange={(e) => setSelectedCeiling(e.target.value)}
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-3 py-2.5 text-xs font-medium text-[#172B4D] focus:border-[#2563EB] focus:bg-white outline-none"
+                className="mt-2 w-full rounded-xl border border-violet-100 bg-[#F5F3FF] px-3 py-2.5 text-xs font-medium text-[#3B1F6E] focus:border-[#7C3AED] focus:bg-white outline-none"
               >
                 {ceilingStyles.map((s) => (
                   <option key={s} value={s}>
@@ -257,13 +257,13 @@ export function ElevatorConfigurator() {
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-[#172B4D]">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#3B1F6E]">
                 4. Floor Material
               </label>
               <select
                 value={selectedFloor}
                 onChange={(e) => setSelectedFloor(e.target.value)}
-                className="mt-2 w-full rounded-xl border border-slate-200 bg-[#F3F6FA] px-3 py-2.5 text-xs font-medium text-[#172B4D] focus:border-[#2563EB] focus:bg-white outline-none"
+                className="mt-2 w-full rounded-xl border border-violet-100 bg-[#F5F3FF] px-3 py-2.5 text-xs font-medium text-[#3B1F6E] focus:border-[#7C3AED] focus:bg-white outline-none"
               >
                 {floorMaterials.map((f) => (
                   <option key={f} value={f}>
@@ -278,12 +278,12 @@ export function ElevatorConfigurator() {
           <div className="pt-2">
             <Link
               href={`/quote?projectType=${encodeURIComponent(selectedType.name)}&elevatorType=${encodeURIComponent(selectedCabin.name)}`}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] py-3.5 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition hover:bg-[#1D4ED8]"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#7C3AED] py-3.5 text-sm font-bold text-white shadow-md shadow-violet-500/25 transition hover:bg-[#6D28D9]"
             >
               <span>Request Quote for This Configuration</span>
               <ArrowRight className="size-4" />
             </Link>
-            <p className="mt-2 text-center text-[11px] text-[#475569]">
+            <p className="mt-2 text-center text-[11px] text-[#4B5563]">
               Includes full structural CAD survey, manufacturing specifications & warranty.
             </p>
           </div>

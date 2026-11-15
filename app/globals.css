@@ -1,24 +1,36 @@
 @import "tailwindcss";
 
+/* =====================================================================
+   VERTIX TECHNO ELEVATOR — Lavender & White Aesthetic Theme
+   Primary Lavender : #7C3AED  (violet-600)
+   Soft Lavender    : #8B5CF6  (violet-500)
+   Light Lavender   : #EDE9FE  (violet-100)
+   Pale Lavender    : #F5F3FF  (violet-50)
+   Deep Plum        : #3B1F6E  (headings)
+   White            : #FFFFFF
+   Body Text        : #4B5563
+   Accent Green     : #10B981
+   ===================================================================== */
+
 :root {
-  --primary-blue: #2563eb;
-  --dark-navy: #172b4d;
-  --white: #ffffff;
-  --light-gray: #f3f6fa;
-  --body-text: #475569;
-  --hover-blue: #1d4ed8;
-  --green-accent: #16a34a;
+  --primary:       #7C3AED;   /* violet-600  — main brand colour        */
+  --primary-hover: #6D28D9;   /* violet-700  — hover state              */
+  --primary-light: #EDE9FE;   /* violet-100  — tint backgrounds         */
+  --primary-pale:  #F5F3FF;   /* violet-50   — page alternate sections  */
+  --heading:       #3B1F6E;   /* deep plum   — all headings             */
+  --white:         #FFFFFF;
+  --body-text:     #4B5563;   /* gray-600    — paragraph text           */
+  --border:        #DDD6FE;   /* violet-200  — card/input borders       */
+  --line:          #EDE9FE;   /* violet-100  — dividers                 */
+  --green-accent:  #10B981;   /* emerald-500 — positive highlights      */
 
-  --background: #ffffff;
-  --foreground: #475569;
-  --card: #ffffff;
-  --card-border: #e2e8f0;
-  --line: #e2e8f0;
+  --background:    #FFFFFF;
+  --foreground:    #4B5563;
+  --card:          #FFFFFF;
+  --card-border:   #DDD6FE;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
@@ -35,106 +47,86 @@ body {
 }
 
 body::selection {
-  background: var(--primary-blue);
+  background: var(--primary);
   color: #ffffff;
 }
 
-/* Clean Professional Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track  { background: #F5F3FF; }
+::-webkit-scrollbar-thumb  { background: #C4B5FD; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #A78BFA; }
 
-a {
-  text-decoration: none;
-}
+a { text-decoration: none; }
 
 .container {
   width: min(1280px, calc(100% - 32px));
   margin-inline: auto;
 }
 
+/* ── Decorative patterns ───────────────────────────────────── */
 .architectural-grid {
   background-image:
-    linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .architectural-dots {
-  background-image: radial-gradient(rgba(23, 43, 77, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(124, 58, 237, 0.10) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
+/* ── Typography helpers ────────────────────────────────────── */
 .display-type {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   letter-spacing: -0.02em;
 }
 
-.gold-gradient-text,
-.navy-gradient-text {
-  background: linear-gradient(135deg, #172b4d 0%, #2563eb 100%);
+.navy-gradient-text,
+.gold-gradient-text {
+  background: linear-gradient(135deg, #3B1F6E 0%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .blue-gradient-text,
 .cyan-gradient-text {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* ── Card / panel helpers ──────────────────────────────────── */
 .glass-panel-luxury {
-  border: 1px solid #e2e8f0;
+  border: 1px solid #DDD6FE;
   background: #ffffff;
-  box-shadow: 0 10px 30px -5px rgba(23, 43, 77, 0.08), 0 4px 6px -2px rgba(23, 43, 77, 0.03);
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08),
+              0 4px 6px -2px rgba(124, 58, 237, 0.04);
 }
 
 .glass-panel-gold {
-  border: 1px solid #dbeafe;
+  border: 1px solid #EDE9FE;
   background: #ffffff;
-  box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(124, 58, 237, 0.08);
 }
 
-.blue-glow {
-  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25);
-}
+/* ── Glow helpers ──────────────────────────────────────────── */
+.blue-glow  { box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.25); }
+.gold-glow  { box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.20); }
+.cyan-glow  { box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.20); }
 
-.gold-glow {
-  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
-}
-
-.cyan-glow {
-  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
-}
-
-.eyebrow {
-  letter-spacing: 0.24em;
-}
+/* ── Misc ──────────────────────────────────────────────────── */
+.eyebrow { letter-spacing: 0.24em; }
 
 .focus-ring {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-
-.focus-ring:focus-visible {
-  outline-color: var(--primary-blue);
-}
+.focus-ring:focus-visible { outline-color: var(--primary); }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;

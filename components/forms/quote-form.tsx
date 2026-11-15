@@ -53,15 +53,15 @@ export function QuoteForm() {
 
   if (quoteId) {
     return (
-      <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center shadow-sm">
-        <CheckCircle2 className="mx-auto size-12 text-[#16A34A]" />
-        <h4 className="mt-3 text-2xl font-bold text-[#172B4D]">Quote Request Received</h4>
-        <p className="mt-2 text-sm text-[#475569] max-w-md mx-auto">
-          Thank you! Your reference code is <strong className="text-[#2563EB] font-mono">{quoteId}</strong>. Our engineering team has logged your requirements and will get back to you with a detailed proposal and preliminary drawings.
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center shadow-sm">
+        <CheckCircle2 className="mx-auto size-12 text-[#10B981]" />
+        <h4 className="mt-3 text-2xl font-bold text-[#3B1F6E]">Quote Request Received</h4>
+        <p className="mt-2 text-sm text-[#4B5563] max-w-md mx-auto">
+          Thank you! Your reference code is <strong className="text-[#7C3AED] font-mono">{quoteId}</strong>. Our engineering team has logged your requirements and will get back to you with a detailed proposal and preliminary drawings.
         </p>
         <button
           onClick={() => setQuoteId(null)}
-          className="mt-5 text-xs font-bold uppercase tracking-wider text-[#2563EB] hover:text-[#1D4ED8] underline cursor-pointer"
+          className="mt-5 text-xs font-bold uppercase tracking-wider text-[#7C3AED] hover:text-[#6D28D9] underline cursor-pointer"
         >
           Submit Another Request
         </button>
@@ -72,11 +72,11 @@ export function QuoteForm() {
   return (
     <form
       onSubmit={submit}
-      className="grid gap-5 rounded-2xl border border-slate-200 bg-white p-6 lg:p-8 shadow-sm"
+      className="grid gap-5 rounded-2xl border border-violet-100 bg-white p-6 lg:p-8 shadow-sm"
     >
-      <div className="border-b border-slate-100 pb-3">
-        <h3 className="text-xl font-bold text-[#172B4D]">Customer Enquiry</h3>
-        <p className="mt-1 text-xs text-[#475569]">
+      <div className="border-b border-violet-50 pb-3">
+        <h3 className="text-xl font-bold text-[#3B1F6E]">Customer Enquiry</h3>
+        <p className="mt-1 text-xs text-[#4B5563]">
           Fill out this form to receive a prompt technical review and cost quotation.
         </p>
       </div>
@@ -91,83 +91,83 @@ export function QuoteForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         {/* Full Name */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             Full Name <span className="text-red-500">*</span>
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-3 size-4 text-slate-400" />
+            <User className="absolute left-3 top-3 size-4 text-violet-300" />
             <input
               required
               name="name"
               type="text"
               placeholder="e.g. Ramesh Kumar"
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] placeholder:text-slate-400 outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] placeholder:text-slate-400 outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             />
           </div>
         </div>
 
         {/* Phone Number */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             Phone Number <span className="text-red-500">*</span>
           </label>
           <div className="relative">
-            <Phone className="absolute left-3 top-3 size-4 text-slate-400" />
+            <Phone className="absolute left-3 top-3 size-4 text-violet-300" />
             <input
               required
               name="phone"
               type="tel"
               placeholder="+91 98765 43210"
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] placeholder:text-slate-400 outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] placeholder:text-slate-400 outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             />
           </div>
         </div>
 
         {/* Email Address */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             Email Address <span className="text-red-500">*</span>
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-3 size-4 text-slate-400" />
+            <Mail className="absolute left-3 top-3 size-4 text-violet-300" />
             <input
               required
               name="email"
               type="email"
               placeholder="name@example.com"
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] placeholder:text-slate-400 outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] placeholder:text-slate-400 outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             />
           </div>
         </div>
 
         {/* City */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             City <span className="text-red-500">*</span>
           </label>
           <div className="relative">
-            <MapPin className="absolute left-3 top-3 size-4 text-slate-400" />
+            <MapPin className="absolute left-3 top-3 size-4 text-violet-300" />
             <input
               required
               name="location"
               type="text"
               placeholder="e.g. Bengaluru, Mysore"
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] placeholder:text-slate-400 outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] placeholder:text-slate-400 outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             />
           </div>
         </div>
 
         {/* Building Type */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             Building Type
           </label>
           <div className="relative">
-            <Building className="absolute left-3 top-3 size-4 text-slate-400" />
+            <Building className="absolute left-3 top-3 size-4 text-violet-300" />
             <select
               name="buildingType"
               defaultValue=""
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             >
               <option value="" disabled>Select Building Type</option>
               <option value="Residential Apartment">Residential Apartment</option>
@@ -184,16 +184,16 @@ export function QuoteForm() {
 
         {/* Required Service */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold text-[#172B4D]">
+          <label className="text-xs font-bold text-[#3B1F6E]">
             Required Service <span className="text-red-500">*</span>
           </label>
           <div className="relative">
-            <Wrench className="absolute left-3 top-3 size-4 text-slate-400" />
+            <Wrench className="absolute left-3 top-3 size-4 text-violet-300" />
             <select
               required
               name="projectType"
               defaultValue=""
-              className="w-full min-h-11 rounded-xl border border-slate-200 bg-[#F3F6FA] pl-9 pr-3.5 text-sm font-medium text-[#172B4D] outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+              className="w-full min-h-11 rounded-xl border border-violet-100 bg-[#F5F3FF] pl-9 pr-3.5 text-sm font-medium text-[#3B1F6E] outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
             >
               <option value="" disabled>Select Required Service</option>
               <option value="Passenger Elevators">Passenger Elevators</option>
@@ -210,14 +210,14 @@ export function QuoteForm() {
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-bold text-[#172B4D]">
+        <label className="text-xs font-bold text-[#3B1F6E]">
           Message
         </label>
         <textarea
           name="message"
           rows={3}
           placeholder="Please share any specific details (number of floors, passenger capacity, shaft dimensions, or timeline)..."
-          className="rounded-xl border border-slate-200 bg-[#F3F6FA] p-3.5 text-sm font-medium text-[#172B4D] placeholder:text-slate-400 outline-none transition focus:border-[#2563EB] focus:bg-white focus:ring-2 focus:ring-blue-100"
+          className="rounded-xl border border-violet-100 bg-[#F5F3FF] p-3.5 text-sm font-medium text-[#3B1F6E] placeholder:text-slate-400 outline-none transition focus:border-[#7C3AED] focus:bg-white focus:ring-2 focus:ring-violet-100"
         />
       </div>
 
@@ -225,7 +225,7 @@ export function QuoteForm() {
         <button
           type="submit"
           disabled={loading}
-          className="focus-ring inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-6 text-sm font-bold tracking-wide text-white shadow-md shadow-blue-500/20 transition hover:bg-[#1D4ED8] disabled:opacity-50 cursor-pointer"
+          className="focus-ring inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-xl bg-[#7C3AED] px-6 text-sm font-bold tracking-wide text-white shadow-md shadow-violet-500/25 transition hover:bg-[#6D28D9] disabled:opacity-50 cursor-pointer"
         >
           {loading ? (
             <>

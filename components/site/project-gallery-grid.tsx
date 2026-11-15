@@ -32,10 +32,10 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
       <section className="container pb-16">
         <div className="mb-6 flex items-end justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#7C3AED]">
               Project Media & Gallery
             </span>
-            <h2 className="text-2xl font-bold text-[#172B4D] tracking-tight mt-1">
+            <h2 className="text-2xl font-bold text-[#3B1F6E] tracking-tight mt-1">
               Project Gallery ({items.length} Photos & Clips)
             </h2>
           </div>
@@ -49,12 +49,12 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
               <div
                 key={m.id || idx}
                 onClick={() => setActiveMedia(m)}
-                className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:border-[#2563EB] hover:shadow-md"
+                className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl border border-violet-100 bg-white shadow-sm transition duration-300 hover:border-[#7C3AED] hover:shadow-md hover:shadow-violet-500/10"
               >
                 {isVid ? (
                   <div className="relative h-full w-full bg-slate-900">
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                      <div className="mb-2 flex size-12 items-center justify-center rounded-full bg-[#2563EB] text-white shadow-lg transition group-hover:scale-110 group-hover:bg-[#1D4ED8]">
+                      <div className="mb-2 flex size-12 items-center justify-center rounded-full bg-[#7C3AED] text-white shadow-lg transition group-hover:scale-110 group-hover:bg-[#6D28D9]">
                         <Play className="size-5 fill-current ml-0.5" />
                       </div>
                       <span className="text-xs font-semibold tracking-wider text-slate-200 uppercase line-clamp-1">
@@ -63,7 +63,7 @@ export function ProjectGalleryGrid({ media, projectName }: ProjectGalleryGridPro
                     </div>
 
                     <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-bold">
-                      <span className="inline-flex items-center gap-1 rounded bg-black/60 px-2 py-0.5 text-blue-300">
+                      <span className="inline-flex items-center gap-1 rounded bg-black/60 px-2 py-0.5 text-violet-300">
                         <Film className="size-3" /> Video
                       </span>
                       <span className="rounded bg-black/60 px-2 py-0.5 text-slate-300 font-mono">

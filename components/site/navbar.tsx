@@ -50,8 +50,8 @@ export function Navbar() {
                 href={item.href}
                 className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-200 ${
                   isActive
-                    ? "bg-blue-50 text-[#2563EB] font-bold"
-                    : "text-[#172B4D] hover:text-[#2563EB] hover:bg-slate-50"
+                    ? "bg-violet-50 text-[#7C3AED] font-bold"
+                    : "text-[#3B1F6E] hover:text-[#7C3AED] hover:bg-violet-50/50"
                 }`}
               >
                 {item.label}
@@ -64,14 +64,14 @@ export function Navbar() {
         <div className="hidden items-center gap-3 sm:flex">
           <a
             href="tel:+916360598915"
-            className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-[#172B4D] transition hover:border-[#2563EB] hover:text-[#2563EB]"
+            className="flex items-center gap-2 rounded-xl border border-violet-200/70 bg-white px-3.5 py-2 text-xs font-semibold text-[#3B1F6E] transition hover:border-[#7C3AED] hover:text-[#7C3AED]"
           >
-            <PhoneCall className="size-3.5 text-[#2563EB]" />
+            <PhoneCall className="size-3.5 text-[#7C3AED]" />
             <span>+91 63605 98915</span>
           </a>
           <Link
             href="/quote"
-            className="flex items-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-[#1D4ED8] active:scale-95"
+            className="flex items-center gap-2 rounded-xl bg-[#7C3AED] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-[#6D28D9] active:scale-95"
           >
             <span>Get a Free Quote</span>
           </Link>
@@ -79,13 +79,13 @@ export function Navbar() {
 
         {/* Mobile menu toggle */}
         <button
-          className="focus-ring flex size-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#172B4D] lg:hidden hover:border-[#2563EB]"
+          className="focus-ring flex size-10 items-center justify-center rounded-xl border border-violet-200/70 bg-white text-[#3B1F6E] lg:hidden hover:border-[#7C3AED]"
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           aria-label="Toggle navigation menu"
           aria-controls="mobile-menu"
         >
-          {open ? <X className="size-5 text-[#2563EB]" /> : <Menu className="size-5" />}
+          {open ? <X className="size-5 text-[#7C3AED]" /> : <Menu className="size-5" />}
         </button>
       </div>
 
@@ -93,22 +93,22 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-menu"
-          className="border-b border-slate-200 bg-white px-6 pb-6 pt-3 shadow-lg lg:hidden"
+          className="border-b border-violet-100 bg-white px-6 pb-6 pt-3 shadow-lg lg:hidden"
         >
-          <div className="flex flex-col divide-y divide-slate-100">
+          <div className="flex flex-col divide-y divide-violet-50">
             {navLinks.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between py-3 text-sm font-semibold transition ${
-                    isActive ? "text-[#2563EB] font-bold" : "text-[#172B4D] hover:text-[#2563EB]"
+                    isActive ? "text-[#7C3AED] font-bold" : "text-[#3B1F6E] hover:text-[#7C3AED]"
                   }`}
                   href={item.href}
                   key={item.label}
                 >
                   <span>{item.label}</span>
-                  <ArrowRight className="size-4 text-slate-400" />
+                  <ArrowRight className="size-4 text-violet-300" />
                 </Link>
               );
             })}
@@ -117,15 +117,15 @@ export function Navbar() {
             <Link
               onClick={() => setOpen(false)}
               href="/quote"
-              className="flex items-center justify-center gap-2 rounded-xl bg-[#2563EB] py-3 text-sm font-bold text-white shadow-sm hover:bg-[#1D4ED8]"
+              className="flex items-center justify-center gap-2 rounded-xl bg-[#7C3AED] py-3 text-sm font-bold text-white shadow-sm hover:bg-[#6D28D9]"
             >
               Get a Free Quote
             </Link>
             <a
               href="tel:+916360598915"
-              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-[#F3F6FA] py-2.5 text-xs font-bold text-[#172B4D]"
+              className="flex items-center justify-center gap-2 rounded-xl border border-violet-200/70 bg-[#F5F3FF] py-2.5 text-xs font-bold text-[#3B1F6E]"
             >
-              <PhoneCall className="size-4 text-[#2563EB]" /> Call: +91 63605 98915
+              <PhoneCall className="size-4 text-[#7C3AED]" /> Call: +91 63605 98915
             </a>
           </div>
         </div>
